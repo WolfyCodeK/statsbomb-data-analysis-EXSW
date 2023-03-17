@@ -1,15 +1,26 @@
 from jsonController import *
 
-examplePath = "open-data-master/data/matches/2/44.json"
+lineupsDir = "open-data-master/data/lineups"
 
 # Create json controller
 jsonCtrl = jsonController()
 
-# Add example path to json controller
-jsonCtrl.addJsonFileToCategory(examplePath, "Matches")
+# Add all lineup jsons to the Lineups category
+jsonCtrl.addDirectoryToCategory(lineupsDir, "Lineups")
 
-# Get all the values associated with the key/value pair
-valuesList = jsonCtrl.getAllValuesFromKeyAtIndex("Matches", "0", "match_id")
+# Get all the values associated with a key, from a chosen category
+jsonList = jsonCtrl.getAllValuesInCategoryFromKey("Lineups", "team_name")
 
-print(valuesList)
+# Remove duplicate data
+jsonList = list(dict.fromkeys(jsonList))
 
+# Sort in descending order (inefficent sort for large data sets)
+jsonList.sort(reverse=False)
+
+# Print out all values
+listSize = len(jsonList)
+
+for i in range(listSize):
+    print(str(jsonList[i]))
+    
+print("\nUnique number of teams: " + str(listSize))

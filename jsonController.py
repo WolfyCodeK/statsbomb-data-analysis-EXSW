@@ -1,15 +1,18 @@
 import json
+import os
 
 class jsonController:
-    categoryError = "ERROR: Invalid category selected"
-    idError ="ERROR: Invalid id selected"
+    CATEGORY_ERROR = "ERROR: Invalid category selected"
+    ID_ERROR = "ERROR: Invalid id selected"
+    NOT_JSON_ERROR = "ERROR: Not a json file"
+    NOT_FILE_ERROR = "ERROR: Not a file"
     
     def __init__(self):
         """
         Initialize the json controller's dictionary.
         """
         # Init categorization of json objects as a dictionary of dictionaries
-        self.jsonObjDict = {
+        self.jsonDict = {
             "Competitions": {},
             "Events": {},
             "Lineups": {},
@@ -18,20 +21,20 @@ class jsonController:
         }
         
     @staticmethod
-    def __getJsonObjFromFile(path):
+    def __getJsonDeserializedFromFile(path):
         """ 
-        getJsonObjFromFile - Converts a JSON file to a 'json object'.
+        __getJsonDeserializedFromFile - Converts a JSON file to a python object.
         
         Args:
             path: Relative path to json file
-            return: The json object
+            return: The python object containing the deserialized json file
         """
-        with open(path, "r") as read_file:
-            jsonObj = json.load(read_file)
+        with open(path, "r", encoding="utf8") as read_file:
+            jsonDeserialized = json.load(read_file)
             
-        return jsonObj
+        return jsonDeserialized
     
-    def addJsonFileToCategory(self, path, catergory):
+    def addJsonFileToCategory(self, path, catergory, jsonID):
         """
         addJsonFileToCategory - Adds a json file to the json controller's dictionary
 
@@ -40,14 +43,13 @@ class jsonController:
             catergory: The category being queried
         """
         # Create json object from file
-        jsonObj = self.__getJsonObjFromFile(path)
+        jsonDeserialized = self.__getJsonDeserializedFromFile(path)
         
         # Add the json object to the controller's json object dictionary
-        if catergory in self.jsonObjDict:
-            # ["0"] is a place holder until getJsonID() has been implemented
-            self.jsonObjDict[catergory]["0"] = jsonObj
+        if catergory in self.jsonDict:
+            self.jsonDict[catergory][jsonID] = jsonDeserialized
         else:
-            print(self.categoryError + " -> addJsonFileToCategory()")
+            print(self.CATEGORY_ERROR + " -> addJsonFileToCategory()")
     
     def getValueFromKeyAtIndex(self, category, jsonID, index, key):
         """ 
@@ -66,29 +68,60 @@ class jsonController:
         value = "NULL_VALUE"
         
         # Check for valid category
-        if category in self.jsonObjDict:
+        if category in self.jsonDict:
             # Check for valid jsonID
-            if jsonID in self.jsonObjDict[category]:
+            if jsonID in self.jsonDict[category].keys():
                 # Get value from key/value pair
-                value = self.jsonObjDict[category][jsonID][index][key]
+                value = self.jsonDict[category][jsonID][0][key]
             else:
-                print(self.idError)
+                print(self.ID_ERROR + " -> getValueFromKeyAtIndex()")
         else:
-            print(self.categoryError + " -> getValueFromKey()")
+            print(self.CATEGORY_ERROR + " -> getValueFromKeyAtIndex()")
             
         return value
     
-    def getAllValuesFromKeyAtIndex(self, category, jsonID, key):
-        valuesList = []
+    def getAllValuesInCategoryFromKey(self, category, key):
+        """
+        getAllValuesInCategoryFromKey - Gets all the values from all the key/value pair.
+
+        Args:
+            category: The category being queried 
+            key: The value found from a key/value pair
+
+        Returns:
+            valuesList: The list of all the values returned
+        """
+        values = []
         
-        for i in range(len(self.jsonObjDict[category][jsonID])):
-            valuesList.append(self.getValueFromKeyAtIndex(category, jsonID, i, key))
+        # Loop through all jsons within the category
+        for jsonID in self.jsonDict[category].keys():
+            # Loop through all the list values within the json
+            for i in range(len(self.jsonDict[category][jsonID])):
+                values.append(self.getValueFromKeyAtIndex(category, jsonID, i, key))
             
-        return valuesList
+        return values
     
-    def getJsonID():
-        pass
-        
-    
-        
-        
+    def addDirectoryToCategory(self, directory, category):
+        """
+        addDirectoryToCategory - Adds all json files from a directory into a chosen category.
+
+        Args:
+            directory: The relative path to a folder of json files
+            category: The category to place the json files into
+        """
+        for filePath in os.listdir(directory):  
+            # Get each specific file path in the directory
+            file = os.path.join(directory, filePath)  
+                 
+            if os.path.isfile(file):
+                # Get the file's extension 
+                ext = os.path.splitext(file)[-1].lower()
+                
+                if ext == ".json":
+                    # Isolate filename from extension
+                    jsonID = str(filePath).removesuffix(".json")
+                    self.addJsonFileToCategory(str(directory + "/" +  filePath), category, jsonID)
+                else:
+                    print(self.NOT_JSON_ERROR + " -> addDirectoryToCategory()")
+            else:
+                print(self.NOT_FILE_ERROR + " -> addDirectoryToCategory()")
