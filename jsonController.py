@@ -1,5 +1,6 @@
 import json
 import os
+from categories import Categories
 
 class jsonController:
     CATEGORY_ERROR = "ERROR: Invalid category selected"
@@ -13,11 +14,11 @@ class jsonController:
         """
         # Init categorization of json objects as a dictionary of dictionaries
         self.jsonDict = {
-            "Competitions": {},
-            "Events": {},
-            "Lineups": {},
-            "Matches": {},
-            "Three-sixty": {}
+            Categories.COMPETITIONS: {},
+            Categories.EVENTS: {},
+            Categories.LINEUPS: {},
+            Categories.MATCHES: {},
+            Categories.THREE_SIXTY: {}
         }
         
     @staticmethod
@@ -34,32 +35,33 @@ class jsonController:
             
         return jsonDeserialized
     
-    def addJsonFileToCategory(self, path, catergory, jsonID):
+    def addJsonFileToCategory(self, path, jsonID, category: Categories=Categories.COMPETITIONS):
         """
         addJsonFileToCategory - Adds a json file to the json controller's dictionary
 
         Args:
             path: Relative path to json file
-            catergory: The category being queried
+            jsonID: The ID of the json being queried (name of the json file)
+            category: The category being queried
         """
         # Create json object from file
         jsonDeserialized = self.__getJsonDeserializedFromFile(path)
         
         # Add the json object to the controller's json object dictionary
-        if catergory in self.jsonDict:
-            self.jsonDict[catergory][jsonID] = jsonDeserialized
+        if category in self.jsonDict:
+            self.jsonDict[category][jsonID] = jsonDeserialized
         else:
             print(self.CATEGORY_ERROR + " -> addJsonFileToCategory()")
     
-    def getValueFromKeyAtIndex(self, category, jsonID, index, key):
+    def getValueFromKeyAtIndex(self, jsonID, index, key, category: Categories):
         """ 
         getValueFromKey - Gets the value from a key/value pair.
         
         Args:
-            category: The category being queried 
             jsonID: The ID of the json being queried (name of the json file)
             index: The index position to query in the json file
             key: The value found from a key/value pair
+            category: The category being queried 
             
         Returns: 
             value: The value linked to the parsed key, if no value is
@@ -72,7 +74,7 @@ class jsonController:
             # Check for valid jsonID
             if jsonID in self.jsonDict[category].keys():
                 # Get value from key/value pair
-                value = self.jsonDict[category][jsonID][0][key]
+                value = self.jsonDict[category][jsonID][index][key]
             else:
                 print(self.ID_ERROR + " -> getValueFromKeyAtIndex()")
         else:
@@ -80,13 +82,13 @@ class jsonController:
             
         return value
     
-    def getAllValuesInCategoryFromKey(self, category, key):
+    def getAllValuesInCategoryFromKey(self, key, category: Categories):
         """
         getAllValuesInCategoryFromKey - Gets all the values from all the key/value pair.
 
         Args:
-            category: The category being queried 
             key: The value found from a key/value pair
+            category: The category being queried 
 
         Returns:
             valuesList: The list of all the values returned
@@ -97,11 +99,11 @@ class jsonController:
         for jsonID in self.jsonDict[category].keys():
             # Loop through all the list values within the json
             for i in range(len(self.jsonDict[category][jsonID])):
-                values.append(self.getValueFromKeyAtIndex(category, jsonID, i, key))
+                values.append(self.getValueFromKeyAtIndex(jsonID, i, key, category))
             
         return values
     
-    def addDirectoryToCategory(self, directory, category):
+    def addDirectoryToCategory(self, directory, category: Categories):
         """
         addDirectoryToCategory - Adds all json files from a directory into a chosen category.
 
@@ -120,7 +122,7 @@ class jsonController:
                 if ext == ".json":
                     # Isolate filename from extension
                     jsonID = str(filePath).removesuffix(".json")
-                    self.addJsonFileToCategory(str(directory + "/" +  filePath), category, jsonID)
+                    self.addJsonFileToCategory(str(directory + "/" +  filePath), jsonID, category)
                 else:
                     print(self.NOT_JSON_ERROR + " -> addDirectoryToCategory()")
             else:
