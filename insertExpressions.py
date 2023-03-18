@@ -11,4 +11,13 @@ class InsertExpressions(Enum):
     MATCHES_COMPETITION_INSERT = """ INSERT INTO MATCHES_COMPETITION (match_id, competition_id,
         country_name, competition_name) values(?, ?, ?, ?)
     """
+    MATCHES_SEASON_INSERT = """ INSERT INTO MATCHES_SEASON (match_id, season_id,
+        season_name) values(?, ?, ?)
+    """
+    MATCHES_HOME_TEAM_INSERT = """ INSERT INTO MATCHES_HOME_TEAM (match_id, home_team_id,
+        home_team_name, home_team_gender, home_team_group) values(?, ?, ?, ?, ?)
+    """
+    MATCHES_HOME_TEAM_COUNTRY_INSERT = """ INSERT INTO MATCHES_HOME_TEAM_COUNTRY (match_id, home_team_id,
+        id, name) values(?, ?, ?, ?)
+    """
     THREE_SIXTY_INSERT = 5
