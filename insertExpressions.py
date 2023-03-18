@@ -7,28 +7,44 @@ class InsertExpressions(Enum):
     """
     LINEUPS_INSERT = """
     """
+    # MATCH RELATED INSERTS EXPRESSIONS
     MATCH_INSERT = """ 
-        INSERT OR IGNORE INTO MATCH (match_id, match_date, kick_off, home_score,
-        away_score, match_status, match_status_360, last_updated, last_updated_360,
-        match_week) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT OR IGNORE INTO MATCH (match_id, match_date, kick_off, competition_id,
+        season_id, home_team_id, away_team_id, home_score, away_score, match_status, 
+        match_status_360, last_updated, last_updated_360, match_week) 
+        values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """
     COMPETITION_INSERT = """ 
-        INSERT OR IGNORE INTO COMPETITION (competition_id, country_name, competition_name) 
+        INSERT OR IGNORE INTO COMPETITION (id, country_name, competition_name) 
         values(?, ?, ?)
     """
     SEASON_INSERT = """ 
-        INSERT OR IGNORE INTO SEASON (season_id, season_name) values(?, ?)
+        INSERT OR IGNORE INTO SEASON (id, season_name) values(?, ?)
     """
-    HOME_TEAM_INSERT = """ 
-        INSERT OR IGNORE INTO HOME_TEAM (home_team_id, home_team_name, home_team_gender, 
-        home_team_group, country_id, manager_id) values(?, ?, ?, ?, ?, ?)
+    TEAM_INSERT = """ 
+        INSERT OR IGNORE INTO TEAM (id, team_name, team_gender, 
+        team_group, country_id, manager_id) values(?, ?, ?, ?, ?, ?)
     """
     COUNTRY_INSERT = """ 
-        INSERT OR IGNORE INTO COUNTRY (country_id, name) values(?, ?)
+        INSERT OR IGNORE INTO COUNTRY (id, name) values(?, ?)
     """
     MANAGER_INSERT = """ 
-        INSERT OR IGNORE INTO MANAGER (manager_id, name, nickname, dob, country_id) 
+        INSERT OR IGNORE INTO MANAGER (id, name, nickname, dob, country_id) 
         values(?, ?, ?, ?, ?)
     """
+    METADATA_INSERT = """ 
+        INSERT OR IGNORE INTO METADATA (match_id, data_version, shot_fidelity_version, 
+        xy_fidelity_version) values(?, ?, ?, ?)
+    """
+    COMPETITION_STAGE_INSERT = """ 
+        INSERT OR IGNORE INTO COMPETITION_STAGE (id, name) values(?, ?)
+    """
+    STADIUM_INSERT = """
+        INSERT OR IGNORE INTO STADIUM (id, name, country_id) values(?, ?, ?)
+    """
+    REFEREE_INSERT = """
+        INSERT OR IGNORE INTO REFEREE (id, name, country_id) values(?, ?, ?)
+    """
+    # THREE-SIXTY RELATED INSERT EXPRESSIONS
     THREE_SIXTY_INSERT = """
     """
