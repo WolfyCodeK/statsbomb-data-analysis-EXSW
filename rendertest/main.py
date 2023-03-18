@@ -1,7 +1,7 @@
 import vtkplotlib as vpl
 from stl.mesh import Mesh
 
-path = "rendertest\model.stl"
+path = "rendertest\halfron.stl"
 
 # Read the STL using numpy-stl
 mesh = Mesh.from_file(path)
