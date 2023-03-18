@@ -93,14 +93,20 @@ class databaseController:
         separator = "---------------------------------------------------------"
 
         print(separator)
-        print("QUERY EXPRESSION:\n")
+        print(">> QUERY EXPRESSION:")
         print(query)
         print("\n")
-        print(separator)
-        print("QUERY RESULTS:\n")
+        print(">> QUERY RESULTS:")
+        
+        count = 0
         
         for row in rows:
             print(row)
+            count += 1
+        
+        print("\nMATCHES FOUND: " + str(count)) 
+        print(separator)
+        print("\n")
         
     def __createTables(self):
         """
