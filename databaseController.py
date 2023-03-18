@@ -34,7 +34,7 @@ class databaseController:
         # Create matches table
         self.dbCursor.execute(
             """
-            CREATE TABLE Matches (
+            CREATE TABLE MATCHES (
                 match_id INTEGER,
                 match_date TEXT,
                 kick_off TEXT,
@@ -51,7 +51,17 @@ class databaseController:
         
         # Non atomic data within Matches table
         
-        # competition
+        self.dbCursor.execute(
+            """
+            CREATE TABLE MATCHES_COMPETITION (
+                match_id INTEGER,
+                competition_id INTEGER,
+                country_name TEXT,
+                competition_name TEXT
+            )
+            """
+        )
+        
         # season
         # home_team
         # away_team
@@ -95,6 +105,22 @@ class databaseController:
                     ))
                         
                 self.__sqlInsertExpression(formattedData, InsertExpressions.MATCHES_INSERT)
+                
+                formattedData = []
+                
+                for i in range(len(jsonData)):
+                    jsonDict = jsonData[i]
+                    jsonDictCompetition = jsonDict["competition"]
+                    print(jsonDictCompetition)
+                    
+                    formattedData.append((
+                        jsonDict["match_id"],
+                        jsonDictCompetition["competition_id"],
+                        jsonDictCompetition["country_name"],
+                        jsonDictCompetition["competition_name"]
+                    ))
+                    
+                self.__sqlInsertExpression(formattedData, InsertExpressions.MATCHES_COMPETITION_INSERT)
             elif CategoryNames.THREE_SIXTY.value in fileName:
                 pass   
         
