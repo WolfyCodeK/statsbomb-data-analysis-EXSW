@@ -1,4 +1,4 @@
-def getMatchesFormattedData(jsonData) -> list:
+def getMatchFormattedData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -17,9 +17,12 @@ def getMatchesFormattedData(jsonData) -> list:
             jsonDict["match_week"]
         ))
         
+    # Remove duplicate tuples
+    formattedData = list(dict.fromkeys(formattedData))
+        
     return formattedData
     
-def getMatchesCompetitionsFormattedData(jsonData) -> list:
+def getCompetitionFormattedData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -27,15 +30,17 @@ def getMatchesCompetitionsFormattedData(jsonData) -> list:
         jsonDictCompetition = jsonDict["competition"]
         
         formattedData.append((
-            jsonDict["match_id"],
             jsonDictCompetition["competition_id"],
             jsonDictCompetition["country_name"],
             jsonDictCompetition["competition_name"]
         ))
-        
+    
+    # Remove duplicate tuples
+    formattedData = list(dict.fromkeys(formattedData))
+    
     return formattedData
 
-def getMatchesSeasonFormattedData(jsonData) -> list:
+def getSeasonFormattedData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -43,31 +48,45 @@ def getMatchesSeasonFormattedData(jsonData) -> list:
         jsonDictSeason = jsonDict["season"]
         
         formattedData.append((
-            jsonDict["match_id"],
             jsonDictSeason["season_id"],
             jsonDictSeason["season_name"]
         ))
         
+    # Remove duplicate tuples
+    formattedData = list(dict.fromkeys(formattedData))    
+        
     return formattedData
     
-def getMatchesHomeTeamFormattedData(jsonData) -> list:
+def getHomeTeamFormattedData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
         jsonDict = jsonData[i]
         jsonDictHomeTeam = jsonDict["home_team"]
+        jsonDictHomeTeamCountry = jsonDictHomeTeam["country"]
         
+        managerID = None
+        
+        if "managers" in jsonDictHomeTeam:
+            jsonDictHomeTeamManagers = jsonDictHomeTeam["managers"]
+            # TEMP SOLUTION FOR MULTIPLE MANAGERS
+            managerID = jsonDictHomeTeamManagers[0]["id"]
+            
         formattedData.append((
-            jsonDict["match_id"],
             jsonDictHomeTeam["home_team_id"],
             jsonDictHomeTeam["home_team_name"],
             jsonDictHomeTeam["home_team_gender"],
-            jsonDictHomeTeam["home_team_group"]
+            jsonDictHomeTeam["home_team_group"],
+            jsonDictHomeTeamCountry["id"],
+            managerID
         ))
+    
+    # Remove duplicate tuples
+    formattedData = list(dict.fromkeys(formattedData))
         
     return formattedData
 
-def getMatchesHomeTeamCountryFormattedData(jsonData) -> list:
+def getCountryFormattedData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -76,10 +95,38 @@ def getMatchesHomeTeamCountryFormattedData(jsonData) -> list:
         jsonDictHomeTeamCountry = jsonDictHomeTeam["country"]
         
         formattedData.append((
-            jsonDict["match_id"],
-            jsonDictHomeTeam["home_team_id"],
             jsonDictHomeTeamCountry["id"],
             jsonDictHomeTeamCountry["name"]
         ))
+    
+    # Remove duplicate tuples
+    formattedData = list(dict.fromkeys(formattedData))
         
     return formattedData
+
+def getManagerFormattedData(jsonData) -> list:
+    formattedData = []
+    
+    for i in range(len(jsonData)):
+        jsonDict = jsonData[i]
+        jsonDictHomeTeam = jsonDict["home_team"]
+        jsonDictHomeTeamCountry = jsonDictHomeTeam["country"]
+        
+        if "managers" in jsonDictHomeTeam:
+            jsonDictHomeTeamManagers = jsonDictHomeTeam["managers"]
+            # TEMP SOLUTION FOR MULTIPLE MANAGERS
+            manager = jsonDictHomeTeamManagers[0]
+            
+            formattedData.append((
+                manager["id"],
+                manager["name"],
+                manager["nickname"],
+                manager["dob"],
+                jsonDictHomeTeamCountry["id"]
+            ))
+    
+    # Remove duplicate tuples
+    formattedData = list(dict.fromkeys(formattedData))
+        
+    return formattedData
+

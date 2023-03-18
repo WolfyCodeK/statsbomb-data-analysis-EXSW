@@ -2,7 +2,7 @@ import json
 
 def getDeserializedJsonFromFile(path):
     """ 
-    getDeserializedJsonFromFile - Converts a JSON file to a python object.
+    Converts a JSON file to a python object.
     
     Args:
         path: Relative path to json file
