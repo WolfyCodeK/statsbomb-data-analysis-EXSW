@@ -1,6 +1,7 @@
 from insertExpressions import *
 from jsonUtils import *
 from categoryNames import *
+from formattedDataHandler import *
 import os
 import sqlite3 as sl
 
@@ -31,10 +32,10 @@ class databaseController:
         self.statsbombDB.close()
         
     def __createTables(self):
-        # Create matches table
+        # Create Matches table
         self.dbCursor.execute(
             """
-            CREATE TABLE Matches (
+            CREATE TABLE MATCHES (
                 match_id INTEGER,
                 match_date TEXT,
                 kick_off TEXT,
@@ -44,16 +45,60 @@ class databaseController:
                 match_status_360 TEXT,
                 last_updated TEXT,
                 last_updated_360 TEXT,
-                match_week INTEGER
+                match_week INTEGER,
+                PRIMARY KEY (match_id)
             )
             """
         )
         
         # Non atomic data within Matches table
+        self.dbCursor.execute(
+            """
+            CREATE TABLE MATCHES_COMPETITION (
+                match_id INTEGER,
+                competition_id INTEGER,
+                country_name TEXT,
+                competition_name TEXT,
+                PRIMARY KEY (match_id)
+            )
+            """
+        )
         
-        # competition
-        # season
-        # home_team
+        self.dbCursor.execute(
+            """
+            CREATE TABLE MATCHES_SEASON (
+                match_id INTEGER,
+                season_id INTEGER,
+                season_name TEXT,
+                PRIMARY KEY (match_id)
+            )
+            """
+        )
+        
+        self.dbCursor.execute(
+            """
+            CREATE TABLE MATCHES_HOME_TEAM (
+                match_id INTEGER,
+                home_team_id INTEGER,
+                home_team_name TEXT,
+                home_team_gender TEXT,
+                home_team_group TEXT,
+                PRIMARY KEY (match_id)
+            )
+            """
+        )
+        
+        self.dbCursor.execute(
+            """
+            CREATE TABLE MATCHES_HOME_TEAM_COUNTRY (
+                match_id INTEGER,
+                home_team_id INTEGER,
+                id INTEGER,
+                name TEXT,
+                PRIMARY KEY (match_id, home_team_id)
+            )
+            """
+        )
         # away_team
         # metadata
         # competition_stage
@@ -64,8 +109,6 @@ class databaseController:
         self.statsbombDB.commit()
         
     def __extractAndStoreData(self, deserializedJson, fileName):
-        formattedData = []
-        
         # Cast deserializedJson as a list object
         jsonData = list(deserializedJson)
         
@@ -77,27 +120,34 @@ class databaseController:
                 pass
             elif CategoryNames.LINEUPS.value in fileName:
                 pass
-            elif CategoryNames.MATCHES.value in fileName:
-                for i in range(len(jsonData)):
-                    jsonDict = jsonData[i]
-                    
-                    formattedData.append((
-                        jsonDict["match_id"],
-                        jsonDict["match_date"],
-                        jsonDict["kick_off"],
-                        jsonDict["home_score"],
-                        jsonDict["away_score"],
-                        jsonDict["match_status"],
-                        jsonDict["match_status_360"],
-                        jsonDict["last_updated"],
-                        jsonDict["last_updated_360"],
-                        jsonDict["match_week"]
-                    ))
-                        
-                self.__sqlInsertExpression(formattedData, InsertExpressions.MATCHES_INSERT)
+            elif CategoryNames.MATCHES.value in fileName:       
+                self.__sqlInsertExpression(
+                    getMatchesFormattedData(jsonData),
+                    InsertExpressions.MATCHES_INSERT
+                )
+
+                self.__sqlInsertExpression(
+                    getMatchesCompetitionsFormattedData(jsonData),
+                    InsertExpressions.MATCHES_COMPETITION_INSERT
+                )
+                
+                self.__sqlInsertExpression(
+                    getMatchesSeasonFormattedData(jsonData),
+                    InsertExpressions.MATCHES_SEASON_INSERT
+                )
+                
+                self.__sqlInsertExpression(
+                    getMatchesHomeTeamFormattedData(jsonData),
+                    InsertExpressions.MATCHES_HOME_TEAM_INSERT
+                )
+                
+                self.__sqlInsertExpression(
+                    getMatchesHomeTeamCountryFormattedData(jsonData),
+                    InsertExpressions.MATCHES_HOME_TEAM_COUNTRY_INSERT
+                )
+                
             elif CategoryNames.THREE_SIXTY.value in fileName:
-                pass   
-        
+                pass  
     def buildDatabase(self):
         print('Please wait while database builds...')
         
@@ -136,5 +186,5 @@ class databaseController:
             else:
                 # Recursively call function on folder to traverse through directory
                 self.addDirectoryToDB(file)
-        
+            
               
