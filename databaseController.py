@@ -43,164 +43,6 @@ class databaseController:
         self.dbCursor.close()
         self.statsbombDB.close()
         
-    def __createTables(self):
-        """
-        Create all the tables required for storing the statsbomb data
-        """
-        # MATCHES
-        self.dbCursor.execute(
-            """
-            CREATE TABLE MATCH (
-                match_id INTEGER,
-                match_date TEXT,
-                kick_off TEXT,
-                home_score INTEGER,
-                away_score INTEGER,
-                match_status TEXT,
-                match_status_360 TEXT,
-                last_updated TEXT,
-                last_updated_360 TEXT,
-                match_week INTEGER,
-                PRIMARY KEY (match_id)
-            )
-            """
-        )
-        
-        # COMPETITION
-        self.dbCursor.execute(
-            """
-            CREATE TABLE COMPETITION (
-                competition_id INTEGER,
-                country_name TEXT,
-                competition_name TEXT,
-                PRIMARY KEY (competition_id)
-            )
-            """
-        )
-        
-        # SEASON
-        self.dbCursor.execute(
-            """
-            CREATE TABLE SEASON (
-                season_id INTEGER,
-                season_name TEXT,
-                PRIMARY KEY (season_id)
-            )
-            """
-        )
-        
-        # HOME_TEAM
-        self.dbCursor.execute(
-            """
-            CREATE TABLE HOME_TEAM (
-                home_team_id INTEGER,
-                home_team_name TEXT,
-                home_team_gender TEXT,
-                home_team_group TEXT,
-                country_id INTEGER,
-                manager_id INTEGER,
-                PRIMARY KEY (home_team_id)
-            )
-            """
-        )
-        
-        # COUNTRY
-        self.dbCursor.execute(
-            """
-            CREATE TABLE COUNTRY (
-                country_id INTEGER,
-                name TEXT,
-                PRIMARY KEY (country_id)
-            )
-            """
-        )
-        
-         # MANAGER
-        
-        # MANAGER
-        self.dbCursor.execute(
-            """
-            CREATE TABLE MANAGER (
-                manager_id INTEGER,
-                name TEXT,
-                nickname TEXT,
-                dob TEXT,
-                country_id INTEGER,
-                PRIMARY KEY (manager_id)
-            )
-            """
-        )
-        
-        # away_team
-        # metadata
-        # competition_stage
-        # stadium
-        
-    def __sqlInsertExpression(self, data, table: InsertExpressions):
-        self.dbCursor.executemany(table.value, data)
-        self.statsbombDB.commit()
-        
-    def __extractAndStoreData(self, deserializedJson, fileName):
-        # Cast deserializedJson as a list object
-        jsonData = list(deserializedJson)
-        
-        # Check that list is not empty
-        if jsonData:
-            if CategoryNames.COMPETITIONS.value in fileName:
-                pass
-            elif CategoryNames.EVENTS.value in fileName:
-                pass
-            elif CategoryNames.LINEUPS.value in fileName:
-                pass
-            elif CategoryNames.MATCHES.value in fileName:       
-                # MATCH
-                self.__sqlInsertExpression(
-                    getMatchFormattedData(jsonData),
-                    InsertExpressions.MATCH_INSERT
-                )
-
-                # COMPETITION
-                self.__sqlInsertExpression(
-                    getCompetitionFormattedData(jsonData),
-                    InsertExpressions.COMPETITION_INSERT
-                )
-                
-                # SEASON
-                self.__sqlInsertExpression(
-                    getSeasonFormattedData(jsonData),
-                    InsertExpressions.SEASON_INSERT
-                )
-                
-                # HOME_TEAM
-                self.__sqlInsertExpression(
-                    getHomeTeamFormattedData(jsonData),
-                    InsertExpressions.HOME_TEAM_INSERT
-                )
-                
-                # COUNTRY
-                self.__sqlInsertExpression(
-                    getCountryFormattedData(jsonData),
-                    InsertExpressions.COUNTRY_INSERT
-                )
-                
-                # MANAGER
-                formattedData = getManagerFormattedData(jsonData)
-                # Check the senario where there are no managers
-                if formattedData:
-                    self.__sqlInsertExpression(
-                        formattedData,
-                        InsertExpressions.MANAGER_INSERT
-                    )
-                    
-                """
-                self.__sqlInsertExpression(
-                        formattedData,
-                        InsertExpressions.MANAGER_INSERT
-                    )
-                """
-            elif CategoryNames.THREE_SIXTY.value in fileName:
-                pass  
-            
     def buildDatabase(self):
         print('Please wait while database builds...')
         
@@ -238,6 +80,266 @@ class databaseController:
                         self.__extractAndStoreData(deserializedJson, str(file))
             else:
                 # Recursively call function on folder to traverse through directory
-                self.addDirectoryToDB(file)
+                self.addDirectoryToDB(file)  
+                
+    def __sqlInsertExpression(self, data, table: InsertExpressions):
+        self.dbCursor.executemany(table.value, data)
+        self.statsbombDB.commit()  
+        
+    def printDatabaseQuery(self, query):
+        self.dbCursor.execute(query)
+
+        rows = self.dbCursor.fetchall()
+        separator = "---------------------------------------------------------"
+
+        print(separator)
+        print(">> QUERY EXPRESSION:")
+        print(query)
+        print("\n")
+        print(">> QUERY RESULTS:")
+        
+        count = 0
+        
+        for row in rows:
+            print(row)
+            count += 1
+        
+        print("\nMATCHES FOUND: " + str(count)) 
+        print(separator)
+        print("\n")
+        
+    def __createTables(self):
+        """
+        Create all the tables required for storing the statsbomb data
+        """
+        # MATCHES
+        self.dbCursor.execute(
+            """
+            CREATE TABLE MATCH (
+                match_id INTEGER,
+                match_date TEXT,
+                kick_off TEXT,
+                competition_id INTEGER,
+                season_id INTEGER,
+                home_team_id INTEGER,
+                away_team_id INTEGER,
+                home_score INTEGER,
+                away_score INTEGER,
+                match_status TEXT,
+                match_status_360 TEXT,
+                last_updated TEXT,
+                last_updated_360 TEXT,
+                match_week INTEGER,
+                PRIMARY KEY (match_id)
+            )
+            """
+        )
+        
+        # COMPETITION
+        self.dbCursor.execute(
+            """
+            CREATE TABLE COMPETITION (
+                id INTEGER,
+                country_name TEXT,
+                competition_name TEXT,
+                PRIMARY KEY (id)
+            )
+            """
+        )
+        
+        # SEASON
+        self.dbCursor.execute(
+            """
+            CREATE TABLE SEASON (
+                id INTEGER,
+                season_name TEXT,
+                PRIMARY KEY (id)
+            )
+            """
+        )
+        
+        # TEAM
+        self.dbCursor.execute(
+            """
+            CREATE TABLE TEAM (
+                id INTEGER,
+                team_name TEXT,
+                team_gender TEXT,
+                team_group TEXT,
+                country_id INTEGER,
+                manager_id INTEGER,
+                PRIMARY KEY (id)
+            )
+            """
+        )
+        
+        # COUNTRY
+        self.dbCursor.execute(
+            """
+            CREATE TABLE COUNTRY (
+                id INTEGER,
+                name TEXT,
+                PRIMARY KEY (id)
+            )
+            """
+        )
+        
+         # MANAGER
+        
+        # MANAGER
+        self.dbCursor.execute(
+            """
+            CREATE TABLE MANAGER (
+                id INTEGER,
+                name TEXT,
+                nickname TEXT,
+                dob TEXT,
+                country_id INTEGER,
+                PRIMARY KEY (id)
+            )
+            """
+        )
+        
+        # METADATA
+        self.dbCursor.execute(
+            """
+            CREATE TABLE METADATA (
+                match_id INTEGER,
+                data_version TEXT,
+                shot_fidelity_version TEXT,
+                xy_fidelity_version TEXT,
+                PRIMARY KEY (match_id)
+            )
+            """
+        )
+        
+        # COMPETITION_STAGE
+        self.dbCursor.execute(
+            """
+            CREATE TABLE COMPETITION_STAGE (
+                id INTEGER,
+                name TEXT,
+                PRIMARY KEY (id)
+            )
+            """
+        )
+        
+        # STADIUM
+        self.dbCursor.execute(
+            """
+            CREATE TABLE STADIUM (
+                id INTEGER,
+                name TEXT,
+                country_id INTEGER,
+                PRIMARY KEY (id)
+            )
+            """
+        )
+        
+        # REFEREE
+        self.dbCursor.execute(
+            """
+            CREATE TABLE REFEREE (
+                id INTEGER,
+                name TEXT,
+                country_id INTEGER,
+                PRIMARY KEY (id)
+            )
+            """
+        )
+        
+    def __extractAndStoreData(self, deserializedJson, fileName):
+        # Cast deserializedJson as a list object
+        jsonData = list(deserializedJson)
+        
+        # Check that list is not empty
+        if jsonData:
+            if CategoryNames.COMPETITIONS.value in fileName:
+                pass
+            elif CategoryNames.EVENTS.value in fileName:
+                pass
+            elif CategoryNames.LINEUPS.value in fileName:
+                pass
+            elif CategoryNames.MATCHES.value in fileName:       
+                # MATCH
+                self.__sqlInsertExpression(
+                    getMatchFormattedData(jsonData),
+                    InsertExpressions.MATCH_INSERT
+                )
+
+                # COMPETITION
+                self.__sqlInsertExpression(
+                    getCompetitionFormattedData(jsonData),
+                    InsertExpressions.COMPETITION_INSERT
+                )
+                
+                # SEASON
+                self.__sqlInsertExpression(
+                    getSeasonFormattedData(jsonData),
+                    InsertExpressions.SEASON_INSERT
+                )
+                
+                # HOME_TEAM
+                self.__sqlInsertExpression(
+                    getHomeTeamFormattedData(jsonData),
+                    InsertExpressions.TEAM_INSERT
+                )
+                
+                # AWAY_TEAM
+                self.__sqlInsertExpression(
+                    getAwayTeamFormattedData(jsonData),
+                    InsertExpressions.TEAM_INSERT
+                )
+                
+                # HOME_TEAM_COUNTRY
+                self.__sqlInsertExpression(
+                    getHomeTeamCountryFormattedData(jsonData),
+                    InsertExpressions.COUNTRY_INSERT
+                )
+                
+                # AWAY_TEAM_COUNTRY
+                self.__sqlInsertExpression(
+                    getAwayTeamCountryFormattedData(jsonData),
+                    InsertExpressions.COUNTRY_INSERT
+                )
+                
+                # HOME_TEAM_MANAGER
+                self.__sqlInsertExpression(
+                    getHomeTeamManagerFormattedData(jsonData),
+                    InsertExpressions.MANAGER_INSERT
+                )
+                    
+                # AWAY_TEAM_MANAGER
+                self.__sqlInsertExpression(
+                    getAwayTeamManagerFormattedData(jsonData),
+                    InsertExpressions.MANAGER_INSERT
+                )
+                    
+                # METADATA
+                self.__sqlInsertExpression(
+                    getMetadataFormattedData(jsonData),
+                    InsertExpressions.METADATA_INSERT
+                )
+               
+                # COMPETITION_STAGE
+                self.__sqlInsertExpression(
+                    getCompetitionStageFormattedData(jsonData),
+                    InsertExpressions.COMPETITION_STAGE_INSERT
+                )
+                
+                # STADIUM
+                self.__sqlInsertExpression(
+                    getStadiumFormattedData(jsonData),
+                    InsertExpressions.STADIUM_INSERT
+                )
+                
+                # REFEREE
+                self.__sqlInsertExpression(
+                    getRefereeFormattedData(jsonData),
+                    InsertExpressions.REFEREE_INSERT
+                )
+                
+            elif CategoryNames.THREE_SIXTY.value in fileName:
+                pass  
             
               

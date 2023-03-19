@@ -15,13 +15,17 @@ if buildDB.lower() == 'y':
 end = time.time()
 
 print("\n##########################################")
-print("Total database build time: " + str(round(end - start, 3)) + " seconds")
-print("##########################################")
+print("Database build time: " + str(round(end - start, 3)) + " seconds")
+print("##########################################\n")
+
+start = time.time()
 
 # QUERIES
+# Example SQL query
+database.printDatabaseQuery("SELECT * FROM TEAM WHERE country_id=68;")
 
 end = time.time()
 
 print("\n#################################################")
-print("Total database build + query time: " + str(round(end - start, 3)) + " seconds")
+print("Database query time: " + str(round(end - start, 3)) + " seconds")
 print("#################################################\n")
