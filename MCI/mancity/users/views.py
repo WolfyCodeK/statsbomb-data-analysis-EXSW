@@ -23,9 +23,7 @@ def home(request):
         elif 'signin' in request.POST:
             email = request.POST['email']
             password = request.POST['password']
-            print(email,password)
             user = authenticate(username=email,password=password)
-            print(user)
             if user is not None:
                 login(request, user)
                 messages.success(request, f'Welcome {email}!')
