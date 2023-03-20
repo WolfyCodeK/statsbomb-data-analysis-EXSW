@@ -1,8 +1,6 @@
 asgiref==3.6.0
 Django==4.1.7
-django-crispy-forms==2.0
 sqlparse==0.4.3
-sweetify==2.3.1
 tzdata==2022.7
 vtkplotlib==2.0.0
 numpy-stl==3.0.1
