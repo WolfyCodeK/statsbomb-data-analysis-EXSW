@@ -1,8 +1,10 @@
-Running the script with:
+Running the script for first time with:
 
-.\script.bat
+.\initial.bat
 
-will cd to the right place and start the server
+wil install reqs and startserver,
+
+.\runserver.bat will just cd and runserver
 
 
 To add:
