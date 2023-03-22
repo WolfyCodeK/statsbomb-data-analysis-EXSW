@@ -1,26 +1,30 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import json
 
 def main(request):
-    passtest()
-    return render(request, 'pitch/pitch.html')
-
+    passlist = passtest()
+    return render(request, 'pitch/pitch.html', {'passlist': passlist})
 
 def passtest():
-    import json
     print("passtest")
 
     output = 'pitch/static/pitch/ManCity_Arsenal_events.json'
 
     # Load the JSON data
-    with open(output, 'r') as file:
+    with open(output, 'r', encoding="utf-8") as file:
         data = json.load(file)
 
-    # Specify the player names or IDs
-    sender_player_name = "10252"
-    receiver_player_name = "10185"
+    passlist = []
 
-    # figure out how to find different pass types
+    # Figure out how to find different pass types
     for event in data:
-        if 'pass' in event:
-            print(event)
+        try:
+            if event['type']['name'] == "Pass":
+                thedata = str(event['pass']['recipient']['name']) + " recieved the ball from " + str(event['player']['name'])
+                passlist.append(thedata)
+                print(event['pass']['recipient']['name'] + " recieved the ball from " + event['player']['name'])
+        except:
+            pass
+
+    return passlist
