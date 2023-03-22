@@ -6,13 +6,26 @@
     <title>Pitch</title>
 </head>
 <body>
-    <h1>Pass List</h1>
-    <ul>
-        {% for pass in passlist %}
-            <li>{{ pass }}</li>
-        {% empty %}
-            <li>No passes found</li>
-        {% endfor %}
-    </ul>
+    <h1>Pass Count</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="sender">Sender:</label>
+        <select name="sender" id="sender">
+            {% for player_id, player_name in players.items %}
+                <option value="{{ player_id }}" {% if player_id == sender_id %}selected{% endif %}>{{ player_name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="receiver">Receiver:</label>
+        <select name="receiver" id="receiver">
+            {% for player_id, player_name in players.items %}
+                <option value="{{ player_id }}" {% if player_id == receiver_id %}selected{% endif %}>{{ player_name }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p>Pass count: {{ pass_count }}</p>
 </body>
 </html>
