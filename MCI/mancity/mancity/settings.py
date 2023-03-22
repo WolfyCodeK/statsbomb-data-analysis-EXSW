@@ -41,7 +41,8 @@ INSTALLED_APPS = [
 
     #own
     'users.apps.UsersConfig',
-    'main'
+    'main',
+    'pitch',
 ]
 
 MIDDLEWARE = [
