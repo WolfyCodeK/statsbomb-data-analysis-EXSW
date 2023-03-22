@@ -9,9 +9,9 @@ wil install reqs and startserver,
 
 To add:
 
-Pass map:
-    Most frequent passes
-    Most common way of progressing up the pitch - vizulisation
+* Pass map:
+    * Most frequent passes
+    * Most common way of progressing up the pitch - vizulisation
 
 Distance from player who recieves the ball to opposition player
 
