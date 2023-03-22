@@ -9,7 +9,7 @@ wil install reqs and startserver,
 
 To add:
 
-* Pass map:
+Pass map:
     * Most frequent passes
     * Most common way of progressing up the pitch - vizulisation
 
