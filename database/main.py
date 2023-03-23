@@ -1,7 +1,7 @@
 from databaseController import *
 import time
 
-DATA_PATH = "D:\DATA\open-data-master\data"
+DATA_PATH = "D:\DATA\statsbombdata\Hays - MCFC-20230320T175115Z-002\Hays - MCFC\StatsBomb\Data"
 
 database = databaseController(DATA_PATH)
 
