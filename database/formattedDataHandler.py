@@ -307,6 +307,8 @@ def getEventFormattedData(jsonData) -> list:
         playerID = None
         positionID = None
         duration = None
+        offCamera = None
+        out = None
         underPressure = None
         counterPress = None
         locationX = None
@@ -337,6 +339,12 @@ def getEventFormattedData(jsonData) -> list:
             
         if "duration" in jsonDict:
             duration = jsonDict["duration"]
+            
+        if "off_camera" in jsonDict:
+            offCamera = jsonDict["off_camera"]   
+            
+        if "out" in jsonDict:
+            out = jsonDict["out"]   
             
         if "counter_press" in jsonDict:
             counterPress = jsonDict["counter_press"]
@@ -373,6 +381,8 @@ def getEventFormattedData(jsonData) -> list:
             locationX,
             locationY,
             duration,
+            offCamera,
+            out,
             underPressure,
             counterPress,
             strRelatedEvents

@@ -278,6 +278,8 @@ class databaseController:
                 location_x INTEGER,
                 location_y INTEGER,
                 duration INTEGER,
+                off_camera BOOLEAN,
+                out BOOLEAN,
                 under_pressure BOOLEAN,
                 counterpress BOOLEAN,
                 related_events TEXT,
