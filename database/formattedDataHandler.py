@@ -292,3 +292,89 @@ def getRefereeFormattedData(jsonData) -> list:
         
     return formattedData
 
+def getEventFormattedData(jsonData) -> list:
+    formattedData = []
+    
+    for i in range(len(jsonData)):
+        jsonDict = jsonData[i]
+        
+        obvForList = [None, None, None]
+        obvAgainstList = [None, None, None]
+        obvTotal = None
+        playerID = None
+        positionID = None
+        duration = None
+        underPressure = None
+        counterPress = None
+        locationX = None
+        locationY = None
+        relatedEvents = None
+        
+        if "obv_for_after" in jsonDict:
+            obvForList.append(jsonData["obv_for_after"])
+            obvForList.append(jsonData["obv_for_before"])
+            obvForList.append(jsonData["obv_for_net"])
+            obvTotal = jsonData["obv_total_net"]
+            
+        if "obv_against_after" in jsonDict:
+            obvAgainstList.append(jsonData["obv_against_after"])
+            obvAgainstList.append(jsonData["obv_against_before"])
+            obvAgainstList.append(jsonData["obv_against_net"])
+            obvTotal = jsonData["obv_total_net"]
+            
+        if "player" in jsonDict:
+            playerID = jsonDict["player"]["id"]
+        
+        if "position" in jsonDict:
+            positionID = jsonDict["position"]["id"]
+                
+        if "location" in jsonData:
+            locationX = jsonData["location"][0]
+            locationY = jsonData["location"][1]
+            
+        if "duration" in jsonData:
+            duration = jsonData["duration"]
+            
+        if "counter_press" in jsonData:
+            counterPress = jsonData["counter_press"]
+            
+        if "under_pressure" in jsonData:
+            underPressure = jsonData["under_pressure"]
+            
+        if "related_events" in jsonData:
+            relatedEvents = jsonData["related_events"]
+        
+        formattedData.append((
+            jsonDict["id"],
+            jsonDict["index"],
+            jsonDict["period"],
+            jsonDict["timestamp"],
+            jsonDict["minute"],
+            jsonDict["second"],
+            jsonDict["type"]["id"],
+            jsonDict["possession"],
+            jsonDict["possession_team"]["id"],
+            jsonDict["play_pattern"]["id"],
+            obvForList[0],
+            obvForList[1],
+            obvForList[2],
+            obvAgainstList[0],
+            obvAgainstList[1],
+            obvAgainstList[2],
+            obvTotal,
+            jsonDict["team"]["id"],
+            playerID,
+            positionID,
+            locationX,
+            locationY,
+            duration,
+            underPressure,
+            counterPress,
+            relatedEvents
+        ))
+        
+    # Remove duplicate tuples
+    formattedData = list(dict.fromkeys(formattedData))
+        
+    return formattedData
+

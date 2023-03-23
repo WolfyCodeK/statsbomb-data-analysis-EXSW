@@ -7,7 +7,7 @@ import sqlite3 as sl
 
 class databaseController:
     SQL_MATHCES_EXPR = "INSERT INTO MATCHES (id, name, age) values(?, ?, ?)"
-    DATABASE_FILE = "statsbombDatabase.db"
+    DATABASE_FILE = "database\statsbombDatabase.db"
     
     def __init__(self, dataPath):
         """
@@ -74,6 +74,11 @@ class databaseController:
                 
                 if ext == ".json":
                     if CategoryNames.MATCHES.value in str(file):
+                        # Isolate filename from extension
+                        deserializedJson = getDeserializedJsonFromFile(file)
+                        
+                        self.__extractAndStoreData(deserializedJson, str(file))
+                    if CategoryNames.EVENTS.value in str(file):
                         # Isolate filename from extension
                         deserializedJson = getDeserializedJsonFromFile(file)
                         
@@ -184,8 +189,6 @@ class databaseController:
             """
         )
         
-         # MANAGER
-        
         # MANAGER
         self.dbCursor.execute(
             """
@@ -248,6 +251,42 @@ class databaseController:
             """
         )
         
+        # EVENTS
+        self.dbCursor.execute(
+            """
+            CREATE TABLE EVENT (
+                id TEXT,
+                `index` INTEGER,
+                period INTEGER,
+                timestamp TEXT,
+                minute INTEGER,
+                second INTEGER,
+                type_id INTEGER,
+                possession INTEGER,
+                possession_team_id INTEGER,
+                play_pattern_id INTEGER,
+                obv_for_after INTEGER,
+                obv_for_before INTEGER,
+                obv_for_net INTEGER,
+                obv_against_after INTEGER,
+                obv_against_before INTEGER,
+                obv_against_net INTEGER,
+                obv_total_net INTEGER,
+                team_id INTEGER,
+                player_id INTEGER,
+                position_id INTEGER,
+                location_x INTEGER,
+                location_y INTEGER,
+                duration INTEGER,
+                under_pressure BOOLEAN,
+                counterpress BOOLEAN,
+                related_events TEXT,
+                PRIMARY KEY (id)
+            )
+            """
+            # carry, goalkeeper
+        )
+        
     def __extractAndStoreData(self, deserializedJson, fileName):
         # Cast deserializedJson as a list object
         jsonData = list(deserializedJson)
@@ -257,6 +296,12 @@ class databaseController:
             if CategoryNames.COMPETITIONS.value in fileName:
                 pass
             elif CategoryNames.EVENTS.value in fileName:
+                # EVENTS
+                self.__sqlInsertExpression(
+                    getEventFormattedData(jsonData),
+                    InsertExpressions.EVENT_INSERT
+                )
+                
                 pass
             elif CategoryNames.LINEUPS.value in fileName:
                 pass

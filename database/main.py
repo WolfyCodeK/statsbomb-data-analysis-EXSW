@@ -22,7 +22,7 @@ start = time.time()
 
 # QUERIES
 # Example SQL query
-database.printDatabaseQuery("SELECT * FROM TEAM WHERE country_id=68;")
+database.printDatabaseQuery("SELECT id FROM EVENT WHERE minute=30 AND second=0;")
 
 end = time.time()
 

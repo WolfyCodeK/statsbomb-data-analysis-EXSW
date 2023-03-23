@@ -45,6 +45,14 @@ class InsertExpressions(Enum):
     REFEREE_INSERT = """
         INSERT OR IGNORE INTO REFEREE (id, name, country_id) values(?, ?, ?)
     """
+    EVENT_INSERT = """
+        INSERT OR IGNORE INTO EVENT (id, `index`, period, timestamp,
+        minute, second, type_id, possession, possession_team_id, play_pattern_id, 
+        obv_for_after, obv_for_before, obv_for_net, obv_against_after, obv_against_before,
+        obv_against_net, obv_total_net, team_id, player_id, position_id, location_x, location_y,
+        duration, under_pressure, counterpress, related_events) 
+        values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """
     # THREE-SIXTY RELATED INSERT EXPRESSIONS
     THREE_SIXTY_INSERT = """
     """
