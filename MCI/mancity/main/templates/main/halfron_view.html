@@ -1,0 +1,17 @@
+{% extends "main/main.html" %}
+
+{% load static %}
+
+{% block content %}
+  <a-scene>
+    <a-assets>
+      <a-asset-item id="halfron-gltf" src="{% static 'main/halfron.gltf' %}"></a-asset-item>
+    </a-assets>
+
+    <a-entity gltf-model="#halfron-gltf" position="0 0 0" rotation="0 0 0" scale="1 1 1"></a-entity>
+
+    <a-entity camera look-controls position="0 0 0"></a-entity>
+    <a-entity light="type: directional; intensity: 1" position="-1 1 1"></a-entity>
+    <a-entity light="type: ambient; intensity: 0.5"></a-entity>
+  </a-scene>
+{% endblock %}

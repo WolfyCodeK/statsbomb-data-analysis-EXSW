@@ -1,49 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Three.js OBJ Example</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.rawgit.com/mrdoob/three.js/r99/examples/js/loaders/OBJLoader2.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model Viewer</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 </head>
 <body>
-
-<script>
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    const scene = new THREE.Scene();
-
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
-    scene.add(camera);
-
-    const loader = new THREE.OBJLoader2();
-    loader.load('halfron.obj', function(object) {
-        object.scale.set(0.1, 0.1, 0.1); // Scale the object down to make it more visible
-        scene.add(object);
-    });
-
-    const light = new THREE.PointLight(0xffffff, 1);
-    light.position.set(0, 0, 5);
-    scene.add(light);
-
-    function animate() {
-        requestAnimationFrame(animate);
-
-        if (object) { // Check if the object has loaded before attempting to rotate it
-            object.rotation.x += 0.01;
-            object.rotation.y += 0.01;
-        }
-
-        renderer.setClearColor(0xEEEEEE);
-        renderer.render(scene, camera);
-        renderer.setClearColor(0xEEEEEE);
-    }
-
-    animate();
-</script>
-
+    {% block content %}{% endblock %}
 </body>
 </html>
