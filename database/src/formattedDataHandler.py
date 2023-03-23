@@ -1,4 +1,4 @@
-def getMatchFormattedData(jsonData) -> list:
+def getMatchData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -26,7 +26,7 @@ def getMatchFormattedData(jsonData) -> list:
         
     return formattedData
     
-def getCompetitionFormattedData(jsonData) -> list:
+def getCompetitionData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -44,7 +44,7 @@ def getCompetitionFormattedData(jsonData) -> list:
     
     return formattedData
 
-def getSeasonFormattedData(jsonData) -> list:
+def getSeasonData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -61,7 +61,7 @@ def getSeasonFormattedData(jsonData) -> list:
         
     return formattedData
     
-def getHomeTeamFormattedData(jsonData) -> list:
+def getHomeTeamData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -90,7 +90,7 @@ def getHomeTeamFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getHomeTeamCountryFormattedData(jsonData) -> list:
+def getHomeTeamCountryData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -108,7 +108,7 @@ def getHomeTeamCountryFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getHomeTeamManagerFormattedData(jsonData) -> list:
+def getHomeTeamManagerData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -134,7 +134,7 @@ def getHomeTeamManagerFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getAwayTeamFormattedData(jsonData) -> list:
+def getAwayTeamData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -163,7 +163,7 @@ def getAwayTeamFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getAwayTeamCountryFormattedData(jsonData) -> list:
+def getAwayTeamCountryData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -181,7 +181,7 @@ def getAwayTeamCountryFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getAwayTeamManagerFormattedData(jsonData) -> list:
+def getAwayTeamManagerData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -207,7 +207,7 @@ def getAwayTeamManagerFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getMetadataFormattedData(jsonData) -> list:
+def getMetadataData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -238,7 +238,7 @@ def getMetadataFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getCompetitionStageFormattedData(jsonData) -> list:
+def getCompetitionStageData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -255,7 +255,7 @@ def getCompetitionStageFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getStadiumFormattedData(jsonData) -> list:
+def getStadiumData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -275,7 +275,7 @@ def getStadiumFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getRefereeFormattedData(jsonData) -> list:
+def getRefereeData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -295,7 +295,7 @@ def getRefereeFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getEventFormattedData(jsonData) -> list:
+def getEventData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -398,7 +398,7 @@ def getEventFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getEventTypeFormattedData(jsonData) -> list:
+def getEventTypeData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -415,7 +415,7 @@ def getEventTypeFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getPlayPatternFormattedData(jsonData) -> list:
+def getPlayPatternData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -432,7 +432,7 @@ def getPlayPatternFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getPlayerFormattedData(jsonData) -> list:
+def getPlayerData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -451,7 +451,7 @@ def getPlayerFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getPassFormattedData(jsonData) -> list:
+def getPassData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -490,7 +490,7 @@ def getPassFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getPassHeightFormattedData(jsonData) -> list:
+def getPassHeightData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
@@ -509,7 +509,7 @@ def getPassHeightFormattedData(jsonData) -> list:
         
     return formattedData
 
-def getPassTypeFormattedData(jsonData) -> list:
+def getPassTypeData(jsonData) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):

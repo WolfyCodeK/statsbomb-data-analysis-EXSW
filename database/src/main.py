@@ -1,5 +1,6 @@
 from databaseController import *
-from jsonUtils import getDeserializedJsonFromFile
+from insightExpressions import *
+from jsonUtils import *
 import time
 
 dbConfig = getDeserializedJsonFromFile("database\cfg.json")[0]
@@ -11,7 +12,7 @@ TIME_UNITS = " seconds"
 start = time.time()
 
 # Init database with path to source data
-database = databaseController(DATA_PATH)
+database = DatabaseController(DATA_PATH)
 
 end = time.time()
 
@@ -23,7 +24,7 @@ start = time.time()
 
 # QUERIES
 # Example SQL query
-query = database.getQueryNumOfPassesBetweenPlayers("Yui Hasegawa", "Khadija Monifa Shaw")
+query = getQueryNumOfPassesBetweenPlayers("Yui Hasegawa", "Khadija Monifa Shaw")
 database.printDatabaseQuery(query)
 
 end = time.time()
