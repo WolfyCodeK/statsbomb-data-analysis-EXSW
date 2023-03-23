@@ -217,15 +217,18 @@ def getMetadataFormattedData(jsonData) -> list:
         shotFidelityVersion = None
         xyFidelityVersion = None
             
+        if "data_version" in metadata:
+            dataVersion = metadata["data_version"]    
+            
         if "shot_fidelity_version" in metadata:
             shotFidelityVersion = metadata["shot_fidelity_version"]
             
         if "xy_fidelity_version" in metadata:
             xyFidelityVersion = metadata["xy_fidelity_version"]
-        
+            
         formattedData.append((
             jsonDict["match_id"],
-            metadata["data_version"],
+            dataVersion,
             shotFidelityVersion,
             xyFidelityVersion
         ))
@@ -308,19 +311,19 @@ def getEventFormattedData(jsonData) -> list:
         counterPress = None
         locationX = None
         locationY = None
-        relatedEvents = None
+        strRelatedEvents = None
         
         if "obv_for_after" in jsonDict:
-            obvForList.append(jsonData["obv_for_after"])
-            obvForList.append(jsonData["obv_for_before"])
-            obvForList.append(jsonData["obv_for_net"])
-            obvTotal = jsonData["obv_total_net"]
+            obvForList.append(jsonDict["obv_for_after"])
+            obvForList.append(jsonDict["obv_for_before"])
+            obvForList.append(jsonDict["obv_for_net"])
+            obvTotal = jsonDict["obv_total_net"]
             
         if "obv_against_after" in jsonDict:
-            obvAgainstList.append(jsonData["obv_against_after"])
-            obvAgainstList.append(jsonData["obv_against_before"])
-            obvAgainstList.append(jsonData["obv_against_net"])
-            obvTotal = jsonData["obv_total_net"]
+            obvAgainstList.append(jsonDict["obv_against_after"])
+            obvAgainstList.append(jsonDict["obv_against_before"])
+            obvAgainstList.append(jsonDict["obv_against_net"])
+            obvTotal = jsonDict["obv_total_net"]
             
         if "player" in jsonDict:
             playerID = jsonDict["player"]["id"]
@@ -328,21 +331,23 @@ def getEventFormattedData(jsonData) -> list:
         if "position" in jsonDict:
             positionID = jsonDict["position"]["id"]
                 
-        if "location" in jsonData:
-            locationX = jsonData["location"][0]
-            locationY = jsonData["location"][1]
+        if "location" in jsonDict:
+            locationX = jsonDict["location"][0]
+            locationY = jsonDict["location"][1]
             
-        if "duration" in jsonData:
-            duration = jsonData["duration"]
+        if "duration" in jsonDict:
+            duration = jsonDict["duration"]
             
-        if "counter_press" in jsonData:
-            counterPress = jsonData["counter_press"]
+        if "counter_press" in jsonDict:
+            counterPress = jsonDict["counter_press"]
             
-        if "under_pressure" in jsonData:
-            underPressure = jsonData["under_pressure"]
+        if "under_pressure" in jsonDict:
+            underPressure = jsonDict["under_pressure"]
             
-        if "related_events" in jsonData:
-            relatedEvents = jsonData["related_events"]
+        if "related_events" in jsonDict:
+            relatedEvents = jsonDict["related_events"]
+            strRelatedEvents = ''.join(relatedEvents)
+            
         
         formattedData.append((
             jsonDict["id"],
@@ -370,11 +375,11 @@ def getEventFormattedData(jsonData) -> list:
             duration,
             underPressure,
             counterPress,
-            relatedEvents
+            strRelatedEvents
         ))
         
     # Remove duplicate tuples
-    formattedData = list(dict.fromkeys(formattedData))
+    #formattedData = list(dict.fromkeys(formattedData))
         
     return formattedData
 
