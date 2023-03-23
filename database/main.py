@@ -1,17 +1,23 @@
 from databaseController import *
+from jsonUtils import getDeserializedJsonFromFile
 import time
 
-DATA_PATH = "statsbombdata"
+dbConfig = getDeserializedJsonFromFile("database\cfg.json")[0]
+DATA_PATH = dbConfig["data_src_path"]
+SEPARATOR = "##########################################"
+QUERY_TIME_DECIMAL_PLACES = 3
+TIME_UNITS = " seconds"
 
 start = time.time()
 
+# Init database with path to source data
 database = databaseController(DATA_PATH)
 
 end = time.time()
 
-print("\n##########################################")
-print("Database build time: " + str(round(end - start, 3)) + " seconds")
-print("##########################################\n")
+print("\n" + SEPARATOR)
+print("Database build time: " + str(round(end - start, QUERY_TIME_DECIMAL_PLACES)) + TIME_UNITS)
+print(SEPARATOR + "\n")
 
 start = time.time()
 
@@ -22,6 +28,6 @@ database.printDatabaseQuery(query)
 
 end = time.time()
 
-print("\n#################################################")
-print("Database query time: " + str(round(end - start, 3)) + " seconds")
-print("#################################################\n")
+print("\n" + SEPARATOR)
+print("Database query time: " + str(round(end - start, QUERY_TIME_DECIMAL_PLACES)) + TIME_UNITS)
+print(SEPARATOR + "\n")

@@ -105,9 +105,9 @@ class databaseController:
         self.dbCursor.execute(query)
 
         rows = self.dbCursor.fetchall()
-        separator = "---------------------------------------------------------"
+        SEPARATOR = "---------------------------------------------------------"
 
-        print(separator)
+        print(SEPARATOR)
         print(">> QUERY EXPRESSION:")
         print(query)
         print("\n")
@@ -115,7 +115,7 @@ class databaseController:
         
         count = 0
         
-        print(separator)
+        print(SEPARATOR)
         
         for row in rows:
             result = str(row)
@@ -123,11 +123,11 @@ class databaseController:
             result = result.removesuffix("',)")
             print("|" + result, end="")
             print("|")
-            print(separator)
+            print(SEPARATOR)
             count += 1
         
         print("\n>> MATCHES FOUND: " + str(count)) 
-        print(separator)
+        print(SEPARATOR)
     
     def getQueryNumOfPassesBetweenPlayers(self, player1, player2):  
         query = """
@@ -529,8 +529,7 @@ class databaseController:
                 self.__sqlInsertExpression(
                     getRefereeFormattedData(jsonData),
                     InsertExpressions.REFEREE_INSERT
-                )
-                
+                )                
             elif CategoryNames.THREE_SIXTY.value in fileName:
                 pass  
             
