@@ -4,4 +4,3 @@ deprecatedPyFiles/
 todo.txt
 database/statsbombDatabase.db
 statsbombdata/
-database/cfg.json
