@@ -307,10 +307,11 @@ def getEventFormattedData(jsonData) -> list:
         playerID = None
         positionID = None
         duration = None
-        offCamera = None
-        out = None
-        underPressure = None
-        counterPress = None
+        formation = None
+        offCamera = False
+        out = False
+        underPressure = False
+        counterPress = False
         locationX = None
         locationY = None
         strRelatedEvents = None
@@ -339,6 +340,9 @@ def getEventFormattedData(jsonData) -> list:
             
         if "duration" in jsonDict:
             duration = jsonDict["duration"]
+            
+        if "tactics" in jsonDict:
+            formation = jsonDict["tactics"]["formation"]
             
         if "off_camera" in jsonDict:
             offCamera = jsonDict["off_camera"]   
@@ -381,6 +385,7 @@ def getEventFormattedData(jsonData) -> list:
             locationX,
             locationY,
             duration,
+            formation,
             offCamera,
             out,
             underPressure,
@@ -389,7 +394,140 @@ def getEventFormattedData(jsonData) -> list:
         ))
         
     # Remove duplicate tuples
-    #formattedData = list(dict.fromkeys(formattedData))
+    formattedData = list(dict.fromkeys(formattedData))
+        
+    return formattedData
+
+def getEventTypeFormattedData(jsonData) -> list:
+    formattedData = []
+    
+    for i in range(len(jsonData)):
+        jsonDict = jsonData[i]
+        typeData = jsonDict["type"]
+                        
+        formattedData.append((
+            typeData["id"],
+            typeData["name"],
+        ))
+                
+    # Remove duplicate tuples
+    formattedData = list(dict.fromkeys(formattedData))
+        
+    return formattedData
+
+def getPlayPatternFormattedData(jsonData) -> list:
+    formattedData = []
+    
+    for i in range(len(jsonData)):
+        jsonDict = jsonData[i]
+        playPatternData = jsonDict["play_pattern"]
+                        
+        formattedData.append((
+            playPatternData["id"],
+            playPatternData["name"],
+        ))
+                
+    # Remove duplicate tuples
+    formattedData = list(dict.fromkeys(formattedData))
+        
+    return formattedData
+
+def getPlayerFormattedData(jsonData) -> list:
+    formattedData = []
+    
+    for i in range(len(jsonData)):
+        jsonDict = jsonData[i]
+        
+        if "player" in jsonDict:
+            player = jsonDict["player"]
+             
+            formattedData.append((
+                player["id"],
+                player["name"],
+            ))          
+                
+    # Remove duplicate tuples
+    formattedData = list(dict.fromkeys(formattedData))
+        
+    return formattedData
+
+def getPassFormattedData(jsonData) -> list:
+    formattedData = []
+    
+    for i in range(len(jsonData)):
+        jsonDict = jsonData[i]
+        
+        if "pass" in jsonDict:
+            passData = jsonDict["pass"]
+            
+            recipientID = None
+            passTypeID = None
+            bodyPartID = None
+            
+            if "recipient" in passData:
+                recipientID = passData["recipient"]["id"]
+            
+            if "type" in passData:
+                passTypeID = passData["type"]["id"]
+                
+            if "body_part" in passData:
+                bodyPartID = passData["body_part"]["id"]
+             
+            formattedData.append((
+                jsonDict["id"],
+                recipientID,
+                passData["length"],
+                passData["angle"],
+                passData["height"]["id"],
+                passData["end_location"][0],
+                passData["end_location"][1],
+                passTypeID,
+                bodyPartID
+            ))          
+                
+    # Remove duplicate tuples
+    formattedData = list(dict.fromkeys(formattedData))
+        
+    return formattedData
+
+def getPassHeightFormattedData(jsonData) -> list:
+    formattedData = []
+    
+    for i in range(len(jsonData)):
+        jsonDict = jsonData[i]
+        
+        if "pass" in jsonDict:
+            passHeight = jsonDict["pass"]["height"]
+             
+            formattedData.append((
+                passHeight["id"],
+                passHeight["name"],
+            ))          
+                
+    # Remove duplicate tuples
+    formattedData = list(dict.fromkeys(formattedData))
+        
+    return formattedData
+
+def getPassTypeFormattedData(jsonData) -> list:
+    formattedData = []
+    
+    for i in range(len(jsonData)):
+        jsonDict = jsonData[i]
+        
+        if "pass" in jsonDict:
+            passData = jsonDict["pass"]
+            
+            if "type" in passData:
+                passType = jsonDict["pass"]["type"]
+             
+            formattedData.append((
+                passType["id"],
+                passType["name"],
+            ))          
+                
+    # Remove duplicate tuples
+    formattedData = list(dict.fromkeys(formattedData))
         
     return formattedData
 

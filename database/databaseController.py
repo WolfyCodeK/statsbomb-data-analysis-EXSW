@@ -90,7 +90,7 @@ class databaseController:
     def __sqlInsertExpression(self, data, table: InsertExpressions):
         self.dbCursor.executemany(table.value, data)
         self.statsbombDB.commit()  
-        
+
     def printDatabaseQuery(self, query):
         self.dbCursor.execute(query)
 
@@ -111,7 +111,25 @@ class databaseController:
         
         print("\nMATCHES FOUND: " + str(count)) 
         print(separator)
-        print("\n")
+    
+    def getQueryNumOfPassesBetweenPlayers(self, player1, player2):  
+        query = """
+            SELECT PassingPlayer.id
+            FROM (
+                SELECT EVENT.id, PLAYER.name
+                FROM EVENT
+                JOIN PLAYER ON EVENT.player_id = PLAYER.id
+            ) AS PassingPlayer JOIN (
+                SELECT PASS.event_id, PLAYER.name
+                FROM PASS
+                JOIN PLAYER ON PASS.recipient_id = PLAYER.id
+            ) AS RecipientOfPass ON id = event_id
+            WHERE (PassingPlayer.name = '""" + player1 + """' 
+            AND RecipientOfPass.name = '"""+ player2 + """')
+            OR (PassingPlayer.name = '""" + player2 + """' 
+            AND RecipientOfPass.name = '""" + player1 + """')"""
+        
+        return query
         
     def __createTables(self):
         """
@@ -261,7 +279,7 @@ class databaseController:
                 timestamp TEXT,
                 minute INTEGER,
                 second INTEGER,
-                type_id INTEGER,
+                event_type_id INTEGER,
                 possession INTEGER,
                 possession_team_id INTEGER,
                 play_pattern_id INTEGER,
@@ -278,6 +296,7 @@ class databaseController:
                 location_x INTEGER,
                 location_y INTEGER,
                 duration INTEGER,
+                formation INTEGER,
                 off_camera BOOLEAN,
                 out BOOLEAN,
                 under_pressure BOOLEAN,
@@ -287,6 +306,79 @@ class databaseController:
             )
             """
             # carry, goalkeeper
+        )
+        
+        # EVENT_TYPE
+        self.dbCursor.execute(
+            """
+            CREATE TABLE EVENT_TYPE (
+                id INTEGER,
+                name TEXT,
+                PRIMARY KEY (id)
+            )
+            """
+        )
+        
+        # PLAY_PATTERN
+        self.dbCursor.execute(
+            """
+            CREATE TABLE PLAY_PATTERN (
+                id INTEGER,
+                name TEXT,
+                PRIMARY KEY (id)
+            )
+            """
+        )
+        
+        # PLAYER
+        self.dbCursor.execute(
+            """
+            CREATE TABLE PLAYER (
+                id INTEGER,
+                name TEXT,
+                PRIMARY KEY (id)
+            )
+            """
+        )
+        
+        # PASS
+        self.dbCursor.execute(
+            """
+            CREATE TABLE PASS (
+                event_id TEXT,
+                recipient_id INTEGER,
+                length INTEGER,
+                angle INTEGER,
+                height_id INTEGER,
+                end_location_x INTEGER,
+                end_location_y INTEGER,
+                pass_type_id INTEGER,
+                body_part_id TEXT,
+                PRIMARY KEY (event_id)
+            )
+            """
+        )
+        
+        # PASS_HEIGHT
+        self.dbCursor.execute(
+            """
+            CREATE TABLE PASS_HEIGHT (
+                id INTEGER,
+                name TEXT,
+                PRIMARY KEY (id)
+            )
+            """
+        )
+        
+        # PASS_TYPE
+        self.dbCursor.execute(
+            """
+            CREATE TABLE PASS_TYPE (
+                id INTEGER,
+                name TEXT,
+                PRIMARY KEY (id)
+            )
+            """
         )
         
     def __extractAndStoreData(self, deserializedJson, fileName):
@@ -302,6 +394,42 @@ class databaseController:
                 self.__sqlInsertExpression(
                     getEventFormattedData(jsonData),
                     InsertExpressions.EVENT_INSERT
+                )
+                
+                # TYPE
+                self.__sqlInsertExpression(
+                    getEventTypeFormattedData(jsonData),
+                    InsertExpressions.EVENT_TYPE_INSERT
+                )
+                
+                # PLAY_PATTERN
+                self.__sqlInsertExpression(
+                    getPlayPatternFormattedData(jsonData),
+                    InsertExpressions.PLAY_PATTERN_INSERT
+                )
+                
+                # PLAYER
+                self.__sqlInsertExpression(
+                    getPlayerFormattedData(jsonData),
+                    InsertExpressions.PLAYER_INSERT
+                )
+                
+                # PASS
+                self.__sqlInsertExpression(
+                    getPassFormattedData(jsonData),
+                    InsertExpressions.PASS_INSERT
+                )
+                
+                # PASS_TYPE
+                self.__sqlInsertExpression(
+                    getPassTypeFormattedData(jsonData),
+                    InsertExpressions.PASS_TYPE_INSERT
+                )
+                
+                # PASS_HEIGHT
+                self.__sqlInsertExpression(
+                    getPassHeightFormattedData(jsonData),
+                    InsertExpressions.PASS_HEIGHT_INSERT
                 )
                 
                 pass

@@ -22,7 +22,8 @@ start = time.time()
 
 # QUERIES
 # Example SQL query
-database.printDatabaseQuery("SELECT id FROM EVENT WHERE minute=30 AND second=0;")
+query = database.getQueryNumOfPassesBetweenPlayers("Yui Hasegawa", "Khadija Monifa Shaw")
+database.printDatabaseQuery(query)
 
 end = time.time()
 
