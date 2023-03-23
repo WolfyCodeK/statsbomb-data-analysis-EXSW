@@ -3,14 +3,9 @@ import time
 
 DATA_PATH = "statsbombdata"
 
-database = databaseController(DATA_PATH)
-
-buildDB = input("Build database (y/n)?\n> ")
-
 start = time.time()
 
-if buildDB.lower() == 'y':
-    database.buildDatabase()
+database = databaseController(DATA_PATH)
 
 end = time.time()
 

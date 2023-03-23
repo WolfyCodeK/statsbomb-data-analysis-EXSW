@@ -18,6 +18,11 @@ class databaseController:
         """
         self.DATA_PATH = dataPath
         self.__openConnections()
+        
+        buildDB = input("> Build database (y/n)?\n> ")
+        
+        if buildDB.lower() == 'y':
+            self.buildDatabase()
         pass
     
     def __deleteDatabase(self):
@@ -33,6 +38,7 @@ class databaseController:
         expressions through.
         """
         self.statsbombDB = sl.connect(self.DATABASE_FILE)
+        
         self.dbCursor = self.statsbombDB.cursor()
         
     def __closeConnections(self):
@@ -44,7 +50,7 @@ class databaseController:
         self.statsbombDB.close()
         
     def buildDatabase(self):
-        print('Please wait while database builds...')
+        print('> Please wait while database builds...')
         
         if os.path.exists(self.DATABASE_FILE):
             self.__deleteDatabase()
@@ -63,6 +69,10 @@ class databaseController:
         Args:
             directory: The relative path to a folder of json files
         """
+        if not(os.path.exists(directory)):
+            print("FilePathError: the path '" + self.DATABASE_FILE + "' is not valid a directory")
+            os._exit(1)
+        
         for filePath in os.listdir(directory):  
             # Get each specific file path in the directory
             file = os.path.join(directory, filePath) 
@@ -101,15 +111,22 @@ class databaseController:
         print(">> QUERY EXPRESSION:")
         print(query)
         print("\n")
-        print(">> QUERY RESULTS:")
+        print(">> QUERY RESULTS:\n")
         
         count = 0
         
+        print(separator)
+        
         for row in rows:
-            print(row)
+            result = str(row)
+            result = result.removeprefix("('")
+            result = result.removesuffix("',)")
+            print("|" + result, end="")
+            print("|")
+            print(separator)
             count += 1
         
-        print("\nMATCHES FOUND: " + str(count)) 
+        print("\n>> MATCHES FOUND: " + str(count)) 
         print(separator)
     
     def getQueryNumOfPassesBetweenPlayers(self, player1, player2):  
