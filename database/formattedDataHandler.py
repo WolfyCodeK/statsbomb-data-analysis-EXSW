@@ -314,15 +314,15 @@ def getEventFormattedData(jsonData) -> list:
         strRelatedEvents = None
         
         if "obv_for_after" in jsonDict:
-            obvForList.append(jsonDict["obv_for_after"])
-            obvForList.append(jsonDict["obv_for_before"])
-            obvForList.append(jsonDict["obv_for_net"])
+            obvForList.insert(0, jsonDict["obv_for_after"])
+            obvForList.insert(1, jsonDict["obv_for_before"])
+            obvForList.insert(2, jsonDict["obv_for_net"])
             obvTotal = jsonDict["obv_total_net"]
             
         if "obv_against_after" in jsonDict:
-            obvAgainstList.append(jsonDict["obv_against_after"])
-            obvAgainstList.append(jsonDict["obv_against_before"])
-            obvAgainstList.append(jsonDict["obv_against_net"])
+            obvAgainstList.insert(0, jsonDict["obv_against_after"])
+            obvAgainstList.insert(1, jsonDict["obv_against_before"])
+            obvAgainstList.insert(2, jsonDict["obv_against_net"])
             obvTotal = jsonDict["obv_total_net"]
             
         if "player" in jsonDict:

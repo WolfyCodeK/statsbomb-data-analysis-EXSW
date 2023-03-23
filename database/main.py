@@ -1,7 +1,7 @@
 from databaseController import *
 import time
 
-DATA_PATH = "database"
+DATA_PATH = "statsbombdata"
 
 database = databaseController(DATA_PATH)
 

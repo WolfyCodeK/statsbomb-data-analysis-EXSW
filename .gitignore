@@ -3,3 +3,4 @@ deprecatedPyFiles/
 *.pyc
 todo.txt
 database/statsbombDatabase.db
+statsbombdata/
