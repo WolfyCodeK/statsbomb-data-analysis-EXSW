@@ -70,7 +70,7 @@ class databaseController:
             directory: The relative path to a folder of json files
         """
         if not(os.path.exists(directory)):
-            print("FilePathError: the path '" + self.DATABASE_FILE + "' is not valid a directory")
+            print("FilePathError: the path '" + self.DATA_PATH + "' is not valid a directory")
             os._exit(1)
         
         for filePath in os.listdir(directory):  
