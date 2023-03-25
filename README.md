@@ -2,9 +2,11 @@ Running the script for first time with:
 
 .\initial.bat
 
-wil install reqs and startserver,
+will install reqs and startserver,
 
 .\runserver.bat will just cd and runserver
+
+./unity/statsbombproject will run the unity 3D render
 
 
 To add:
