@@ -28,4 +28,4 @@ obj.select_set(True)
 dup_obj.select_set(True)
 
 # Export the scene as an OBJ file
-bpy.ops.export_scene.obj(filepath="output.obj", check_existing=False, use_selection=True)
+bpy.ops.export_scene.obj(filepath="testscripts/render/output.obj", check_existing=False, use_selection=True)
