@@ -16,8 +16,6 @@ angle = math.radians(-90)
 axis = 'X'
 obj.rotation_euler.rotate_axis(axis, angle)
 
-
-
 # Create a duplicate of the object
 bpy.context.scene.collection.objects.link(dup_obj)
 
