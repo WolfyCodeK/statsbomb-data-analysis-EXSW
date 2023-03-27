@@ -9,12 +9,12 @@ model = project.version(4).model
 # infer on a local image
 data = model.predict("testscripts\main.png", confidence=40, overlap=30).json()
 
-with open("testscripts/predictioncoords.json", "w") as json_file:
+with open("testscripts/imagerecognition/predictioncoords.json", "w") as json_file:
     json.dump(data, json_file)
 
 
-input_image="testscripts\main.png"
-output_image="testscripts\prediction.jpg"
+input_image="testscripts\imagerecognition\main.png"
+output_image="testscripts\imagerecognition\prediction.jpg"
 # visualize your prediction
 model.predict(input_image, confidence=40, overlap=30).save(output_image)
 
