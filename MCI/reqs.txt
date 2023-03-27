@@ -5,3 +5,4 @@ tzdata==2022.7
 vtkplotlib==2.0.0
 numpy-stl==3.0.1
 roboflow
+bpy
