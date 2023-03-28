@@ -1,3 +1,5 @@
+import json
+import time
 import bpy
 import math
 import xml.etree.ElementTree as ET
@@ -8,6 +10,19 @@ def default_rotate(obj):
     axis = 'X'
     obj.rotation_euler.rotate_axis(axis, angle)
     return obj
+
+def rotatehometeam(obj):
+    angle = math.radians(90)
+    axis = 'Z'
+    obj.rotation_euler.rotate_axis(axis, angle)
+    return obj
+
+def rotateawayteam(obj):
+    angle = math.radians(-90)
+    axis = 'Z'
+    obj.rotation_euler.rotate_axis(axis, angle)
+    return obj
+
 
 def makeobject(*obj_name):
     # Load the halfron.obj file
@@ -31,6 +46,7 @@ mtlloc = "testscripts/render/output.mtl"
 playermodelloc = "models/halfron.obj"
 pitchloc = "models/Soccer Field With Field Texture Big.fbx"
 matchdata="C:/Users/harve/Downloads/MCI Women's Files/g2312135_SecondSpectrum_tracking-produced.xml"
+teamlineuploc="C:/Users/harve/Downloads/MCI Women's Files/g2312135_SecondSpectrum_meta.json"
 
 def get_player_locations(matchdata=matchdata, input_time=0.04):
     root = ET.parse(matchdata).getroot()
@@ -40,25 +56,38 @@ def get_player_locations(matchdata=matchdata, input_time=0.04):
         if float(frame.get('time')) == input_time:
             for player in frame:
                 if player.tag == 'player':
-                    num = player.get('num')
+                    id = player.get('id')
                     loc = player.get('loc')
                 elif player.tag == 'ball':
-                    num = 'ball'
+                    id = 'ball'
                     loc = player.get('loc')
-                player_locations.append([num, loc])
+                player_locations.append([id, loc])
             break
 
     return player_locations
 
 objs_to_render=[]
 
-def createallplayers():
+def createallplayers(teams):
     player_locations = get_player_locations(matchdata,input_time=0.04)
     for element in player_locations:
         if element[0] != "ball":
-            temp_obj = makeobject()
-            temp_obj = setcoords(temp_obj,ast.literal_eval(element[1]))
-            objs_to_render.append(temp_obj)
+            #home team
+            if any(element[0] in sublist for sublist in teams[0]):
+                print("home team")
+                temp_obj = makeobject()
+                temp_obj = rotatehometeam(temp_obj)
+                temp_obj = setcoords(temp_obj,ast.literal_eval(element[1]))
+                objs_to_render.append(temp_obj)
+            if any(element[0] in sublist for sublist in teams[1]):
+                print("away team")
+                temp_obj = makeobject()
+                temp_obj = rotateawayteam(temp_obj)
+                temp_obj = setcoords(temp_obj,ast.literal_eval(element[1]))
+                objs_to_render.append(temp_obj)
+            
+        if element[0] == "ball":
+            print("add ball model to list")
 
 
 def export_objects_to_obj(objs_to_render, outputloc):
@@ -72,6 +101,37 @@ def export_objects_to_obj(objs_to_render, outputloc):
     # Export the selected objects as a single OBJ file
     bpy.ops.export_scene.obj(filepath=outputloc, check_existing=False, use_selection=True)
 
-createallplayers()
+with open(teamlineuploc, 'r') as file:
+    json_data = json.load(file)
+
+def get_home_players(json_data=json_data):
+    home_players_data = json_data["homePlayers"]
+    home_players = []
+
+    for player in home_players_data:
+        player_id = player["ssiId"]
+        player_name = player["name"]
+        home_players.append([player_id,player_name])
+
+    return home_players
+
+def get_away_players(json_data=json_data):
+    away_players_data = json_data.get("awayPlayers", [])
+    away_players = []
+
+    for player in away_players_data:
+        player_id = player.get("ssiId")
+        player_name = player.get("name")
+        away_players.append([player_id,player_name])
+
+    return away_players
+
+def getteamplayerlist():
+    home_players = get_home_players()
+    away_players = get_away_players()
+    return [home_players,away_players]
+
+teams = getteamplayerlist()
+createallplayers(teams)
 print(objs_to_render)
 export_objects_to_obj(objs_to_render, outputloc)
