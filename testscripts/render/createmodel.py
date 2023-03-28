@@ -23,6 +23,35 @@ def rotateawayteam(obj):
     obj.rotation_euler.rotate_axis(axis, angle)
     return obj
 
+def change_material_color_to_blue(obj):
+    # Ensure the object has a material slot
+    if not obj.material_slots:
+        mat = bpy.data.materials.new(name="New Material")
+        obj.data.materials.append(mat)
+    else:
+        mat = obj.material_slots[0].material
+
+    # Set the material color to blue
+    mat.use_nodes = True
+    bsdf_node = mat.node_tree.nodes.get('Principled BSDF')
+    if bsdf_node:
+        bsdf_node.inputs['Base Color'].default_value = (0, 0, 1, 1)
+
+    return obj
+
+def change_material_color_to_red(obj):
+    # Ensure the object has a material slot
+    if not obj.material_slots:
+        mat = bpy.data.materials.new(name="New Material")
+        obj.data.materials.append(mat)
+    else:
+        mat = obj.material_slots[0].material
+
+    # Set the material color to red
+    mat.use_nodes = True
+    bsdf_node = mat.node_tree.nodes.get('Principled BSDF')
+    if bsdf_node:
+        bsdf_node.inputs['Base Color'].default_value = (1, 0, 0, 1)
 
 def makeobject(*obj_name):
     # Load the halfron.obj file
@@ -77,12 +106,14 @@ def createallplayers(teams):
                 print("home team")
                 temp_obj = makeobject()
                 temp_obj = rotatehometeam(temp_obj)
+                temp_obj = change_material_color_to_blue(temp_obj)
                 temp_obj = setcoords(temp_obj,ast.literal_eval(element[1]))
                 objs_to_render.append(temp_obj)
             if any(element[0] in sublist for sublist in teams[1]):
                 print("away team")
                 temp_obj = makeobject()
                 temp_obj = rotateawayteam(temp_obj)
+                temp_obj = change_material_color_to_red(temp_obj)
                 temp_obj = setcoords(temp_obj,ast.literal_eval(element[1]))
                 objs_to_render.append(temp_obj)
             
