@@ -301,6 +301,8 @@ def getEventData(jsonData) -> list:
     for i in range(len(jsonData)):
         jsonDict = jsonData[i]
         
+        matchID
+        
         obvForList = [None, None, None]
         obvAgainstList = [None, None, None]
         obvTotal = None
@@ -363,6 +365,7 @@ def getEventData(jsonData) -> list:
         
         formattedData.append((
             jsonDict["id"],
+            matchID,
             jsonDict["index"],
             jsonDict["period"],
             jsonDict["timestamp"],

@@ -16,10 +16,18 @@ def getQueryNumOfPassesBetweenPlayers(player1, player2):
 
 def getTeamIDs():
     query = """
-        SELECT team_id
-        FROM EVENT
-        WHERE event_type_id = 35
+        SELECT 
+            SELECT team_id
+            FROM EVENT
+            WHERE event_type_id = 35
     """
-
+    
+def getMatchID(team1, team2):
+    query = """
+        SELECT id
+        FROM MATCH
+        WHERE home_team_id = """ + str(team1) + """
+        AND away_team_id = """ + str(team2) + """
+    """
 # 746 968
 

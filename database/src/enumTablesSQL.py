@@ -3,7 +3,7 @@ from enum import Enum
 class TableCreationSQL(Enum):
     MATCHES_TABLE = """
         CREATE TABLE MATCH (
-            match_id INTEGER,
+            id INTEGER,
             match_date TEXT,
             kick_off TEXT,
             competition_id INTEGER,
@@ -17,7 +17,7 @@ class TableCreationSQL(Enum):
             last_updated TEXT,
             last_updated_360 TEXT,
             match_week INTEGER,
-            PRIMARY KEY (match_id)
+            PRIMARY KEY (id)
         )
     """
     
@@ -108,6 +108,7 @@ class TableCreationSQL(Enum):
     EVENTS_TABLE = """
         CREATE TABLE EVENT (
             id TEXT,
+            match_id INTEGER,
             `index` INTEGER,
             period INTEGER,
             timestamp TEXT,
