@@ -24,7 +24,7 @@ start = time.time()
 
 # QUERIES
 # Example SQL query
-query = getQueryNumOfPassesBetweenPlayers("Yui Hasegawa", "Khadija Monifa Shaw")
+query = getQueryNumOfPassesBetweenPlayers(25632, 25554)
 database.printDatabaseQuery(query)
 
 end = time.time()
