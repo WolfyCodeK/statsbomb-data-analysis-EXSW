@@ -108,7 +108,7 @@ def add_pitch_obj(pitchloc):
     scale_factor = 20000
 
     for obj in imported_objects:
-        #default_rotate(obj)
+        
         obj.scale *= scale_factor
         angle = math.radians(-90)
         axis = 'Y'
