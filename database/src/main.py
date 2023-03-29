@@ -22,8 +22,9 @@ start = time.time()
 
 # QUERIES
 # Example SQL query
-query = getQueryPassesBetweenPlayers(3855961, 25632, 25554)
+query = getQueryPassesBetweenPlayers(3852832, 25632, 25554)
 database.printDatabaseQuery(query)
+database.printDatabaseQuery(getMatchIDFromTeam(746))
 
 end = time.time()
 

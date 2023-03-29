@@ -25,3 +25,15 @@ def getMatchID(team1, team2):
     
     return query
 
+def getMatchIDFromTeam(team):
+    query = """
+        SELECT T1.id, T2.team_name as Home, T3.team_name as Away
+        FROM MATCH as T1
+        JOIN TEAM as T2 ON T1.home_team_id = T2.id
+        JOIN TEAM as T3 ON T1.away_team_id = T3.id
+        WHERE T2.id = """ + str(team) + """
+        OR T3.id = """ + str(team) + """
+    """
+    
+    return query
+
