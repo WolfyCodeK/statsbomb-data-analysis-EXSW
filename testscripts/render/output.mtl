@@ -240,8 +240,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Bump -bm 1.100000 Normal.png
-map_Kd C:\\Users\\alpla\\Desktop\\Textures\\Saha0.png
+map_Bump -bm 1.100000 C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Saha0 Normal.png
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Saha0.png
 
 newmtl Material.002
 Ns 250.000000
@@ -465,7 +465,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\alpla\\Desktop\\Textures\\1.png
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\1.png
 
 newmtl Material.027
 Ns 224.999983
@@ -577,7 +577,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Bump -bm 1.800000 C:\\Users\\alpla\\Desktop\\Textures\\Concrete_Wall_006_Normal.jpg
+map_Bump -bm 1.800000 C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Concrete_Wall_006_Normal.jpg
 
 newmtl Material.040
 Ns 224.999983
@@ -588,7 +588,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Bump C:\\Users\\alpla\\Desktop\\Textures\\Concrete_Wall_006_Normal.jpg
+map_Bump C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Concrete_Wall_006_Normal.jpg
 
 newmtl Material.041
 Ns 224.999983
@@ -599,7 +599,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Bump C:\\Users\\alpla\\Desktop\\Textures\\Concrete_Wall_006_Normal.jpg
+map_Bump C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Concrete_Wall_006_Normal.jpg
 
 newmtl Material.042
 Ns 224.999983
@@ -610,7 +610,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Bump C:\\Users\\alpla\\Desktop\\Textures\\Concrete_Wall_006_Normal.jpg
+map_Bump C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Concrete_Wall_006_Normal.jpg
 
 newmtl Material.045
 Ns 224.999983
@@ -621,7 +621,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\alpla\\Desktop\\Textures\\Ads.png
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Ads.png
 
 newmtl Material.047
 Ns 224.999983
@@ -632,7 +632,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\alpla\\Desktop\\Textures\\2.png
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\2.png
 
 newmtl Material.048
 Ns 224.999983
@@ -643,7 +643,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\alpla\\Desktop\\Textures\\2.png
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\2.png
 
 newmtl Material.049
 Ns 224.999983
@@ -654,7 +654,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\alpla\\Desktop\\Textures\\2.png
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\2.png
 
 newmtl Material.050
 Ns 224.999983
@@ -665,7 +665,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\alpla\\Desktop\\Textures\\2.png
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\2.png
 
 newmtl Material.051
 Ns 224.999983
@@ -676,7 +676,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\alpla\\Desktop\\Textures\\Ads.png
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Ads.png
 
 newmtl Material.053
 Ns 224.999983
@@ -707,7 +707,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\alpla\\Desktop\\Textures\\Turkey.png
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Turkey.png
 
 newmtl Material.056
 Ns 224.999983
@@ -718,7 +718,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\alpla\\Desktop\\Textures\\italy.png
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\italy.png
 
 newmtl Material.057
 Ns 224.999983

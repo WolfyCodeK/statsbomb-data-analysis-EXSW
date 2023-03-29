@@ -1,10 +1,230 @@
-# Blender MTL File: 'Stadyum3.blend'
-# Material Count: 55
+# Blender MTL File: 'None'
+# Material Count: 78
 
-newmtl Material
-Ns 225.000000
+newmtl Black_s
+Ns 96.078421
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.001
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.002
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.003
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.004
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.005
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.006
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.007
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.008
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.009
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.010
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.011
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.012
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.013
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.014
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.015
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.016
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.017
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.018
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.019
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.020
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Default_OBJ.021
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.000000 0.000000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
@@ -12,7 +232,7 @@ d 1.000000
 illum 2
 
 newmtl Material.001
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -23,8 +243,8 @@ illum 2
 map_Bump -bm 1.100000 C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Saha0 Normal.png
 map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Saha0.png
 
-newmtl Material.003
-Ns 225.000000
+newmtl Material.002
+Ns 250.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -32,10 +252,20 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Saha cevresi.png
+
+newmtl Material.003
+Ns 224.999983
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\cevresi.png
 
 newmtl Material.004
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -43,10 +273,10 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Saha cevresi.png
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\cevresi.png
 
 newmtl Material.005
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -54,10 +284,10 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Saha cevresi.png
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\cevresi.png
 
 newmtl Material.007
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.390159 0.390159 0.390159
 Ks 0.500000 0.500000 0.500000
@@ -67,7 +297,7 @@ d 1.000000
 illum 2
 
 newmtl Material.008
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.390159 0.390159 0.390159
 Ks 0.500000 0.500000 0.500000
@@ -77,7 +307,7 @@ d 1.000000
 illum 2
 
 newmtl Material.009
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.390159 0.390159 0.390159
 Ks 0.500000 0.500000 0.500000
@@ -87,7 +317,7 @@ d 1.000000
 illum 2
 
 newmtl Material.010
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.071650 0.195852 0.471952
 Ks 0.500000 0.500000 0.500000
@@ -97,7 +327,7 @@ d 1.000000
 illum 2
 
 newmtl Material.011
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.071650 0.195852 0.471952
 Ks 0.500000 0.500000 0.500000
@@ -107,7 +337,7 @@ d 1.000000
 illum 2
 
 newmtl Material.012
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.071650 0.195852 0.471952
 Ks 0.500000 0.500000 0.500000
@@ -117,7 +347,7 @@ d 1.000000
 illum 2
 
 newmtl Material.013
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.390159 0.390159 0.390159
 Ks 0.500000 0.500000 0.500000
@@ -127,7 +357,7 @@ d 1.000000
 illum 2
 
 newmtl Material.014
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.071650 0.195852 0.471952
 Ks 0.500000 0.500000 0.500000
@@ -137,7 +367,7 @@ d 1.000000
 illum 2
 
 newmtl Material.015
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.095923 0.095923 0.095923
 Ks 0.500000 0.500000 0.500000
@@ -147,7 +377,7 @@ d 1.000000
 illum 2
 
 newmtl Material.016
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.095923 0.095923 0.095923
 Ks 0.500000 0.500000 0.500000
@@ -157,7 +387,7 @@ d 1.000000
 illum 2
 
 newmtl Material.017
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.095923 0.095923 0.095923
 Ks 0.500000 0.500000 0.500000
@@ -167,7 +397,7 @@ d 1.000000
 illum 2
 
 newmtl Material.018
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.095923 0.095923 0.095923
 Ks 0.500000 0.500000 0.500000
@@ -177,7 +407,7 @@ d 1.000000
 illum 2
 
 newmtl Material.021
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.095923 0.095923 0.095923
 Ks 0.500000 0.500000 0.500000
@@ -187,7 +417,7 @@ d 1.000000
 illum 2
 
 newmtl Material.022
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.095923 0.095923 0.095923
 Ks 0.500000 0.500000 0.500000
@@ -197,7 +427,7 @@ d 1.000000
 illum 2
 
 newmtl Material.023
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.390159 0.390159 0.390159
 Ks 0.500000 0.500000 0.500000
@@ -207,7 +437,7 @@ d 1.000000
 illum 2
 
 newmtl Material.024
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.053270 0.496186 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -217,7 +447,7 @@ d 1.000000
 illum 2
 
 newmtl Material.025
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.053270 0.496186 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -227,7 +457,7 @@ d 1.000000
 illum 2
 
 newmtl Material.026
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.053270 0.496186 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -238,7 +468,7 @@ illum 2
 map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\1.png
 
 newmtl Material.027
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -246,10 +476,10 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Saha cevresi.png
+map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\cevresi.png
 
 newmtl Material.028
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.130137 0.479320 0.637597
 Ks 0.500000 0.500000 0.500000
@@ -259,7 +489,7 @@ d 1.000000
 illum 2
 
 newmtl Material.029
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.053270 0.496186 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -269,7 +499,7 @@ d 1.000000
 illum 2
 
 newmtl Material.030
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.053270 0.496186 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -279,7 +509,7 @@ d 1.000000
 illum 2
 
 newmtl Material.031
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.000000 0.920639 1.000000
 Ks 0.500000 0.500000 0.500000
@@ -289,7 +519,7 @@ d 1.000000
 illum 2
 
 newmtl Material.032
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.000000 0.000000 0.000000
 Ks 0.500000 0.500000 0.500000
@@ -299,7 +529,7 @@ d 1.000000
 illum 2
 
 newmtl Material.033
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.000000 0.000000 0.000000
 Ks 0.500000 0.500000 0.500000
@@ -309,7 +539,7 @@ d 1.000000
 illum 2
 
 newmtl Material.034
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.071650 0.195852 0.471952
 Ks 0.500000 0.500000 0.500000
@@ -319,7 +549,7 @@ d 1.000000
 illum 2
 
 newmtl Material.035
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.053270 0.496186 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -329,7 +559,7 @@ d 1.000000
 illum 2
 
 newmtl Material.036
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.053270 0.496186 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -339,7 +569,7 @@ d 1.000000
 illum 2
 
 newmtl Material.039
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.147348 0.422004 1.000000
 Ks 0.500000 0.500000 0.500000
@@ -350,7 +580,7 @@ illum 2
 map_Bump -bm 1.800000 C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Concrete_Wall_006_Normal.jpg
 
 newmtl Material.040
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.117878 0.337603 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -361,7 +591,7 @@ illum 2
 map_Bump C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Concrete_Wall_006_Normal.jpg
 
 newmtl Material.041
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.117878 0.337603 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -372,7 +602,7 @@ illum 2
 map_Bump C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Concrete_Wall_006_Normal.jpg
 
 newmtl Material.042
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.117878 0.337603 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -383,7 +613,7 @@ illum 2
 map_Bump C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Concrete_Wall_006_Normal.jpg
 
 newmtl Material.045
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -394,7 +624,7 @@ illum 2
 map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Ads.png
 
 newmtl Material.047
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -405,7 +635,7 @@ illum 2
 map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\2.png
 
 newmtl Material.048
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -416,7 +646,7 @@ illum 2
 map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\2.png
 
 newmtl Material.049
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -427,7 +657,7 @@ illum 2
 map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\2.png
 
 newmtl Material.050
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -438,7 +668,7 @@ illum 2
 map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\2.png
 
 newmtl Material.051
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -448,18 +678,8 @@ d 1.000000
 illum 2
 map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Ads.png
 
-newmtl Material.052
-Ns 470.638936
-Ka 0.454545 0.454545 0.454545
-Kd 0.000000 0.000000 0.000000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.450000
-d 1.000000
-illum 3
-
 newmtl Material.053
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.012426 0.701991 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -469,7 +689,7 @@ d 1.000000
 illum 2
 
 newmtl Material.054
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.012426 0.701991 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -479,7 +699,7 @@ d 1.000000
 illum 2
 
 newmtl Material.055
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -490,7 +710,7 @@ illum 2
 map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\Turkey.png
 
 newmtl Material.056
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
@@ -501,7 +721,7 @@ illum 2
 map_Kd C:\\Users\\harve\\OneDrive\\Desktop\\EXSW\\statsbomb-data-analysis-EXSW\\models\\euro-arena-soccer-stadium-euro-2020\\source\\Textures\\italy.png
 
 newmtl Material.057
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.000000 0.000000 0.000000
 Ks 0.500000 0.500000 0.500000
@@ -511,7 +731,7 @@ d 1.000000
 illum 2
 
 newmtl Material.058
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.000000 0.000000 0.000000
 Ks 0.500000 0.500000 0.500000
@@ -521,7 +741,7 @@ d 1.000000
 illum 2
 
 newmtl Material.059
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.000000 0.000000 0.000000
 Ks 0.500000 0.500000 0.500000
@@ -531,7 +751,7 @@ d 1.000000
 illum 2
 
 newmtl Material.060
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.133616 0.133616 0.133616
 Ks 0.500000 0.500000 0.500000
@@ -541,7 +761,7 @@ d 1.000000
 illum 2
 
 newmtl Material.061
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.133616 0.133616 0.133616
 Ks 0.500000 0.500000 0.500000
@@ -551,7 +771,7 @@ d 1.000000
 illum 2
 
 newmtl Material.062
-Ns 225.000000
+Ns 224.999983
 Ka 1.000000 1.000000 1.000000
 Kd 0.000000 0.000000 0.000000
 Ks 0.500000 0.500000 0.500000
@@ -561,9 +781,21 @@ d 1.000000
 illum 2
 
 newmtl None
-Ns 500
-Ka 0.8 0.8 0.8
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
+Ns 499.999983
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.800000 0.800000 0.800000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl White_s
+Ns 96.078421
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
 illum 2
