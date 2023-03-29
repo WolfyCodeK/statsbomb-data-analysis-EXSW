@@ -4,3 +4,4 @@ deprecatedPyFiles/
 todo.txt
 database/statsbombDatabase.db
 statsbombdata/
+testscripts/render/output.obj

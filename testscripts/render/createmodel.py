@@ -67,6 +67,8 @@ def makeobject(*obj_name):
     default_rotate(obj_name)
     return obj_name
 
+
+
 def makeball(*obj_name):
     # Load the ball.obj file
     bpy.ops.import_scene.obj(filepath=ballloc)
@@ -92,9 +94,24 @@ outputloc = "testscripts/render/output.obj"
 mtlloc = "testscripts/render/output.mtl"
 playermodelloc = "models/halfron.obj"
 ballloc = "models/Ball/Ball.obj"
-pitchloc = "models/Soccer Field With Field Texture Big.fbx"
 matchdata="C:/Users/harve/Downloads/MCI Women's Files/g2312135_SecondSpectrum_tracking-produced.xml"
 teamlineuploc="C:/Users/harve/Downloads/MCI Women's Files/g2312135_SecondSpectrum_meta.json"
+pitchloc="models/euro-arena-soccer-stadium-euro-2020/source/Models/EuroArena.obj"
+
+def add_pitch_obj(pitchloc):
+    # Import the OBJ file
+    bpy.ops.import_scene.obj(filepath=pitchloc)
+
+    # Get a reference to the imported object(s)
+    imported_objects = bpy.context.selected_objects
+
+    scale_factor = 20000
+
+    for obj in imported_objects:
+        #default_rotate(obj)
+        obj.scale *= scale_factor
+
+    return imported_objects
 
 def get_player_locations(matchdata=matchdata, input_time=0.0):
     root = ET.parse(matchdata).getroot()
@@ -148,7 +165,7 @@ def export_objects_to_obj(objs_to_render, outputloc):
         obj.select_set(True)
 
     # Export the selected objects as a single OBJ file
-    bpy.ops.export_scene.obj(filepath=outputloc, check_existing=False, use_selection=True)
+    bpy.ops.export_scene.obj(filepath=outputloc, check_existing=False, use_selection=True, use_materials=True)
 
 with open(teamlineuploc, 'r') as file:
     json_data = json.load(file)
@@ -181,8 +198,15 @@ def getteamplayerlist():
     return [home_players,away_players]
 
 teams = getteamplayerlist()
+
 createallplayers(teams)
+
 ball = makeball()          
 objs_to_render.append(ball)
-print(objs_to_render)
+
+# Add the pitch to the scene
+pitch_obj_loc = pitchloc
+pitch_objects = add_pitch_obj(pitch_obj_loc)
+objs_to_render.extend(pitch_objects)
+
 export_objects_to_obj(objs_to_render, outputloc)
