@@ -1,3 +1,5 @@
+from insightExpressions import *
+
 def getMatchData(jsonData) -> list:
     formattedData = []
     
@@ -295,13 +297,11 @@ def getRefereeData(jsonData) -> list:
         
     return formattedData
 
-def getEventData(jsonData) -> list:
+def getEventData(jsonData, matchID) -> list:
     formattedData = []
     
     for i in range(len(jsonData)):
         jsonDict = jsonData[i]
-        
-        matchID
         
         obvForList = [None, None, None]
         obvAgainstList = [None, None, None]

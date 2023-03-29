@@ -59,7 +59,7 @@ class InsertSQL(Enum):
     """
     
     EVENT_INSERT = """
-        INSERT OR IGNORE INTO EVENT (id, match_id `index`, period, timestamp,
+        INSERT OR IGNORE INTO EVENT (id, match_id, `index`, period, timestamp,
         minute, second, event_type_id, possession, possession_team_id, play_pattern_id, 
         obv_for_after, obv_for_before, obv_for_net, obv_against_after, obv_against_before,
         obv_against_net, obv_total_net, team_id, player_id, position_id, location_x, location_y,

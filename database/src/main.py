@@ -3,8 +3,6 @@ from insightExpressions import *
 from jsonUtils import *
 import time
 
-dbConfig = getDeserializedJsonFromFile("database\cfg.json")[0]
-DATA_PATH = dbConfig["data_src_path"]
 SEPARATOR = "##########################################"
 QUERY_TIME_DECIMAL_PLACES = 3
 TIME_UNITS = " seconds"
@@ -12,7 +10,7 @@ TIME_UNITS = " seconds"
 start = time.time()
 
 # Init database with path to source data
-database = DatabaseController(DATA_PATH)
+database = DatabaseController(getLocalDataPath(), True)
 
 end = time.time()
 
@@ -24,7 +22,7 @@ start = time.time()
 
 # QUERIES
 # Example SQL query
-query = getQueryNumOfPassesBetweenPlayers(25632, 25554)
+query = getQueryPassesBetweenPlayers(3855961, 25632, 25554)
 database.printDatabaseQuery(query)
 
 end = time.time()

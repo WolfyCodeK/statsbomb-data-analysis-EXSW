@@ -11,7 +11,7 @@ import sqlite3 as sl
 class DatabaseController:
     DATABASE_FILE = "database\statsbombDatabase.db"
     
-    def __init__(self, dataPath):
+    def __init__(self, dataPath, build):
         """
         Initialize the database connections.
         
@@ -21,9 +21,7 @@ class DatabaseController:
         self.DATA_PATH = dataPath
         self.__openConnections()
         
-        buildDB = input("> Build database (y/n)?\n> ")
-        
-        if buildDB.lower() == 'y':
+        if build:
             self.buildDatabase()
         pass
     
@@ -61,10 +59,10 @@ class DatabaseController:
         self.__openConnections()
         
         self.__createTables()
-        self.__addDirectoryToDB(self.DATA_PATH) 
+        self.__addAllDirectoriesToDB(self.DATA_PATH) 
         pass
         
-    def __addDirectoryToDB(self, directory):
+    def __addCategoryDirectoryToDB(self, directory, Category: CategoryNames):
         """
         addDirectoryToDB - Adds all json files from a directory into a database.
 
@@ -85,41 +83,45 @@ class DatabaseController:
                 ext = os.path.splitext(file)[-1].lower()
                 
                 if ext == ".json":
-                    if CategoryNames.MATCHES.value in str(file):
-                        # Isolate filename from extension
-                        deserializedJson = getDeserializedJsonFromFile(file)
-                        
-                        self.__extractAndStoreData(deserializedJson, str(file))
-                    if CategoryNames.EVENTS.value in str(file):
+                    if Category.value in str(file):
                         # Isolate filename from extension
                         deserializedJson = getDeserializedJsonFromFile(file)
                         
                         self.__extractAndStoreData(deserializedJson, str(file))
             else:
                 # Recursively call function on folder to traverse through directory
-                self.__addDirectoryToDB(file)  
+                self.__addCategoryDirectoryToDB(file, Category)  
+                
+    def __addAllDirectoriesToDB(self, Directory):
+        self.__addCategoryDirectoryToDB(Directory, CategoryNames.MATCHES)
+        self.__addCategoryDirectoryToDB(Directory, CategoryNames.EVENTS)
                 
     def __sqlInsertExpression(self, data, table: InsertSQL):
         self.dbCursor.executemany(table.value, data)
         self.statsbombDB.commit()  
 
-    def printDatabaseQuery(self, query):
+    def getDatabaseQueryResult(self, query):
         self.dbCursor.execute(query)
-
         rows = self.dbCursor.fetchall()
+        
+        return rows
+
+    def printDatabaseQuery(self, query):
+        result = self.getDatabaseQueryResult(query)
+        
         SEPARATOR = "---------------------------------------------------------"
 
         print(SEPARATOR)
         print(">> QUERY EXPRESSION:")
         print(query)
-        print("\n")
+        print("")
         print(">> QUERY RESULTS:\n")
         
         count = 0
         
         print(SEPARATOR)
         
-        for row in rows:
+        for row in result:
             result = str(row)
             result = result.removeprefix("('")
             result = result.removesuffix("',)")
@@ -146,15 +148,32 @@ class DatabaseController:
         if jsonData:
             if CategoryNames.COMPETITIONS.value in fileName:
                 pass
-            elif CategoryNames.EVENTS.value in fileName:
-                self.__sqlInsertExpression(getEventData(jsonData), InsertSQL.EVENT_INSERT)
+            elif CategoryNames.EVENTS.value in fileName:  
+                teamIDs = []
+    
+                # Find the IDs if the teams playing in this event
+                for i in range(len(jsonData)):
+                    jsonDict = jsonData[i]
+                    eventTypeID = jsonDict["type"]["id"]
+                    
+                    if eventTypeID == 35:
+                        teamIDs.append(jsonDict["team"]["id"])     
+                
+                # Find the matchID of this specific event
+                database = DatabaseController(getLocalDataPath(), False)
+                result = database.getDatabaseQueryResult(getMatchID(teamIDs[0], teamIDs[1]))
+                matchID = str(result[0])
+                matchID = matchID.removeprefix("(")
+                matchID = matchID.removesuffix(",)")
+                
+                self.__sqlInsertExpression(getEventData(jsonData, matchID), InsertSQL.EVENT_INSERT)
                 self.__sqlInsertExpression(getEventTypeData(jsonData), InsertSQL.EVENT_TYPE_INSERT)
                 self.__sqlInsertExpression(getPlayPatternData(jsonData), InsertSQL.PLAY_PATTERN_INSERT)
                 self.__sqlInsertExpression(getPlayerData(jsonData), InsertSQL.PLAYER_INSERT)
                 self.__sqlInsertExpression(getPassData(jsonData), InsertSQL.PASS_INSERT)
                 self.__sqlInsertExpression(getPassTypeData(jsonData), InsertSQL.PASS_TYPE_INSERT)
                 self.__sqlInsertExpression(getPassHeightData(jsonData), InsertSQL.PASS_HEIGHT_INSERT)
-                
+                        
                 pass
             elif CategoryNames.LINEUPS.value in fileName:
                 pass

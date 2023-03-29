@@ -12,3 +12,10 @@ def getDeserializedJsonFromFile(path):
         deserializedJson = json.load(read_file)
         
     return deserializedJson
+
+def getLocalDataPath():
+    dbConfig = getDeserializedJsonFromFile("database\cfg.json")[0]
+    DATA_PATH = dbConfig["data_src_path"]
+    
+    return DATA_PATH
+
