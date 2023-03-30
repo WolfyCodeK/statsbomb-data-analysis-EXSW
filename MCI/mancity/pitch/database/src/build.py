@@ -18,6 +18,9 @@ print("\n" + SEPARATOR)
 print("Database build time: " + str(round(end - start, QUERY_TIME_DECIMAL_PLACES)) + TIME_UNITS)
 print(SEPARATOR + "\n")
 
+# QUERY EXAMPLE >>>
+
+"""
 start = time.time()
 
 # QUERIES
@@ -31,3 +34,4 @@ end = time.time()
 print("\n" + SEPARATOR)
 print("Database query time: " + str(round(end - start, QUERY_TIME_DECIMAL_PLACES)) + TIME_UNITS)
 print(SEPARATOR + "\n")
+"""
