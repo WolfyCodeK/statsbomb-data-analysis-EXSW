@@ -96,8 +96,8 @@ outputloc = "testscripts/render/output.obj"
 mtlloc = "testscripts/render/output.mtl"
 playermodelloc = "models/halfron.obj"
 ballloc = "models/Ball/Ball.obj"
-matchdata="C:/Users/harve/Downloads/MCI Women's Files/g2312135_SecondSpectrum_tracking-produced.xml"
-teamlineuploc="C:/Users/harve/Downloads/MCI Women's Files/g2312135_SecondSpectrum_meta.json"
+matchdata="largefiles/g2312135_SecondSpectrum_tracking-produced.xml"
+teamlineuploc="largefiles/g2312135_SecondSpectrum_meta.json"
 pitchloc="models/euro-arena-soccer-stadium-euro-2020/source/Models/EuroArena.obj"
 
 def add_pitch_obj(pitchloc):
@@ -118,7 +118,9 @@ def add_pitch_obj(pitchloc):
 
     return imported_objects
 
-def get_player_locations(matchdata=matchdata, input_time=0.0):
+#this bits slow
+def get_player_locations(matchdata=matchdata, input_time=4.0):
+    print("start",datetime.now() - startTime)
     root = ET.parse(matchdata).getroot()
     player_locations = []
 
@@ -135,12 +137,14 @@ def get_player_locations(matchdata=matchdata, input_time=0.0):
                     ballpos = [id,ast.literal_eval(loc)]
                 player_locations.append([id, loc])
             break
+    print("start",datetime.now() - startTime)
+    print(player_locations)
     return player_locations
 
 objs_to_render=[]
 
 def createallplayers(teams):
-    player_locations = get_player_locations(matchdata,input_time=0.0)
+    player_locations = get_player_locations(matchdata,input_time=4.0)
     for element in player_locations:
         if element[0] != "ball":
             print(element)
@@ -225,6 +229,10 @@ objs_to_render.append(ball)
 pitch_obj_loc = pitchloc
 pitch_objects = add_pitch_obj(pitch_obj_loc)
 objs_to_render.extend(pitch_objects)
+
+# Set the default camera position
+bpy.context.scene.camera.location = (0, 0, 10)
+bpy.context.scene.camera.rotation_euler = (0, 0, 0)
 
 export_objects_to_obj(objs_to_render, outputloc)
 modify_obj_file("testscripts/render/output.obj", "testscripts/render/theonethatworks.mtl")
