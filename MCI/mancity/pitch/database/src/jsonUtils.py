@@ -14,7 +14,7 @@ def getDeserializedJsonFromFile(path):
     return deserializedJson
 
 def getLocalDataPath():
-    dbConfig = getDeserializedJsonFromFile("database\cfg.json")[0]
+    dbConfig = getDeserializedJsonFromFile("MCI\mancity\pitch\database\cfg.json")[0]
     DATA_PATH = dbConfig["data_src_path"]
     
     return DATA_PATH
