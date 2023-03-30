@@ -4,6 +4,8 @@ import bpy
 import math
 import xml.etree.ElementTree as ET
 import ast
+from datetime import datetime
+startTime = datetime.now()
 
 def default_rotate(obj):
     angle = math.radians(-90)
@@ -200,6 +202,19 @@ def getteamplayerlist():
     away_players = get_away_players()
     return [home_players,away_players]
 
+def modify_obj_file(obj_file_path, mtl_file_name):
+    # Read the contents of the OBJ file
+    with open(obj_file_path, 'r') as f:
+        lines = f.readlines()
+
+    # Modify the third line to include the MTL file name
+    lines[2] = "mtllib " + mtl_file_name + "\n"
+
+    # Save the modified contents back to the OBJ file
+    with open(obj_file_path, 'w') as f:
+        f.writelines(lines)
+
+
 teams = getteamplayerlist()
 
 createallplayers(teams)
@@ -213,3 +228,7 @@ pitch_objects = add_pitch_obj(pitch_obj_loc)
 objs_to_render.extend(pitch_objects)
 
 export_objects_to_obj(objs_to_render, outputloc)
+modify_obj_file("testscripts/render/output.obj", "testscripts/render/theonethatworks.mtl")
+
+print(datetime.now() - startTime)
+print("to run")
