@@ -20,6 +20,8 @@ coordinates = [
 # Select the object you want to animate
 obj = bpy.context.selected_objects[0]
 
+print(bpy.data.objects)
+
 # Set the animation duration and frame rate
 duration = 100  # Animation duration in frames
 frame_rate = 24  # Frame rate of the animation

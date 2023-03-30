@@ -207,7 +207,7 @@ def modify_obj_file(obj_file_path, mtl_file_name):
         lines = f.readlines()
 
     # Modify the third line to include the MTL file name
-    lines[2] = "mtllib " + mtl_file_name + "\n"
+    lines[2] = "mtllib " + "theonethatworks.mtl" + "\n"
 
     # Save the modified contents back to the OBJ file
     with open(obj_file_path, 'w') as f:
