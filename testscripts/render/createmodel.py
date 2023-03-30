@@ -96,13 +96,8 @@ outputloc = "testscripts/render/output.obj"
 mtlloc = "testscripts/render/output.mtl"
 playermodelloc = "models/halfron.obj"
 ballloc = "models/Ball/Ball.obj"
-<<<<<<< Updated upstream
 matchdata="largefiles/g2312135_SecondSpectrum_tracking-produced.xml"
 teamlineuploc="largefiles/g2312135_SecondSpectrum_meta.json"
-=======
-matchdata="D:\DATA\VSCode\Python\statsbomb-data-analysis-EXSW\statsbombdata\MCI Women_s Files-001\g2312135_SecondSpectrum_tracking-produced.xml"
-teamlineuploc="D:\DATA\VSCode\Python\statsbomb-data-analysis-EXSW\statsbombdata\MCI Women_s Files-001\g2312135_SecondSpectrum_meta.json"
->>>>>>> Stashed changes
 pitchloc="models/euro-arena-soccer-stadium-euro-2020/source/Models/EuroArena.obj"
 
 def add_pitch_obj(pitchloc):
