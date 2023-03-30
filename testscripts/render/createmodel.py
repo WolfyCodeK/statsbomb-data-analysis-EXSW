@@ -135,7 +135,6 @@ def get_player_locations(matchdata=matchdata, input_time=0.0):
                     ballpos = [id,ast.literal_eval(loc)]
                 player_locations.append([id, loc])
             break
-
     return player_locations
 
 objs_to_render=[]
