@@ -6,3 +6,4 @@ database/statsbombDatabase.db
 statsbombdata/
 testscripts/render/output.obj
 largefiles/
+MCI/mancity/db.sqlite3
