@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./MCI/mancity/pitch/database/src"
+    ]
+}

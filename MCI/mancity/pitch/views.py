@@ -1,7 +1,13 @@
+import os
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
 import sqlite3 as sl
+import sys
+# Add database path at runtime
+LOCAL_PATH = os.getcwd()
+sys.path.append(LOCAL_PATH + "\pitch\database\src")
+from insightExpressions import *
 
 '''
 
@@ -14,23 +20,23 @@ List all the times that event happened
 '''
 
 def main(request):
-    statsbombDB = sl.connect("C:/Users/harve/OneDrive/Desktop/EXSW/statsbomb-data-analysis-EXSW/MCI/mancity/pitch/statsbombDatabase.db")
+    statsbombDB = sl.connect(LOCAL_PATH + "\pitch\database\statsbombDatabase.db")
     dbCursor = statsbombDB.cursor()
 
     players = get_unique_players()
     pass_count = 0
     sender_id = None
     receiver_id = None
-    matchID = 3855983
+    matchID = 3852832
 
     if request.method == "POST":
         sender_id = request.POST.get("sender")
         receiver_id = request.POST.get("receiver")
         pass_count = passtest(sender_id, receiver_id)
-        dbCursor.execute(getQueryPassesBetweenPlayers(matchID, player1=sender_id, player2=receiver_id))
+        query = getQueryPassesBetweenPlayers(matchID, player1=sender_id, player2=receiver_id)
+        dbCursor.execute(query)
 
         rows = dbCursor.fetchall()
-        print(rows)
         #len rows is passcount
         if len(rows) != 0:
             pass_count=len(rows)
@@ -87,26 +93,3 @@ def passtest(sender_id, receiver_id):
             pass
 
     return pass_count
-
-
-#input player data
-def getQueryPassesBetweenPlayers(matchID, player1, player2):
-    query = """
-        SELECT location_x, location_y, minute, second
-        FROM (
-            SELECT EVENT.id, match_id, EVENT.player_id, location_x, location_y, minute, second
-            FROM EVENT
-            JOIN PLAYER ON EVENT.player_id = PLAYER.id
-        ) AS T1 JOIN PASS ON PASS.event_id = T1.id
-        WHERE (match_id = """ + str(matchID) + """)
-        AND ((T1.player_id = """ + str(player1) + """
-        AND recipient_id = """+ str(player2) + """)
-        OR (T1.player_id = """ + str(player2) + """
-        AND recipient_id = """ + str(player1) + """))
-    """
-
-    return query
-
-
-
-

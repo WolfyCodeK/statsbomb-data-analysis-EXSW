@@ -9,7 +9,7 @@ import os
 import sqlite3 as sl
 
 class DatabaseController:
-    DATABASE_FILE = "database\statsbombDatabase.db"
+    DATABASE_FILE = "MCI\mancity\pitch\database\statsbombDatabase.db"
     
     def __init__(self, dataPath, build):
         """
