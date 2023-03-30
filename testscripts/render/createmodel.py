@@ -120,7 +120,6 @@ def add_pitch_obj(pitchloc):
 
 #this bits slow
 def get_player_locations(matchdata=matchdata, input_time=4.0):
-    print("start",datetime.now() - startTime)
     root = ET.parse(matchdata).getroot()
     player_locations = []
 
@@ -137,8 +136,6 @@ def get_player_locations(matchdata=matchdata, input_time=4.0):
                     ballpos = [id,ast.literal_eval(loc)]
                 player_locations.append([id, loc])
             break
-    print("start",datetime.now() - startTime)
-    print(player_locations)
     return player_locations
 
 objs_to_render=[]
@@ -147,7 +144,6 @@ def createallplayers(teams):
     player_locations = get_player_locations(matchdata,input_time=4.0)
     for element in player_locations:
         if element[0] != "ball":
-            print(element)
             #home team
             if any(element[0] in sublist for sublist in teams[0]):
                 print("home team")
