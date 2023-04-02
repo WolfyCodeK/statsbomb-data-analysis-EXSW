@@ -213,7 +213,7 @@ def modify_obj_file(obj_file_path, mtl_file_name):
     with open(obj_file_path, 'w') as f:
         f.writelines(lines)
 
-if __name__ == "__main__":
+def run_script():
     startTime = datetime.now()
     teams = getteamplayerlist()
 

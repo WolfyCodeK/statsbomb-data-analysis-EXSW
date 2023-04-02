@@ -4,6 +4,8 @@ from django.http import HttpResponse
 import json
 import sqlite3 as sl
 import sys
+
+
 # Add database path at runtime
 LOCAL_PATH = os.getcwd()
 sys.path.append(LOCAL_PATH + "\pitch\database\src")
@@ -20,6 +22,7 @@ List all the times that event happened
 '''
 
 def main(request):
+    context = {}
     statsbombDB = sl.connect(LOCAL_PATH + "\pitch\database\statsbombDatabase.db")
     dbCursor = statsbombDB.cursor()
 
@@ -33,6 +36,7 @@ def main(request):
         sender_id = request.POST.get("sender")
         receiver_id = request.POST.get("receiver")
         pass_count = passtest(sender_id, receiver_id)
+        context={'players': players, 'pass_count': pass_count, 'sender_id': sender_id, 'receiver_id': receiver_id}
         query = getQueryPassesBetweenPlayers(matchID, player1=sender_id, player2=receiver_id)
         dbCursor.execute(query)
 
@@ -40,15 +44,18 @@ def main(request):
         #len rows is passcount
         if len(rows) != 0:
             pass_count=len(rows)
+            times=[]
+            for row in rows:
+                times.append(f'{row[2]}:{row[3]}')
+            print(pass_count)
+            print(times)
+            context['times'] = times
 
         '''
         Xcoord, y coord, min, second
         '''
-        times=[]
-        for row in rows:
-            times.append(f'{row[2]}:{row[3]}')
-        
-    return render(request, 'pitch/pitch.html', {'players': players, 'pass_count': pass_count, 'sender_id': sender_id, 'receiver_id': receiver_id, 'times': times})
+        context['pass_count']=pass_count        
+    return render(request, 'pitch/pitch.html', context)
 
 def get_unique_players():
 
@@ -98,11 +105,16 @@ def passtest(sender_id, receiver_id):
     return pass_count
 
 
-from django.http import HttpResponse
+import os
+from django.http import FileResponse
+from . import createmodelmodded  # Make sure to import your createmodelmodded.py script
 
-# Add this new view to your views.py
 def download_time(request, time):
-    content = f"Time: {time}"
-    response = HttpResponse(content, content_type="text/plain")
-    response["Content-Disposition"] = f"attachment; filename={time}.txt"
+    # Call your createmodelmodded.py script
+    createmodelmodded.run_script()  # Assuming you have a function named run_script() in createmodelmodded.py
+
+    # Serve the output.obj file
+    output_file = os.path.join("MCI", "mancity", "pitch", "models", "output.obj")
+    response = FileResponse(open(output_file, "rb"), content_type="application/octet-stream")
+    response["Content-Disposition"] = f"attachment; filename=output.obj"
     return response
