@@ -1,5 +1,8 @@
 {
     "python.analysis.extraPaths": [
         "./MCI/mancity/pitch/database/src"
+    ],
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "main"
     ]
 }

@@ -27,6 +27,12 @@
     </form>
 
     <p>Pass count: {{ pass_count }}</p>
+
+    <h2>Times:</h2>
+    <ul>
+        {% for time in times %}
+            <li><a href="#">{{ time }}</a></li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
-    
