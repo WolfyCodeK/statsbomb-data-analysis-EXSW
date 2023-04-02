@@ -236,3 +236,5 @@ def run_script():
 
     print(datetime.now() - startTime)
     print("to run")
+
+run_script()
