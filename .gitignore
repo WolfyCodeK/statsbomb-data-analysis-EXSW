@@ -9,3 +9,4 @@ largefiles/
 MCI/mancity/db.sqlite3
 testscripts/render/output.mtl
 testscripts/animation/output.glb
+MCI/mancity/pitch/models/output.obj

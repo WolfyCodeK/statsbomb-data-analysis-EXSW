@@ -5,7 +5,7 @@ import math
 import xml.etree.ElementTree as ET
 import ast
 from datetime import datetime
-startTime = datetime.now()
+
 
 def default_rotate(obj):
     angle = math.radians(-90)
@@ -213,25 +213,26 @@ def modify_obj_file(obj_file_path, mtl_file_name):
     with open(obj_file_path, 'w') as f:
         f.writelines(lines)
 
+if __name__ == "__main__":
+    startTime = datetime.now()
+    teams = getteamplayerlist()
 
-teams = getteamplayerlist()
+    createallplayers(teams)
 
-createallplayers(teams)
+    ball = makeball()          
+    objs_to_render.append(ball)
 
-ball = makeball()          
-objs_to_render.append(ball)
+    # Add the pitch to the scene
+    pitch_obj_loc = pitchloc
+    pitch_objects = add_pitch_obj(pitch_obj_loc)
+    objs_to_render.extend(pitch_objects)
 
-# Add the pitch to the scene
-pitch_obj_loc = pitchloc
-pitch_objects = add_pitch_obj(pitch_obj_loc)
-objs_to_render.extend(pitch_objects)
+    # Set the default camera position
+    bpy.context.scene.camera.location = (0, 0, 10)
+    bpy.context.scene.camera.rotation_euler = (0, 0, 0)
 
-# Set the default camera position
-bpy.context.scene.camera.location = (0, 0, 10)
-bpy.context.scene.camera.rotation_euler = (0, 0, 0)
+    export_objects_to_obj(objs_to_render, outputloc)
+    modify_obj_file("MCI/mancity/pitch/models/output.obj", "MCI/mancity/pitch/models/theonethatworks.mtl")
 
-export_objects_to_obj(objs_to_render, outputloc)
-modify_obj_file("testscripts/render/output.obj", "testscripts/render/theonethatworks.mtl")
-
-print(datetime.now() - startTime)
-print("to run")
+    print(datetime.now() - startTime)
+    print("to run")
