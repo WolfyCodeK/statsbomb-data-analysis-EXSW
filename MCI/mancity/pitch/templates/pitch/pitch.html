@@ -31,7 +31,7 @@
     <h2>Times:</h2>
     <ul>
         {% for time in times %}
-            <li><a href="#">{{ time }}</a></li>
+            <li><a href="{% url 'download_time' time=time %}">{{ time }}</a></li>
         {% endfor %}
     </ul>
 </body>

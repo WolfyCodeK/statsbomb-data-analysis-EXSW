@@ -37,7 +37,6 @@ def main(request):
         dbCursor.execute(query)
 
         rows = dbCursor.fetchall()
-        print(rows)
         #len rows is passcount
         if len(rows) != 0:
             pass_count=len(rows)
@@ -49,10 +48,6 @@ def main(request):
         for row in rows:
             times.append(f'{row[2]}:{row[3]}')
         
-        print(times)
-
-
-
     return render(request, 'pitch/pitch.html', {'players': players, 'pass_count': pass_count, 'sender_id': sender_id, 'receiver_id': receiver_id, 'times': times})
 
 def get_unique_players():
@@ -101,3 +96,13 @@ def passtest(sender_id, receiver_id):
             pass
 
     return pass_count
+
+
+from django.http import HttpResponse
+
+# Add this new view to your views.py
+def download_time(request, time):
+    content = f"Time: {time}"
+    response = HttpResponse(content, content_type="text/plain")
+    response["Content-Disposition"] = f"attachment; filename={time}.txt"
+    return response
