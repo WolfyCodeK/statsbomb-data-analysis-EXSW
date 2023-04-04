@@ -25,6 +25,7 @@ def main(request):
     context = {}
     statsbombDB = sl.connect(LOCAL_PATH + "\pitch\database\statsbombDatabase.db")
     dbCursor = statsbombDB.cursor()
+    
 
     players = get_unique_players()
     pass_count = 0
@@ -33,6 +34,7 @@ def main(request):
     matchID = 3852832
 
     if request.method == "POST":
+        print("Post req")
         sender_id = request.POST.get("sender")
         receiver_id = request.POST.get("receiver")
         pass_count = passtest(sender_id, receiver_id)
@@ -47,14 +49,14 @@ def main(request):
             times=[]
             for row in rows:
                 times.append(f'{row[2]}:{row[3]}')
-            print(pass_count)
-            print(times)
             context['times'] = times
 
         '''
         Xcoord, y coord, min, second
         '''
-        context['pass_count']=pass_count        
+        context['pass_count']=pass_count
+
+    context['players']=players      
     return render(request, 'pitch/pitch.html', context)
 
 def get_unique_players():
