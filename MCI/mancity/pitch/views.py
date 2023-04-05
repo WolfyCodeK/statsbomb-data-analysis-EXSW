@@ -112,7 +112,7 @@ import zipfile
 from django.http import FileResponse
 
 def download_time(request, time):
-    os.system('MCI/mancity/pitch/createmodelmodded.py')
+    #os.system('MCI/mancity/pitch/createmodelmodded.py')
 
     # Create a ZIP file
     zip_filename = "output_files.zip"
@@ -120,6 +120,7 @@ def download_time(request, time):
         # Add the output.obj file
         output_obj_file = os.path.join("pitch", "models", "output.obj")
         zipf.write(output_obj_file, "output.obj")
+
 
         # Add the output.mtl file
         output_mtl_file = os.path.join("pitch", "models", "theonethatworks.mtl")
@@ -137,3 +138,4 @@ def download_time(request, time):
     response = FileResponse(open(zip_filename, "rb"), content_type="application/zip")
     response["Content-Disposition"] = f"attachment; filename={zip_filename}"
     return response
+

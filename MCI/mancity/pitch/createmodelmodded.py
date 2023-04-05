@@ -92,13 +92,13 @@ def setcoords(obj,coordinates):
     return obj
 
 
-outputloc = "MCI/mancity/pitch/models/output.obj"
-mtlloc = "MCI/mancity/pitch/models/output.mtl"
-playermodelloc = "models/halfron.obj"
-ballloc = "models/Ball/Ball.obj"
-matchdata="largefiles/g2312135_SecondSpectrum_tracking-produced.xml"
-teamlineuploc="largefiles/g2312135_SecondSpectrum_meta.json"
-pitchloc="models/euro-arena-soccer-stadium-euro-2020/source/Models/EuroArena.obj"
+outputloc = "../../../MCI/mancity/pitch/models/output.obj"
+mtlloc = "../../../MCI/mancity/pitch/models/output.mtl"
+playermodelloc = "../../../models/halfron.obj"
+ballloc = "../../../models/Ball/Ball.obj"
+matchdata="../../../largefiles/g2312135_SecondSpectrum_tracking-produced.xml"
+teamlineuploc="../../../largefiles/g2312135_SecondSpectrum_meta.json"
+pitchloc="../../../models/euro-arena-soccer-stadium-euro-2020/source/Models/EuroArena.obj"
 
 def add_pitch_obj(pitchloc):
     # Import the OBJ file
@@ -232,9 +232,10 @@ def run_script():
     bpy.context.scene.camera.rotation_euler = (0, 0, 0)
 
     export_objects_to_obj(objs_to_render, outputloc)
-    modify_obj_file("MCI/mancity/pitch/models/output.obj", "MCI/mancity/pitch/models/theonethatworks.mtl")
+    modify_obj_file("../../../MCI/mancity/pitch/models/output.obj", "../../../MCI/mancity/pitch/models/theonethatworks.mtl")
 
     print(datetime.now() - startTime)
     print("to run")
+    return True
 
 run_script()
