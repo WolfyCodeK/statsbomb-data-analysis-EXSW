@@ -1,3 +1,3 @@
 @echo off
 cd pitch
-python createmodelmodded.py
+python createmodelmodded.py %1

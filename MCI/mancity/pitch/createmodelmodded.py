@@ -261,4 +261,14 @@ def run_script():
     print("to run")
     return True
 
-run_script()
+
+import sys
+
+if __name__ == '__main__':
+    #this is the time of the event
+    render_time = sys.argv[1]
+
+
+    # Do something with the arguments
+    run_script()
+

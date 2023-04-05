@@ -116,7 +116,7 @@ def download_time(request, time):
     zip_filename = "pitch/output_files.zip"
 
     import subprocess
-    subprocess.call([r'pitch\scriptforobj.bat'])
+    subprocess.call([r'pitch\scriptforobj.bat',time])
     
     # Check if the zip file exists
     if not os.path.exists(zip_filename):
