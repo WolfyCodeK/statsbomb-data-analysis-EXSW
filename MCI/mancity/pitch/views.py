@@ -112,30 +112,16 @@ import zipfile
 from django.http import FileResponse
 
 def download_time(request, time):
-    #os.system('MCI/mancity/pitch/createmodelmodded.py')
+    # Assume the pre-zipped folder is named "output_files.zip"
+    zip_filename = "pitch/output_files.zip"
+    
+    # Check if the zip file exists
+    if not os.path.exists(zip_filename):
+        return HttpResponse("Error: The requested zip file does not exist.", status=404)
 
-    # Create a ZIP file
-    zip_filename = "output_files.zip"
-    with zipfile.ZipFile(zip_filename, "w") as zipf:
-        # Add the output.obj file
-        output_obj_file = os.path.join("pitch", "models", "output.obj")
-        zipf.write(output_obj_file, "output.obj")
-
-
-        # Add the output.mtl file
-        output_mtl_file = os.path.join("pitch", "models", "theonethatworks.mtl")
-        zipf.write(output_mtl_file, "theonethatworks.mtl")
-
-        # Add the textures folder
-        textures_folder = os.path.join("pitch", "models", "Textures")
-        for folder, subfolders, filenames in os.walk(textures_folder):
-            for filename in filenames:
-                file_path = os.path.join(folder, filename)
-                arcname = os.path.join("Textures", os.path.relpath(file_path, textures_folder))
-                zipf.write(file_path, arcname)
-
-    # Serve the ZIP file
+    # Serve the pre-zipped folder
     response = FileResponse(open(zip_filename, "rb"), content_type="application/zip")
     response["Content-Disposition"] = f"attachment; filename={zip_filename}"
     return response
+
 

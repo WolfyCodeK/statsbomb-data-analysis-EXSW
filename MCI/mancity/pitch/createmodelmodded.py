@@ -1,5 +1,7 @@
 import json
+import os
 import time
+import zipfile
 import bpy
 import math
 import xml.etree.ElementTree as ET
@@ -95,6 +97,7 @@ def setcoords(obj,coordinates):
 outputloc = "../../../MCI/mancity/pitch/models/output.obj"
 mtlloc = "../../../MCI/mancity/pitch/models/output.mtl"
 playermodelloc = "../../../models/halfron.obj"
+texturesfolder= "../../../pitch/models/Textures"
 ballloc = "../../../models/Ball/Ball.obj"
 matchdata="../../../largefiles/g2312135_SecondSpectrum_tracking-produced.xml"
 teamlineuploc="../../../largefiles/g2312135_SecondSpectrum_meta.json"
@@ -213,6 +216,26 @@ def modify_obj_file(obj_file_path, mtl_file_name):
     with open(obj_file_path, 'w') as f:
         f.writelines(lines)
 
+def zip_files():
+    zip_filename = "output_files.zip"
+    with zipfile.ZipFile(zip_filename, "w") as zipf:
+        # Add the output.obj file
+        output_obj_file = outputloc
+        zipf.write(output_obj_file, "output.obj")
+
+
+        # Add the output.mtl file
+        output_mtl_file = mtlloc
+        zipf.write(output_mtl_file, "theonethatworks.mtl")
+
+        # Add the textures folder
+        textures_folder = texturesfolder
+        for folder, subfolders, filenames in os.walk(textures_folder):
+            for filename in filenames:
+                file_path = os.path.join(folder, filename)
+                arcname = os.path.join("Textures", os.path.relpath(file_path, textures_folder))
+                zipf.write(file_path, arcname)
+
 def run_script():
     startTime = datetime.now()
     teams = getteamplayerlist()
@@ -233,6 +256,7 @@ def run_script():
 
     export_objects_to_obj(objs_to_render, outputloc)
     modify_obj_file("../../../MCI/mancity/pitch/models/output.obj", "../../../MCI/mancity/pitch/models/theonethatworks.mtl")
+    zip_files()
 
     print(datetime.now() - startTime)
     print("to run")
