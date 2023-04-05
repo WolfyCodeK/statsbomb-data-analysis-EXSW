@@ -97,7 +97,7 @@ def setcoords(obj,coordinates):
 outputloc = "../../../MCI/mancity/pitch/models/output.obj"
 mtlloc = "../../../MCI/mancity/pitch/models/output.mtl"
 playermodelloc = "../../../models/halfron.obj"
-texturesfolder= "../../../pitch/models/Textures"
+texturesfolder= "models/Textures"
 ballloc = "../../../models/Ball/Ball.obj"
 matchdata="../../../largefiles/g2312135_SecondSpectrum_tracking-produced.xml"
 teamlineuploc="../../../largefiles/g2312135_SecondSpectrum_meta.json"
@@ -122,7 +122,7 @@ def add_pitch_obj(pitchloc):
     return imported_objects
 
 #this bits slow
-def get_player_locations(matchdata=matchdata, input_time=4.0):
+def get_player_locations(matchdata, input_time):
     root = ET.parse(matchdata).getroot()
     player_locations = []
 
@@ -143,8 +143,8 @@ def get_player_locations(matchdata=matchdata, input_time=4.0):
 
 objs_to_render=[]
 
-def createallplayers(teams):
-    player_locations = get_player_locations(matchdata,input_time=4.0)
+def createallplayers(teams,total_seconds):
+    player_locations = get_player_locations(matchdata,total_seconds)
     for element in player_locations:
         if element[0] != "ball":
             #home team
@@ -224,7 +224,7 @@ def zip_files():
         zipf.write(output_obj_file, "output.obj")
 
         # Add the output.mtl file
-        output_mtl_file = mtlloc
+        output_mtl_file = "models/theonethatworks.mtl"
         zipf.write(output_mtl_file, "theonethatworks.mtl")
 
         # Add the textures folder
@@ -235,11 +235,11 @@ def zip_files():
                 arcname = os.path.join("Textures", os.path.relpath(file_path, textures_folder))
                 zipf.write(file_path, arcname)
 
-def run_script():
+def run_script(total_seconds):
     startTime = datetime.now()
     teams = getteamplayerlist()
 
-    createallplayers(teams)
+    createallplayers(teams,total_seconds)
 
     ball = makeball()          
     objs_to_render.append(ball)
@@ -263,12 +263,20 @@ def run_script():
 
 
 import sys
+import re
 
 if __name__ == '__main__':
     #this is the time of the event
     render_time = sys.argv[1]
 
+    pattern = r"(\d+):(\d+)"
+    match = re.match(pattern, render_time)
+    if match:
+        minutes = int(match.group(1))
+        seconds = int(match.group(2))
+        total_seconds = minutes * 60 + seconds
+        print(total_seconds)
 
     # Do something with the arguments
-    run_script()
+    run_script(total_seconds)
 
