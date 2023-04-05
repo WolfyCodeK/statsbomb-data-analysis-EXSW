@@ -27,7 +27,8 @@ def home(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f'Welcome {email}!')
-                return redirect('main/')
+                #change this for default landing after login
+                return redirect('pitch/')
             else:
                 messages.error(request, 'Invalid email or password.')
     else:
