@@ -223,7 +223,6 @@ def zip_files():
         output_obj_file = outputloc
         zipf.write(output_obj_file, "output.obj")
 
-
         # Add the output.mtl file
         output_mtl_file = mtlloc
         zipf.write(output_mtl_file, "theonethatworks.mtl")

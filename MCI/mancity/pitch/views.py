@@ -114,6 +114,9 @@ from django.http import FileResponse
 def download_time(request, time):
     # Assume the pre-zipped folder is named "output_files.zip"
     zip_filename = "pitch/output_files.zip"
+
+    import subprocess
+    subprocess.call([r'pitch\scriptforobj.bat'])
     
     # Check if the zip file exists
     if not os.path.exists(zip_filename):
