@@ -4,6 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pitch</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+        }
+    
+        form,
+        p,
+        h2,
+        ul,
+        #downloadProgressContainer {
+            text-align: center;
+            max-width: 80%;
+        }
+        ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+    </style>
+    
+    
 </head>
 <body>
     <h1>Pass Count</h1>
@@ -31,8 +55,63 @@
     <h2>Times:</h2>
     <ul>
         {% for time in times %}
-            <li><a href="{% url 'download_time' time=time %}">{{ time }}</a></li>
+            <li>
+                <a href="#" class="downloadLink" data-time="{{ time }}">{{ time }}</a>
+                <a href="{% url 'download_time' time=time %}" class="hiddenDownloadLink" hidden></a>
+            </li>
         {% endfor %}
     </ul>
+
+    <!-- Add the progress bar and initially hide it -->
+    <div id="downloadProgressContainer" style="display: none;">
+        <h3>Download Progress:</h3>
+        <progress id="downloadProgress" value="0" max="100"></progress>
+    </div>
+
+    <!-- Add JavaScript to handle the download and update the progress bar -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const downloadLinks = document.getElementsByClassName("downloadLink");
+            const hiddenDownloadLinks = document.getElementsByClassName("hiddenDownloadLink");
+            const downloadProgress = document.getElementById("downloadProgress");
+            const downloadProgressContainer = document.getElementById("downloadProgressContainer");
+
+            for (let i = 0; i < downloadLinks.length; i++) {
+                downloadLinks[i].addEventListener("click", function(event) {
+                    event.preventDefault();
+
+                    // Show the download progress container
+                    downloadProgressContainer.style.display = "block";
+
+                    // Simulate the download process
+                    downloadFile(hiddenDownloadLinks[i].href);
+
+                    // Update the progress bar
+                    let progress = 0;
+                    const interval = setInterval(function() {
+                        if (progress < 100) {
+                            progress += 1;
+                            downloadProgress.value = progress;
+                        } else {
+                            clearInterval(interval);
+
+                            // Hide the download progress container after the download is complete
+                            downloadProgressContainer.style.display = "none";
+                        }
+                    }, 550);
+                });
+            }
+        });
+
+        function downloadFile(url) {
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = url.split("/").pop();
+            link.style.display = "none";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
 </body>
 </html>

@@ -137,6 +137,8 @@ def get_player_locations(matchdata, input_time):
                     loc = player.get('loc')
                     global ballpos 
                     ballpos = [id,ast.literal_eval(loc)]
+                    print("aaaaa")
+                    print(ballpos)
                 player_locations.append([id, loc])
             break
     return player_locations
