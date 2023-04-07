@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'main',
     'pitch',
+    'space',
 ]
 
 MIDDLEWARE = [
