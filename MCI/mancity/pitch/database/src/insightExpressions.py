@@ -34,6 +34,14 @@ def getMatchIDFromTeam(team):
         WHERE T2.id = """ + str(team) + """
         OR T3.id = """ + str(team) + """
     """
+
+def getAllPassesFromMatch(matchID):
+    query = """
+        SELECT PLAYER.name
+        FROM EVENT
+        JOIN PLAYER ON EVENT.player_id = PLAYER.id
+        WHERE event_type_id = 30 AND match_id = """ + str(matchID) + """
+    """
     
     return query
 
