@@ -272,12 +272,20 @@ if __name__ == '__main__':
     render_time = sys.argv[1]
 
     pattern = r"(\d+):(\d+)"
-    match = re.match(pattern, render_time)
-    if match:
-        minutes = int(match.group(1))
-        seconds = int(match.group(2))
+    matchTime = re.match(pattern, render_time)
+    
+    matchPeriod = str(re.findall(r'[^- ]+$', render_time))
+    matchPeriod = matchPeriod.removeprefix("['")
+    matchPeriod = matchPeriod.removesuffix("']") 
+    
+    if matchTime:
+        minutes = int(matchTime.group(1))
+        seconds = int(matchTime.group(2))
         total_seconds = minutes * 60 + seconds
         print(total_seconds)
+
+    if (int(matchPeriod) == 2):
+        total_seconds -= (45 * 60)
 
     # Do something with the arguments
     run_script(total_seconds)

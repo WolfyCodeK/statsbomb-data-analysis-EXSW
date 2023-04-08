@@ -1,8 +1,8 @@
 def getQueryPassesBetweenPlayers(matchID, player1, player2):
     query = """
-        SELECT location_x, location_y, minute, second
+        SELECT location_x, location_y, minute, second, period
         FROM (
-            SELECT EVENT.id, match_id, EVENT.player_id, location_x, location_y, minute, second
+            SELECT EVENT.id, match_id, EVENT.player_id, location_x, location_y, minute, second, period
             FROM EVENT
             JOIN PLAYER ON EVENT.player_id = PLAYER.id
         ) AS T1 JOIN PASS ON PASS.event_id = T1.id
