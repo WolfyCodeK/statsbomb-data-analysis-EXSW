@@ -122,35 +122,39 @@ def add_pitch_obj(pitchloc):
     return imported_objects
 
 #this bits slow
-def get_player_locations(matchdata, input_time):
+def get_player_locations(matchdata, input_time,matchPeriod):
     root = ET.parse(matchdata).getroot()
     player_locations = []
+    print(input_time)
+    time.sleep(5)
 
-    for frame in root.iter('frame'):
-        if float(frame.get('time')) == input_time:
-            for player in frame:
-                if player.tag == 'player':
-                    id = player.get('id')
-                    loc = player.get('loc')
-                elif player.tag == 'ball':
-                    id = 'ball'
-                    loc = player.get('loc')
-                    global ballpos 
-                    ballpos = [id,ast.literal_eval(loc)]
-                    print("aaaaa")
-                    print(ballpos)
-                player_locations.append([id, loc])
-            break
+    for period in root.iter('period'):
+        if period.get('number') == str(matchPeriod):
+            for frame in period.iter('frame'):
+                if float(frame.get('time')) == input_time:
+                    for player in frame:
+                        if player.tag == 'player':
+                            id = player.get('id')
+                            loc = player.get('loc')
+                        elif player.tag == 'ball':
+                            id = 'ball'
+                            loc = player.get('loc')
+                            global ballpos 
+                            ballpos = [id, ast.literal_eval(loc)]
+                            print("aaaaa")
+                            print(ballpos)
+                        player_locations.append([id, loc])
+                    break
     return player_locations
 
 objs_to_render=[]
 
-def createallplayers(teams,total_seconds):
-    player_locations = get_player_locations(matchdata,total_seconds)
+def createallplayers(teams,total_seconds,matchPeriod):
+    player_locations = get_player_locations(matchdata,total_seconds,matchPeriod)
     
     # Get location of players 1 second before
     if (total_seconds > 0):
-        player_previous_locations = get_player_locations(matchdata,total_seconds - 1)
+        player_previous_locations = get_player_locations(matchdata,total_seconds - 1,matchPeriod)
         
     for i in range(len(player_locations)):
         element = player_locations[i]
@@ -295,11 +299,11 @@ def zip_files():
                 arcname = os.path.join("Textures", os.path.relpath(file_path, textures_folder))
                 zipf.write(file_path, arcname)
 
-def run_script(total_seconds):
+def run_script(total_seconds,matchPeriod):
     startTime = datetime.now()
     teams = getteamplayerlist()
 
-    createallplayers(teams,total_seconds)
+    createallplayers(teams,total_seconds,matchPeriod)
 
     ball = makeball()          
     objs_to_render.append(ball)
@@ -346,5 +350,5 @@ if __name__ == '__main__':
         total_seconds -= (45 * 60)
 
     # Do something with the arguments
-    run_script(total_seconds)
+    run_script(total_seconds,matchPeriod)
 

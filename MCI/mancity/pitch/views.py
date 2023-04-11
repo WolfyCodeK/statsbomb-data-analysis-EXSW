@@ -1,4 +1,5 @@
 import os
+import time
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
@@ -32,6 +33,11 @@ def main(request):
     sender_id = None
     receiver_id = None
     matchID = 3852832
+
+    query = getAllPassesFromMatch(matchID)
+    dbCursor.execute(query)
+    rows = dbCursor.fetchall()
+    print(rows)
 
     if request.method == "POST":
         print("Post req")
@@ -127,4 +133,10 @@ def download_time(request, time):
     response["Content-Disposition"] = f"attachment; filename={zip_filename}"
     return response
 
+def key_passes(passers,balllocs):
 
+    #turn player passes into list of names
+    names = [name[0] for name in passers]
+    #turn player passes into tuples (from,to)
+    tuples_passes = [(names[i], names[i+1]) for i in range(len(names)-1)]
+    print(tuples_passes)
