@@ -150,12 +150,15 @@ def get_player_locations(matchdata, input_time,matchPeriod):
 objs_to_render=[]
 
 def createallplayers(teams,total_seconds,matchPeriod):
-    player_locations = get_player_locations(matchdata,total_seconds,matchPeriod)
-    
+
     # Get location of players 1 second before
     if (total_seconds > 0):
         player_previous_locations = get_player_locations(matchdata,total_seconds - 1,matchPeriod)
         
+        
+    player_locations = get_player_locations(matchdata,total_seconds,matchPeriod)
+    
+    
     for i in range(len(player_locations)):
         element = player_locations[i]
         if element[0] != "ball":
