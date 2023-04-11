@@ -15,14 +15,14 @@ def default_rotate(obj):
     obj.rotation_euler.rotate_axis(axis, angle)
     return obj
 
-def rotatehometeam(obj):
-    angle = math.radians(90)
+def rotatehometeam(obj, newAngle):
+    angle = math.radians(newAngle)
     axis = 'Z'
     obj.rotation_euler.rotate_axis(axis, angle)
     return obj
 
-def rotateawayteam(obj):
-    angle = math.radians(-90)
+def rotateawayteam(obj, newAngle):
+    angle = math.radians(newAngle)
     axis = 'Z'
     obj.rotation_euler.rotate_axis(axis, angle)
     return obj
@@ -147,23 +147,81 @@ objs_to_render=[]
 
 def createallplayers(teams,total_seconds):
     player_locations = get_player_locations(matchdata,total_seconds)
-    for element in player_locations:
+    
+    # Get location of players 1 second before
+    if (total_seconds > 0):
+        player_previous_locations = get_player_locations(matchdata,total_seconds - 1)
+        
+    for i in range(len(player_locations)):
+        element = player_locations[i]
         if element[0] != "ball":
             #home team
             if any(element[0] in sublist for sublist in teams[0]):
                 print("home team")
                 temp_obj = makeobject()
-                temp_obj = rotatehometeam(temp_obj)
+                angle = getPlayerAngle(
+                    ast.literal_eval(element[1]), 
+                    ast.literal_eval(player_previous_locations[i][1])
+                )
+                
+                 # Default angle value
+                if (angle == None):
+                    angle = 90
+                
+                temp_obj = rotatehometeam(temp_obj, angle)
+                print(str(i) + " ~ " + str(angle))
                 temp_obj = change_material_color_to_blue(temp_obj)
                 temp_obj = setcoords(temp_obj,ast.literal_eval(element[1]))
                 objs_to_render.append(temp_obj)
             if any(element[0] in sublist for sublist in teams[1]):
                 print("away team")
                 temp_obj = makeobject()
-                temp_obj = rotateawayteam(temp_obj)
+                angle = getPlayerAngle(
+                    ast.literal_eval(element[1]), 
+                    ast.literal_eval(player_previous_locations[i][1])
+                )
+                
+                # Default angle value
+                if (angle == None):
+                    angle = -90
+                
+                temp_obj = rotateawayteam(temp_obj, angle)
                 temp_obj = change_material_color_to_red(temp_obj)
                 temp_obj = setcoords(temp_obj,ast.literal_eval(element[1]))
                 objs_to_render.append(temp_obj)
+
+def getPlayerAngle(current_location, previous_location):
+    # current player coords
+    xCurrent = float(current_location[0])
+    yCurrent = float(current_location[1])
+    
+    # previous player coords
+    xPrevious = float(previous_location[0])
+    yPrevious = float(previous_location[1])
+    
+    # absoulte change in player position
+    xChange = xCurrent - xPrevious
+    yChange = yCurrent - yPrevious
+    
+    angle = None
+    
+    # yChange = opp, xChange = adj, tan(theta) = opp / adj 
+    if (xChange != 0) and (yChange != 0):
+        tanTheta = abs(yChange) / abs(xChange)
+        theta = math.degrees(math.atan(tanTheta))
+        
+        if (xChange > 0) and (yChange > 0):
+            angleCorrection = 90
+        if (xChange > 0) and (yChange < 0):
+            angleCorrection = 0
+        if (xChange < 0) and (yChange > 0):
+            angleCorrection = 180
+        if (xChange < 0) and (yChange < 0):
+            angleCorrection = 270  
+        
+        angle = theta + angleCorrection
+    
+    return angle
 
 def export_objects_to_obj(objs_to_render, outputloc):
     # Deselect all objects
