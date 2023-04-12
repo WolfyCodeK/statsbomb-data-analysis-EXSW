@@ -55,3 +55,28 @@ def getAllBallPassLocationsFromMatch(matchID):
     
     return query
 
+def getMaxMatchLength(matchID):
+    query = """
+        SELECT minute, max(second)
+        FROM EVENT JOIN (
+            (
+                SELECT max(minute) as maxMin
+                FROM EVENT
+                WHERE match_id = """ + str(matchID) + """
+            ) AS T1
+        ) ON maxMin = minute
+        WHERE match_id = """ + str(matchID) + """
+    """
+    
+    return query
+
+def getAllTeamPossessions(matchID, possessionTeamID):
+    query = """
+        SELECT possession, location_x, end_location_x, player_id, recipient_id, minute, second
+        FROM "EVENT" JOIN PASS ON id = event_id 
+        WHERE possession_team_id = """ + str(possessionTeamID) + """ 
+        AND event_type_id = 30
+        AND match_id = """ + str(matchID) + """;
+    """
+    
+    return query

@@ -26,18 +26,17 @@ def main(request):
     context = {}
     statsbombDB = sl.connect(LOCAL_PATH + "\pitch\database\statsbombDatabase.db")
     dbCursor = statsbombDB.cursor()
-    
 
     players = get_unique_players()
     pass_count = 0
     sender_id = None
     receiver_id = None
     matchID = 3852832
+    teamID = 746
 
     query = getAllPassesFromMatch(matchID)
     dbCursor.execute(query)
     rows = dbCursor.fetchall()
-    print(rows)
 
     if request.method == "POST":
         print("Post req")
@@ -61,9 +60,74 @@ def main(request):
         Xcoord, y coord, min, second
         '''
         context['pass_count']=pass_count
+    
+    query = getAllTeamPossessions(matchID, teamID)
+    dbCursor.execute(query)
+    teamPossessions = dbCursor.fetchall()
+    
+    # Do something with possession ranking
+    possessionRanking = createPossessionRanking(teamPossessions)
+    
+    for i in range(10):
+        print(possessionRanking[i])
 
     context['players']=players      
     return render(request, 'pitch/pitch.html', context)
+
+def createPossessionRanking(teamPossessions):
+    # First possession in a match always starts from kick off position
+    startxPos = 60
+    endxPos = 60
+    previousPossession = None
+    
+    rewardGrowthRate = 1.039
+    possessionRanking = []
+    passingData = []
+    matchTimeSeconds = 0
+    
+    for passPlay in teamPossessions:
+        
+        currentPossession = passPlay[0]
+        
+        # Same possession
+        if (currentPossession == previousPossession):
+            passingData.append(passPlay[3])
+            endxPos = passPlay[2]
+            
+        # New possession
+        if (currentPossession != previousPossession):
+            previousPossession = currentPossession
+            
+            passRecipient = passPlay[4]
+            if (passRecipient != None):
+                passingData.append(passRecipient)
+            
+            # Calculate how good the passing possession was
+            groundGained = endxPos - startxPos
+            pitchPosAdjustmentValue = (pow(rewardGrowthRate, endxPos) / 100)
+            possessionValue = groundGained * pitchPosAdjustmentValue    
+            
+            possessionRanking.append((possessionValue, passingData, matchTimeSeconds))
+            passingData = []
+            
+            # Get value for starting position in new possession
+            startxPos = passPlay[1]
+            minute = passPlay[5]
+            second = passPlay[6]
+            matchTimeSeconds = minute * 60 + second
+    
+    # Sort possession ranking in descending order
+    for j in range(len(possessionRanking) - 1):
+        for i in range(len(possessionRanking) - 1):
+            value = possessionRanking[i][0]
+            nextValue = possessionRanking[i+1][0]
+            
+            if (nextValue > value):
+                temp = (value, possessionRanking[i][1], possessionRanking[i][2])
+                possessionRanking[i] = (nextValue, possessionRanking[i+1][1], possessionRanking[i+1][2])
+                possessionRanking[i+1] = temp  
+    
+    return possessionRanking
 
 def get_unique_players():
 
