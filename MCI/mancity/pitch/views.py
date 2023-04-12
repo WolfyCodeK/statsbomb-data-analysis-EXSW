@@ -53,7 +53,8 @@ def main(request):
             pass_count=len(rows)
             times=[]
             for row in rows:
-                times.append(f'{row[2]}:{row[3]} - {row[4]}')
+                second = f"{row[3]:02}"
+                times.append(f'{row[2]}:{second} - {row[4]}')
             context['times'] = times
 
         '''
