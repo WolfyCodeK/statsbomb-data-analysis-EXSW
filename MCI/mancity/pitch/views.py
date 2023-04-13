@@ -85,9 +85,15 @@ def main(request):
         if int(item[0]) > 10:
             actualposessionranking.append(item)    
     
+    #convert the times into MM:SS format
+    actualposessionranking2=[]
+    for item in actualposessionranking:
+        item = list(item)
+        item[-1] = seconds_to_mmss(item[-1])
+        actualposessionranking2.append(item)
 
     context['players']=players     
-    context['possessionRanking'] =actualposessionranking
+    context['possessionRanking'] =actualposessionranking2
     return render(request, 'pitch/pitch.html', context)
 
 def createPossessionRanking(teamPossessions):
@@ -193,6 +199,10 @@ def passtest(sender_id, receiver_id):
 
     return pass_count
 
+def seconds_to_mmss(seconds):
+    minutes = seconds // 60
+    seconds = seconds % 60
+    return '{:02d}:{:02d}'.format(minutes, seconds)
 
 import os
 import zipfile
