@@ -97,8 +97,8 @@ table {
                     <td>{{ forloop.counter }}</td>
                     <td>{{ possession.1|join:" -> " }}</td>
                     <td>
-                        <a href="#" class="downloadLink" data-time="{{ possession.2 }}">{{ possession.2 }}</a>
-                        <a href="{% url 'download_time' time=possession.2 %}" class="hiddenDownloadLink" hidden></a>
+                        <a href="#" class="downloadLink" data-time="{{ possession.3 }}">{{ possession.3 }}</a>
+                        <a href="{% url 'download_time' time=possession.3 %}" class="hiddenDownloadLink" hidden></a>
                     </td>
                 </tr>
             {% endfor %}

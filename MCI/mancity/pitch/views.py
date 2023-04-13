@@ -91,10 +91,11 @@ def main(request):
         item = list(item)
         period = item[2]
         time_in_mmss = seconds_to_mmss(item[-1])
-        item[-1] = str(time_in_mmss) + " - " + str(2)
+        item[-1] = str(time_in_mmss) + " - " + str(period)
         actualposessionranking2.append(item)
 
     context['players']=players     
+    print(actualposessionranking2)
     context['possessionRanking'] =actualposessionranking2
     return render(request, 'pitch/pitch.html', context)
 
