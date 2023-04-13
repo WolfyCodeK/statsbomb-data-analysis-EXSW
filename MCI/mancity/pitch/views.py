@@ -94,9 +94,16 @@ def main(request):
         item[-1] = str(time_in_mmss) + " - " + str(period)
         actualposessionranking2.append(item)
 
+    actualposessionranking3=[]
+    #check if player passes to themselves
+    for item in actualposessionranking2:
+        if item[1][0] != item[1][-1]:
+            actualposessionranking3.append(item)
+        
+
     context['players']=players     
-    print(actualposessionranking2)
-    context['possessionRanking'] =actualposessionranking2
+    print(actualposessionranking3)
+    context['possessionRanking'] =actualposessionranking3
     return render(request, 'pitch/pitch.html', context)
 
 def createPossessionRanking(teamPossessions):
