@@ -96,10 +96,14 @@ table {
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ possession.1|join:" -> " }}</td>
-                    <td>{{ possession.2 }}</td>
+                    <td>
+                        <a href="#" class="downloadLink" data-time="{{ possession.2 }}">{{ possession.2 }}</a>
+                        <a href="{% url 'download_time' time=possession.2 %}" class="hiddenDownloadLink" hidden></a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
+        
     </table>
 
     <!-- Add JavaScript to handle the download and update the progress bar -->

@@ -85,11 +85,13 @@ def main(request):
         if int(item[0]) > 10:
             actualposessionranking.append(item)    
     
-    #convert the times into MM:SS format
+    #convert the times into MM:SS - period format
     actualposessionranking2=[]
     for item in actualposessionranking:
         item = list(item)
-        item[-1] = seconds_to_mmss(item[-1])
+        period = item[2]
+        time_in_mmss = seconds_to_mmss(item[-1])
+        item[-1] = str(time_in_mmss) + " - " + str(2)
         actualposessionranking2.append(item)
 
     context['players']=players     
