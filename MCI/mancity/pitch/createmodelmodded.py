@@ -71,7 +71,8 @@ def makeobject(*obj_name):
     default_rotate(obj_name)
     return obj_name
 
-
+global scalefactor
+scalefactor = 47500
 
 def makeball(*obj_name):
     # Load the ball.obj file
@@ -83,14 +84,14 @@ def makeball(*obj_name):
     # Set the object's location to 0,0,0
     
     obj_name.scale = (15000, 15000, 15000)
-    obj_name.location = (50000 *ballpos[1][0],50000 *ballpos[1][1],(50000 *ballpos[1][2]))
+    obj_name.location = (scalefactor *ballpos[1][0],scalefactor *ballpos[1][1],(scalefactor *ballpos[1][2]))
 
 
     default_rotate(obj_name)
     return obj_name
 
 def setcoords(obj,coordinates):
-    obj.location = (50000 * coordinates[0],50000 * coordinates[1],coordinates[2])
+    obj.location = (scalefactor * coordinates[0],scalefactor * coordinates[1],coordinates[2])
     return obj
 
 
