@@ -108,6 +108,7 @@ def createPossessionRanking(teamPossessions):
     possessionRanking = []
     passingData = []
     matchTimeSeconds = 0
+    period = 0
     
     for passPlay in teamPossessions:
         
@@ -131,13 +132,14 @@ def createPossessionRanking(teamPossessions):
             pitchPosAdjustmentValue = (pow(rewardGrowthRate, endxPos) / 100)
             possessionValue = groundGained * pitchPosAdjustmentValue    
             
-            possessionRanking.append((possessionValue, passingData, matchTimeSeconds))
+            possessionRanking.append((possessionValue, passingData, period, matchTimeSeconds))
             passingData = []
             
             # Get value for starting position in new possession
             startxPos = passPlay[1]
             minute = passPlay[5]
             second = passPlay[6]
+            period = passPlay[7]
             matchTimeSeconds = minute * 60 + second
     
     # Sort possession ranking in descending order
@@ -147,8 +149,20 @@ def createPossessionRanking(teamPossessions):
             nextValue = possessionRanking[i+1][0]
             
             if (nextValue > value):
-                temp = (value, possessionRanking[i][1], possessionRanking[i][2])
-                possessionRanking[i] = (nextValue, possessionRanking[i+1][1], possessionRanking[i+1][2])
+                temp = (
+                    value, 
+                    possessionRanking[i][1], 
+                    possessionRanking[i][2],
+                    possessionRanking[i][3]
+                )
+                
+                possessionRanking[i] = (
+                    nextValue,
+                    possessionRanking[i+1][1],
+                    possessionRanking[i+1][2],
+                    possessionRanking[i+1][3]
+                )
+                
                 possessionRanking[i+1] = temp  
     
     print(possessionRanking)
