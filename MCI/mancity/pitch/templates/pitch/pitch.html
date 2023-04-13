@@ -46,7 +46,7 @@ table {
     <h1>Pass Count</h1>
     <form method="post">
         {% csrf_token %}
-        <label for="sender">Sender:</label>
+        <label for="sender">Passer:</label>
         <select name="sender" id="sender">
             {% for player_id, player_name in players.items %}
                 <option value="{{ player_id }}" {% if player_id == sender_id %}selected{% endif %}>{{ player_name }}</option>
