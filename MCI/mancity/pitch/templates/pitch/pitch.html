@@ -24,7 +24,20 @@
     list-style-type: none;
     padding: 0;
 }
-
+/* Add table styles */
+table {
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            width: 80%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
     
     
@@ -67,6 +80,29 @@
         <h3>Download Progress:</h3>
         <progress id="downloadProgress" value="0" max="100"></progress>
     </div>
+
+    
+    <h2>Possession Ranking:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Score</th>
+                <th>Players</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for possession in possessionRanking %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ possession.0 }}</td>
+                    <td>{{ possession.1|join:" -> " }}</td>
+                    <td>{{ possession.2 }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
     <!-- Add JavaScript to handle the download and update the progress bar -->
     <script>

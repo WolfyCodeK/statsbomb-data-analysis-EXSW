@@ -65,14 +65,28 @@ def main(request):
     query = getAllTeamPossessions(matchID, teamID)
     dbCursor.execute(query)
     teamPossessions = dbCursor.fetchall()
-    
+
+
     # Do something with possession ranking
     possessionRanking = createPossessionRanking(teamPossessions)
-    
-    for i in range(10):
-        print(possessionRanking[i])
 
-    context['players']=players      
+    #convert from player ids to string
+    print(players)
+    for sequence in possessionRanking:
+
+        if sequence[0] > 10:
+            temp_list=[]
+            #convert player id to string
+            for i in range(len(sequence[1])):
+                sequence[1][i] = players[str(sequence[1][i])]
+
+        else:
+            possessionRanking.remove(sequence)
+
+    
+
+    context['players']=players     
+    context['possessionRanking'] =possessionRanking
     return render(request, 'pitch/pitch.html', context)
 
 def createPossessionRanking(teamPossessions):
@@ -128,6 +142,7 @@ def createPossessionRanking(teamPossessions):
                 possessionRanking[i] = (nextValue, possessionRanking[i+1][1], possessionRanking[i+1][2])
                 possessionRanking[i+1] = temp  
     
+    print(possessionRanking)
     return possessionRanking
 
 def get_unique_players():
@@ -204,4 +219,3 @@ def key_passes(passers,balllocs):
     names = [name[0] for name in passers]
     #turn player passes into tuples (from,to)
     tuples_passes = [(names[i], names[i+1]) for i in range(len(names)-1)]
-    print(tuples_passes)
