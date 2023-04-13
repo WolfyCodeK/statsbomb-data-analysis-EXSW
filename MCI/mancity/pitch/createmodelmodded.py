@@ -272,6 +272,10 @@ def getteamplayerlist():
     return [home_players,away_players]
 
 def modify_obj_file(obj_file_path, mtl_file_name):
+
+    keep_colours(mtl_file_name)
+
+    '''
     # Read the contents of the OBJ file
     with open(obj_file_path, 'r') as f:
         lines = f.readlines()
@@ -282,6 +286,29 @@ def modify_obj_file(obj_file_path, mtl_file_name):
     # Save the modified contents back to the OBJ file
     with open(obj_file_path, 'w') as f:
         f.writelines(lines)
+    '''
+
+def keep_colours(obj_files_path):
+    with open(obj_files_path, 'r') as f:
+        lines = f.readlines()
+
+    # Find the line with "newmtl Material.001"
+    for i, line in enumerate(lines):
+        if line.startswith("newmtl Material.001"):
+            break
+
+    # Remove all lines after the "newmtl Material.001" line
+    lines = lines[:i]
+
+    # Append selection.txt to the end of the original file
+    with open("../../../MCI/mancity/pitch/models/selection.txt", "r") as f:
+        selection_lines = f.readlines()
+    lines += selection_lines
+
+    # Write the modified lines back to the original file
+    with open(obj_files_path, "w") as f:
+        f.writelines(lines)
+
 
 def zip_files():
     zip_filename = "output_files.zip"
@@ -291,8 +318,8 @@ def zip_files():
         zipf.write(output_obj_file, "output.obj")
 
         # Add the output.mtl file
-        output_mtl_file = "models/theonethatworks.mtl"
-        zipf.write(output_mtl_file, "theonethatworks.mtl")
+        output_mtl_file = "models/output.mtl"
+        zipf.write(output_mtl_file, "output.mtl")
 
         # Add the textures folder
         textures_folder = texturesfolder
@@ -321,7 +348,7 @@ def run_script(total_seconds,matchPeriod):
     bpy.context.scene.camera.rotation_euler = (0, 0, 0)
 
     export_objects_to_obj(objs_to_render, outputloc)
-    modify_obj_file("../../../MCI/mancity/pitch/models/output.obj", "../../../MCI/mancity/pitch/models/theonethatworks.mtl")
+    modify_obj_file("../../../MCI/mancity/pitch/models/output.obj", "../../../MCI/mancity/pitch/models/output.mtl")
     zip_files()
 
     print(datetime.now() - startTime)
