@@ -87,7 +87,6 @@ table {
         <thead>
             <tr>
                 <th>Rank</th>
-                <th>Score</th>
                 <th>Players</th>
                 <th>Time</th>
             </tr>
@@ -96,7 +95,6 @@ table {
             {% for possession in possessionRanking %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ possession.0 }}</td>
                     <td>{{ possession.1|join:" -> " }}</td>
                     <td>{{ possession.2 }}</td>
                 </tr>
