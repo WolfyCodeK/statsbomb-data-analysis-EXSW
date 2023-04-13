@@ -72,7 +72,7 @@ def getMaxMatchLength(matchID):
 
 def getAllTeamPossessions(matchID, possessionTeamID):
     query = """
-        SELECT possession, location_x, end_location_x, player_id, recipient_id, minute, second
+        SELECT possession, location_x, end_location_x, player_id, recipient_id, minute, second, period
         FROM "EVENT" JOIN PASS ON id = event_id 
         WHERE possession_team_id = """ + str(possessionTeamID) + """ 
         AND event_type_id = 30
