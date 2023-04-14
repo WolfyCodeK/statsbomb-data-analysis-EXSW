@@ -59,20 +59,20 @@ def change_material_color_to_red(obj):
 
     return obj
 
-def makeobject(*obj_name):
+def makeobject(obj_name):
     # Load the halfron.obj file
     bpy.ops.import_scene.obj(filepath=playermodelloc)
 
     # Get a reference to the object
-    obj_name = bpy.context.selected_objects[0]
+    obj = bpy.context.selected_objects[0]
 
     # Set the object's name
-    obj_name.name = "player_model"
+    obj.name = str(obj_name)
 
     # Set the object's location to 0,0,0
-    obj_name.location = (0, 0, 0)
-    default_rotate(obj_name)
-    return obj_name
+    obj.location = (0, 0, 0)
+    default_rotate(obj)
+    return obj
 
 global scalefactor
 scalefactor = 47500
@@ -171,7 +171,7 @@ def createallplayers(teams,total_seconds,matchPeriod):
             #home team
             if any(element[0] in sublist for sublist in teams[0]):
                 print("home team")
-                temp_obj = makeobject()
+                temp_obj = makeobject(element[0])
                 angle = getPlayerAngle(
                     ast.literal_eval(element[1]), 
                     ast.literal_eval(player_previous_locations[i][1])
@@ -188,7 +188,7 @@ def createallplayers(teams,total_seconds,matchPeriod):
                 objs_to_render.append(temp_obj)
             if any(element[0] in sublist for sublist in teams[1]):
                 print("away team")
-                temp_obj = makeobject()
+                temp_obj = makeobject(element[0])
                 angle = getPlayerAngle(
                     ast.literal_eval(element[1]), 
                     ast.literal_eval(player_previous_locations[i][1])

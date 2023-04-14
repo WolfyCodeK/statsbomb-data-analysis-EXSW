@@ -70,7 +70,6 @@ def main(request):
     possessionRanking = createPossessionRanking(teamPossessions)
 
     #convert from player ids to string
-    print(players)
     for sequence in possessionRanking:
         if sequence[0] > 10:
             temp_list=[]
@@ -101,7 +100,6 @@ def main(request):
         
 
     context['players']=players     
-    print(actualposessionranking3)
     context['possessionRanking'] =actualposessionranking3
     return render(request, 'pitch/pitch.html', context)
 
