@@ -66,6 +66,9 @@ def makeobject(*obj_name):
     # Get a reference to the object
     obj_name = bpy.context.selected_objects[0]
 
+    # Set the object's name
+    obj_name.name = "player_model"
+
     # Set the object's location to 0,0,0
     obj_name.location = (0, 0, 0)
     default_rotate(obj_name)

@@ -1,52 +1,45 @@
 import bpy
 
-def main(timedata,playercoords):
+def main(timedata, playercoords):
     # Clear the existing mesh objects in the scene
     bpy.ops.object.select_all(action='DESELECT')
     bpy.ops.object.select_by_type(type='MESH')
     bpy.ops.object.delete()
 
     # Import the OBJ file
-    obj_file_path = "testscripts/render/output.obj"
+    obj_file_path = "MCI/mancity/pitch/models/output.obj"
     bpy.ops.import_scene.obj(filepath=obj_file_path)
 
-    # example coords
-    coordinates = [
-        (10000, 110000, 110000),
-        (210000, 210000, 210000),
-        (310000, 310000, 310000),
-        (410000, 410000, 410000),
-    ]
-
-    # Set the animation duration and frame rate, make this depend on length    
+    # Set the animation duration and frame rate
     frame_rate = 24  # Frame rate of the animation
-    duration = int(20*frame_rate/(timedata[2]-timedata[0]))  # Animation duration in frames
-    #total seconds in fr/duration
+    duration = int(20 * frame_rate / (timedata[2] - timedata[0]))  # Animation duration in frames
 
     scalefactor = 47500
 
     for i in range(23):
-        print(i)
-        # Select the object you want to animate
+        # THIS IS WRONG - SELECT CORRECT PLAYER
         obj = bpy.context.selected_objects[i]
+        print(obj.name)
+        time.sleep(1)
 
-        coordinates=[]
+        obj.location = [playercoords[i][0][0],playercoords[i][0][1],playercoords[i][0][2]]
 
-        for data in playercoords[i]:
-            print(data)
-            coordinates.append([data[0]*scalefactor,data[1]*scalefactor,data[2]*scalefactor])
+        # Scale the player coordinates
+        scaled_coordinates = [[coord[0] * scalefactor, coord[1] * scalefactor, coord[2] * scalefactor] for coord in playercoords[i]]
 
         # Set keyframes for each coordinate
-        for i, coord in enumerate(coordinates):
-            frame_number = int(i * duration / (len(coordinates) - 1))
+        for j, coord in enumerate(scaled_coordinates):
+            frame_number = int(j * duration / (len(scaled_coordinates) - 1))
             obj.location = coord
             obj.keyframe_insert(data_path="location", frame=frame_number)
 
-
+    obj.location = [playercoords[i][0][0],playercoords[i][0][1],playercoords[i][0][2]]
     # Set the scene's end frame
     bpy.context.scene.frame_end = duration
     gltf_file_path = "testscripts/animation/output.gltf"
     bpy.ops.export_scene.gltf(filepath=gltf_file_path, check_existing=False)
+
+
 
 '''
 take in match time seconds and period for start and end [start seconds, period, endtime seconds, period]
