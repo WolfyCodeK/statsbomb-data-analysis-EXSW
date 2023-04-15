@@ -17,23 +17,53 @@ def main(timedata, playercoords):
     scalefactor = 47500
 
     for i in range(23):
-        # THIS IS WRONG - SELECT CORRECT PLAYER
-        obj = bpy.context.selected_objects[i]
-        print(obj.name)
-        time.sleep(1)
+        frameCoords = playercoords[i]
 
-        obj.location = [playercoords[i][0][0],playercoords[i][0][1],playercoords[i][0][2]]
+        currentCoords = []
+        ballSelected = False
+        
+        for player in frameCoords:
+            playerID = str(player[1])
+            #print(playerID + " ~ " + str(player[0]))  
+            
+            for j in range(23):
+                selectedObj = bpy.context.selected_objects[j]
+                objName = str(selectedObj.name)
+                objName, sep, tail = objName.partition('_Object')
+                
+                if playerID == objName:
+                    currentCoords = player[0]
+                    break;
+                
+        # get ball
+        if currentCoords == []:
+            selectedObj = bpy.context.selected_objects[22]
+            currentCoords = frameCoords[0]
+            ballSelected = True
+                                    
+        selectedObj.location = [currentCoords[0],currentCoords[1],currentCoords[2]]
 
-        # Scale the player coordinates
-        scaled_coordinates = [[coord[0] * scalefactor, coord[1] * scalefactor, coord[2] * scalefactor] for coord in playercoords[i]]
+        if ballSelected == False: 
+            # Scale the player coordinates
+            scaled_coordinates = [
+                [coord[0][0] * scalefactor, coord[0][1] * scalefactor, coord[0][2] * scalefactor]
+                for coord in frameCoords
+            ]
+        else: 
+            # Scale the player coordinates
+            scaled_coordinates = [
+                [coord[0] * scalefactor, coord[1] * scalefactor, coord[2] * scalefactor]
+                for coord in frameCoords
+            ]
 
         # Set keyframes for each coordinate
         for j, coord in enumerate(scaled_coordinates):
             frame_number = int(j * duration / (len(scaled_coordinates) - 1))
-            obj.location = coord
-            obj.keyframe_insert(data_path="location", frame=frame_number)
-
-    obj.location = [playercoords[i][0][0],playercoords[i][0][1],playercoords[i][0][2]]
+            selectedObj.location = coord
+            selectedObj.keyframe_insert(data_path="location", frame=frame_number)
+            if (i == 0):
+                print(selectedObj.name + str(coord))
+            
     # Set the scene's end frame
     bpy.context.scene.frame_end = duration
     gltf_file_path = "testscripts/animation/output.gltf"
@@ -68,9 +98,9 @@ def player_coords(timedata):
             tmp_list=[]
             if result['period'] == 1:
                 for element in result['homePlayers']:
-                    tmp_list.append(element['xyz'])
+                    tmp_list.append((element['xyz'], element['playerId']))
                 for element in result['awayPlayers']:
-                    tmp_list.append(element['xyz'])
+                    tmp_list.append((element['xyz'], element['playerId']))
                 tmp_list.append(result['ball']['xyz'])
                 firsthalflist.append(tmp_list)
         ffhalfdata=[[] for x in range(23)]
@@ -90,9 +120,9 @@ def player_coords(timedata):
             tmp_list=[]
             if result['period'] == 2:
                 for element in result['homePlayers']:
-                    tmp_list.append(element['xyz'])
+                    tmp_list.append((element['xyz'], element['playerId']))
                 for element in result['awayPlayers']:
-                    tmp_list.append(element['xyz'])
+                    tmp_list.append((element['xyz'], element['playerId']))
                 tmp_list.append(result['ball']['xyz'])
                 secondhalflist.append(tmp_list)
         fshalfdata=[[] for x in range(23)]
