@@ -11,10 +11,10 @@ def main(timedata, playercoords):
     bpy.ops.import_scene.obj(filepath=obj_file_path)
 
     # Set the animation duration and frame rate
-    frame_rate = 24  # Frame rate of the animation
-    duration = int(20 * frame_rate / (timedata[2] - timedata[0]))  # Animation duration in frames
+    frame_rate = 25  # Frame rate of the animation
+    duration = int((frame_rate*(timedata[2] - timedata[0])))  # Animation duration in frames
 
-    scalefactor = 47500
+    scalefactor = 10000
 
     for i in range(23):
         frameCoords = playercoords[i]
@@ -46,15 +46,17 @@ def main(timedata, playercoords):
         if ballSelected == False: 
             # Scale the player coordinates
             scaled_coordinates = [
-                [coord[0][0] * scalefactor, coord[0][1] * scalefactor, coord[0][2] * scalefactor]
+                [(coord[0][0] * scalefactor), (coord[0][1] * scalefactor), coord[0][2]]
                 for coord in frameCoords
             ]
         else: 
-            # Scale the player coordinates
+            # Scale the ball coordinates
             scaled_coordinates = [
-                [coord[0] * scalefactor, coord[1] * scalefactor, coord[2] * scalefactor]
+                [coord[0] * 50000, coord[1] * 50000, coord[2]]
                 for coord in frameCoords
             ]
+
+        #scaled_coordinates.insert(0,[currentCoords[0],currentCoords[1],currentCoords[2]])
 
         # Set keyframes for each coordinate
         for j, coord in enumerate(scaled_coordinates):
@@ -139,7 +141,7 @@ def player_coords(timedata):
 
 
 if __name__ == '__main__':
-    timedata=[0,1,5]
+    timedata=[0,1,20]
     playercoords= player_coords(timedata)
     main(timedata,playercoords)
     
