@@ -316,8 +316,10 @@ def keep_colours(obj_files_path):
         f.writelines(lines)
 
 
-def zip_files():
-    zip_filename = "output_files.zip"
+def zip_files(render_time):
+    print(render_time)
+    time.sleep(10)
+    zip_filename = f"{render_time}.zip"
     with zipfile.ZipFile(zip_filename, "w") as zipf:
         # Add the output.obj file
         output_obj_file = outputloc
@@ -335,7 +337,7 @@ def zip_files():
                 arcname = os.path.join("Textures", os.path.relpath(file_path, textures_folder))
                 zipf.write(file_path, arcname)
 
-def run_script(total_seconds,matchPeriod):
+def run_script(total_seconds,matchPeriod,render_time):
     startTime = datetime.now()
     teams = getteamplayerlist()
 
@@ -355,7 +357,7 @@ def run_script(total_seconds,matchPeriod):
 
     export_objects_to_obj(objs_to_render, outputloc)
     modify_obj_file("../../../MCI/mancity/pitch/models/output.obj", "../../../MCI/mancity/pitch/models/output.mtl")
-    zip_files()
+    zip_files(render_time)
 
     print(datetime.now() - startTime)
     print("to run")
@@ -368,6 +370,7 @@ import re
 if __name__ == '__main__':
     #this is the time of the event
     render_time = sys.argv[1]
+    
 
     pattern = r"(\d+):(\d+)"
     matchTime = re.match(pattern, render_time)
@@ -386,5 +389,5 @@ if __name__ == '__main__':
         total_seconds -= (45 * 60)
 
     # Do something with the arguments
-    run_script(total_seconds,matchPeriod)
+    run_script(total_seconds,matchPeriod,render_time)
 

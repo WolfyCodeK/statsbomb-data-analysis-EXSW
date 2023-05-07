@@ -247,8 +247,9 @@ import zipfile
 from django.http import FileResponse
 
 def download_time(request, time):
+    print(time)
     # Assume the pre-zipped folder is named "output_files.zip"
-    zip_filename = "pitch/output_files.zip"
+    zip_filename = f"pitch/{time}.zip"
 
     import subprocess
     subprocess.call([r'pitch\scriptforobj.bat',time])
