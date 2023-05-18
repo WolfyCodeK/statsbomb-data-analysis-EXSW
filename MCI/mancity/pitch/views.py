@@ -298,11 +298,11 @@ def key_passes(passers,balllocs):
     tuples_passes = [(names[i], names[i+1]) for i in range(len(names)-1)]
 
 from django.http import HttpResponseRedirect
-def redirect_to_space(request,filename):
 
-    # Construct the URL for the "space" app
+def redirect_to_space(request, filename):
+    # Construct the URL for the "space" app with the filename parameter
     space_url = "/space/?text={}".format(filename)
-    print("redirecting......")
 
     # Redirect the user to the "space" app
-    return HttpResponseRedirect("/space/")
+    return HttpResponseRedirect(space_url)
+
