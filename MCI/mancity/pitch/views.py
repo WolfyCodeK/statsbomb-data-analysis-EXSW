@@ -247,20 +247,21 @@ import zipfile
 from django.http import FileResponse
 
 def download_time(request, time):
-    # Assume the pre-zipped folder is named "output_files.zip"
-    zip_filename = "pitch/output_files.zip"
+    # Assume the GLB file is named "output_file.glb"
+    glb_filename = "pitch/glbmodels/output.glb"
 
     import subprocess
-    subprocess.call([r'pitch\scriptforobj.bat',time])
+    subprocess.call([r'pitch\scriptforobj.bat', time])
     
-    # Check if the zip file exists
-    if not os.path.exists(zip_filename):
-        return HttpResponse("Error: The requested zip file does not exist.", status=404)
+    # Check if the GLB file exists
+    if not os.path.exists(glb_filename):
+        return HttpResponse("Error: The requested GLB file does not exist.", status=404)
 
-    # Serve the pre-zipped folder
-    response = FileResponse(open(zip_filename, "rb"), content_type="application/zip")
-    response["Content-Disposition"] = f"attachment; filename={zip_filename}"
+    # Serve the GLB file
+    response = FileResponse(open(glb_filename, "rb"), content_type="model/gltf-binary")
+    response["Content-Disposition"] = f"attachment; filename={glb_filename}"
     return response
+
 
 def key_passes(passers,balllocs):
 

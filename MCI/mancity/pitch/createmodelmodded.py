@@ -7,6 +7,7 @@ import math
 import xml.etree.ElementTree as ET
 import ast
 from datetime import datetime
+import gltf
 
 
 def default_rotate(obj):
@@ -97,9 +98,10 @@ def setcoords(obj,coordinates):
     obj.location = (scalefactor * coordinates[0],scalefactor * coordinates[1],coordinates[2])
     return obj
 
-
+#change that to specify per new model time
 outputloc = "../../../MCI/mancity/pitch/models/output.obj"
 mtlloc = "../../../MCI/mancity/pitch/models/output.mtl"
+outputlocglb = "../../../MCI/mancity/pitch/glbmodels/output.glb"
 playermodelloc = "../../../models/halfron.obj"
 texturesfolder= "models/Textures"
 ballloc = "../../../models/Ball/Ball.obj"
@@ -247,6 +249,18 @@ def export_objects_to_obj(objs_to_render, outputloc):
     # Export the selected objects as a single OBJ file
     bpy.ops.export_scene.obj(filepath=outputloc, check_existing=False, use_selection=True, use_materials=True)
 
+def export_objects_to_glb(objs_to_render, outputlocglb):
+    # Deselect all objects
+    bpy.ops.object.select_all(action='DESELECT')
+
+    # Select the objects in the list
+    for obj in objs_to_render:
+        obj.select_set(True)
+
+    # Export the selected objects as a single glb file
+    bpy.ops.export_scene.gltf(filepath=outputlocglb, check_existing=False, use_selection=True, export_format='GLB')
+
+
 with open(teamlineuploc, 'r') as file:
     json_data = json.load(file)
 
@@ -319,6 +333,8 @@ def keep_colours(obj_files_path):
 def zip_files():
     zip_filename = "output_files.zip"
     with zipfile.ZipFile(zip_filename, "w") as zipf:
+
+        #change these two
         # Add the output.obj file
         output_obj_file = outputloc
         zipf.write(output_obj_file, "output.obj")
@@ -353,9 +369,10 @@ def run_script(total_seconds,matchPeriod):
     bpy.context.scene.camera.location = (0, 0, 10)
     bpy.context.scene.camera.rotation_euler = (0, 0, 0)
 
-    export_objects_to_obj(objs_to_render, outputloc)
-    modify_obj_file("../../../MCI/mancity/pitch/models/output.obj", "../../../MCI/mancity/pitch/models/output.mtl")
-    zip_files()
+    #export_objects_to_obj(objs_to_render, outputloc)
+    export_objects_to_glb(objs_to_render, outputlocglb)
+    #modify_obj_file("../../../MCI/mancity/pitch/models/output.obj", "../../../MCI/mancity/pitch/models/output.mtl")
+    #zip_files()
 
     print(datetime.now() - startTime)
     print("to run")

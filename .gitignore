@@ -13,3 +13,7 @@ MCI/mancity/pitch/models/output.obj
 MCI/mancity/output_files.zip
 MCI/mancity/pitch/output_files.zip
 videos/
+testscripts/
+MCI/mancity/pitch/models/output.glb
+MCI/mancity/pitch/glbmodels/
+output.obj
