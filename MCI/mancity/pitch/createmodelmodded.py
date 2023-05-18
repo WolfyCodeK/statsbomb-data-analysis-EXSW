@@ -249,16 +249,18 @@ def export_objects_to_obj(objs_to_render, outputloc):
     # Export the selected objects as a single OBJ file
     bpy.ops.export_scene.obj(filepath=outputloc, check_existing=False, use_selection=True, use_materials=True)
 
-def export_objects_to_glb(objs_to_render, outputlocglb):
+def export_objects_to_glb(objs_to_render, outputlocglb,total_seconds,matchperiod):
     # Deselect all objects
     bpy.ops.object.select_all(action='DESELECT')
+    outputlocglb = "../../../MCI/mancity/pitch/glbmodels/output.glb"
+    outputname=f"../../../MCI/mancity/pitch/glbmodels/{matchperiod}_{total_seconds}.glb"
 
     # Select the objects in the list
     for obj in objs_to_render:
         obj.select_set(True)
 
     # Export the selected objects as a single glb file
-    bpy.ops.export_scene.gltf(filepath=outputlocglb, check_existing=False, use_selection=True, export_format='GLB')
+    bpy.ops.export_scene.gltf(filepath=outputname, check_existing=False, use_selection=True, export_format='GLB')
 
 
 with open(teamlineuploc, 'r') as file:
@@ -370,7 +372,7 @@ def run_script(total_seconds,matchPeriod):
     bpy.context.scene.camera.rotation_euler = (0, 0, 0)
 
     #export_objects_to_obj(objs_to_render, outputloc)
-    export_objects_to_glb(objs_to_render, outputlocglb)
+    export_objects_to_glb(objs_to_render, outputlocglb,total_seconds,matchPeriod)
     #modify_obj_file("../../../MCI/mancity/pitch/models/output.obj", "../../../MCI/mancity/pitch/models/output.mtl")
     #zip_files()
 
@@ -385,6 +387,8 @@ import re
 if __name__ == '__main__':
     #this is the time of the event
     render_time = sys.argv[1]
+    print(render_time,"rendertime")
+    time.sleep(10)
 
     pattern = r"(\d+):(\d+)"
     matchTime = re.match(pattern, render_time)
@@ -397,7 +401,6 @@ if __name__ == '__main__':
         minutes = int(matchTime.group(1))
         seconds = int(matchTime.group(2))
         total_seconds = minutes * 60 + seconds
-        print(total_seconds)
 
     if (int(matchPeriod) == 2):
         total_seconds -= (45 * 60)

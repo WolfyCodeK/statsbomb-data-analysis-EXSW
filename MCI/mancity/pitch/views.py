@@ -246,20 +246,46 @@ import os
 import zipfile
 from django.http import FileResponse
 
+import re
+import subprocess
+
 def download_time(request, time):
+    print(time)
+
+    
+
+    render_time = time
+    print(render_time,"rendertime")
+
+    pattern = r"(\d+):(\d+)"
+    matchTime = re.match(pattern, render_time)
+    
+    matchPeriod = str(re.findall(r'[^- ]+$', render_time))
+    matchPeriod = matchPeriod.removeprefix("['")
+    matchPeriod = matchPeriod.removesuffix("']") 
+    
+    if matchTime:
+        minutes = int(matchTime.group(1))
+        seconds = int(matchTime.group(2))
+        total_seconds = minutes * 60 + seconds
+
+    if (int(matchPeriod) == 2):
+        total_seconds -= (45 * 60)
+    
     # Assume the GLB file is named "output_file.glb"
     glb_filename = "pitch/glbmodels/output.glb"
+    #glb_filename=f"../../../MCI/mancity/pitch/glbmodels/{time}.glb"
+    glb_filename=f"pitch/glbmodels/{matchPeriod}_{total_seconds}.glb"
+    print(glb_filename)
 
-    import subprocess
-    subprocess.call([r'pitch\scriptforobj.bat', time])
-    
     # Check if the GLB file exists
     if not os.path.exists(glb_filename):
-        return HttpResponse("Error: The requested GLB file does not exist.", status=404)
+        subprocess.call([r'pitch\scriptforobj.bat', time])
+        #return HttpResponse("Error: The requested GLB file does not exist.", status=404)
 
     # Serve the GLB file
     response = FileResponse(open(glb_filename, "rb"), content_type="model/gltf-binary")
-    response["Content-Disposition"] = f"attachment; filename={glb_filename}"
+    response["Content-Disposition"] = f"attachment; filename={matchPeriod}_{total_seconds}.glb"
     return response
 
 
