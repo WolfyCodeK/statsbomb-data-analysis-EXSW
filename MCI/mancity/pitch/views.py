@@ -286,7 +286,7 @@ def download_time(request, time):
 
     # Serve the GLB file
     response = FileResponse(open(glb_filename, "rb"), content_type="model/gltf-binary")
-    response["Content-Disposition"] = f"attachment; filename={matchPeriod}_{total_seconds}.glb"
+    response["Content-Disposition"] = f"attachment; filename={matchPeriod}_{total_seconds}.glb"    
     return response
 
 
@@ -296,3 +296,13 @@ def key_passes(passers,balllocs):
     names = [name[0] for name in passers]
     #turn player passes into tuples (from,to)
     tuples_passes = [(names[i], names[i+1]) for i in range(len(names)-1)]
+
+from django.http import HttpResponseRedirect
+def redirect_to_space(request,filename):
+
+    # Construct the URL for the "space" app
+    space_url = "/space/?text={}".format(filename)
+    print("redirecting......")
+
+    # Redirect the user to the "space" app
+    return HttpResponseRedirect("/space/")
