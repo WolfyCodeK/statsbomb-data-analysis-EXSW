@@ -15,5 +15,5 @@ MCI/mancity/pitch/output_files.zip
 videos/
 testscripts/
 MCI/mancity/pitch/models/output.glb
-MCI/mancity/pitch/glbmodels/*
+MCI/mancity/pitch/glbmodels/*.glb
 output.obj
