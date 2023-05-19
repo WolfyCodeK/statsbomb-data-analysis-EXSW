@@ -32,7 +32,8 @@ def space(request):
         total_seconds -= (45 * 60)
     
     #glb_filename=f"../../../MCI/mancity/pitch/glbmodels/{time}.glb"
-    glb_filename=f"pitch/glbmodels/{matchPeriod}_{total_seconds}.glb"
+    glb_filename=f"space/glbmodels/{matchPeriod}_{total_seconds}.glb"
+    #glb_filename='space/output.glb'
 
     if not os.path.exists(glb_filename):
         print("no existy")

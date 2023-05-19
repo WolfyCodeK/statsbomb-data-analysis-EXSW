@@ -262,6 +262,16 @@ def export_objects_to_glb(objs_to_render, outputlocglb,total_seconds,matchperiod
     # Export the selected objects as a single glb file
     bpy.ops.export_scene.gltf(filepath=outputname, check_existing=False, use_selection=True, export_format='GLB')
 
+    bpy.ops.object.select_all(action='DESELECT')
+    outputname=f"../../../MCI/mancity/space/static/space/glbmodels/{matchperiod}_{total_seconds}.glb"
+
+    # Select the objects in the list
+    for obj in objs_to_render:
+        obj.select_set(True)
+
+    # Export the selected objects as a single glb file
+    bpy.ops.export_scene.gltf(filepath=outputname, check_existing=False, use_selection=True, export_format='GLB')
+
 
 with open(teamlineuploc, 'r') as file:
     json_data = json.load(file)

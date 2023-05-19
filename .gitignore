@@ -17,3 +17,6 @@ testscripts/
 MCI/mancity/pitch/models/output.glb
 MCI/mancity/pitch/glbmodels/*.glb
 output.obj
+MCI/mancity/staticfiles/pitch/glbmodels/*.glb
+MCI/mancity/space/static/space/glbmodels/*.glb
+MCI/mancity/staticfiles/space/glbmodels/*.glb

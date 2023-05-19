@@ -251,9 +251,7 @@ import re
 import subprocess
 
 def download_time(request, time):
-    print(time)
-
-    
+    print(time)    
 
     render_time = time
     print(render_time,"rendertime")
@@ -281,6 +279,7 @@ def download_time(request, time):
 
     # Check if the GLB file exists
     if not os.path.exists(glb_filename):
+        print("this runs")
         subprocess.call([r'pitch\scriptforobj.bat', time])
         #return HttpResponse("Error: The requested GLB file does not exist.", status=404)
 
