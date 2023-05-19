@@ -298,11 +298,19 @@ def key_passes(passers,balllocs):
     tuples_passes = [(names[i], names[i+1]) for i in range(len(names)-1)]
 
 from django.http import HttpResponseRedirect
+from django.http import JsonResponse
+from django.shortcuts import redirect
+from django.http import JsonResponse
 
-def redirect_to_space(request, filename):
-    # Construct the URL for the "space" app with the filename parameter
-    space_url = "/space/?text={}".format(filename)
+import json
 
-    # Redirect the user to the "space" app
-    return HttpResponseRedirect(space_url)
+def redirect_to_space(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        time = data.get('time')  # Retrieve the time value from the request
+        print(time)  # Print the selected time in the console
+        print("hello")
+        # Perform other actions with the time value if needed
+        download_time(request, time)
+        return HttpResponse(status=200)
 

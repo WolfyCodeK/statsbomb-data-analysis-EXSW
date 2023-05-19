@@ -15,8 +15,7 @@
         form,
         p,
         h2,
-        ul,
-        #downloadProgressContainer {
+        ul {
             text-align: center;
             max-width: 80%;
         }
@@ -71,18 +70,11 @@
     <ul>
         {% for time in times %}
             <li>
-                <a href="#" class="downloadLink" data-time="{{ time }}">{{ time }}</a>
-                <a href="{% url 'download_time' time=time %}" class="hiddenDownloadLink" hidden></a>
-                <a href="{% url 'redirect_to_space' filename=time%}" class="redirectLink" hidden></a>
+                <a href="#" onclick="redirectToSpace('{{ time }}', event)">{{ time }}</a>
+
             </li>
         {% endfor %}
     </ul>
-
-    <!-- Add the progress bar and initially hide it -->
-    <div id="downloadProgressContainer" style="display: none;">
-        <h3>Download Progress:</h3>
-        <progress id="downloadProgress" value="0" max="100"></progress>
-    </div>
 
     <h2>Passing Sequence Ranking:</h2>
     <table>
@@ -99,63 +91,44 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{ possession.1|join:" -> " }}</td>
                     <td>
-                        <a href="#" class="downloadLink" data-time="{{ possession.3 }}">{{ possession.3 }}</a>
-                        <a href="{% url 'download_time' time=possession.3 %}" class="hiddenDownloadLink" hidden></a>
-                        <a href="{% url 'redirect_to_space' filename=possession.3%}" class="redirectLink" hidden></a>
+                        <a href="#" onclick="redirectToSpace('{{ possession.3 }}', event)">{{ possession.3 }}</a>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <!-- Add JavaScript to handle the download and update the progress bar -->
+    <!-- Add JavaScript to handle the redirection to "space" -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const downloadLinks = document.getElementsByClassName("downloadLink");
-            const hiddenDownloadLinks = document.getElementsByClassName("hiddenDownloadLink");
-            const redirectLinks = document.getElementsByClassName("redirectLink");
-            const downloadProgress = document.getElementById("downloadProgress");
-            const downloadProgressContainer = document.getElementById("downloadProgressContainer");
+        function redirectToSpace(time, event) {
+    event.preventDefault(); // Prevent the default link behavior
 
-            for (let i = 0; i < downloadLinks.length; i++) {
-                downloadLinks[i].addEventListener("click", function(event) {
-                    event.preventDefault();
-
-                    // Show the download progress container
-                    downloadProgressContainer.style.display = "block";
-
-                    // Simulate the download process
-                    downloadFile(hiddenDownloadLinks[i].href);
-
-                    // Update the progress bar
-                    let progress = 0;
-                    const interval = setInterval(function() {
-                        if (progress < 100) {
-                            progress += 1;
-                            downloadProgress.value = progress;
-                        } else {
-                            clearInterval(interval);
-
-                            // Hide the download progress container after the download is complete
-                            downloadProgressContainer.style.display = "none";
-                            
-                            // Redirect to space
-                            redirectLinks[i].click();
-                        }
-                    }, 10);
-                });
-            }
-        });
-
-        function downloadFile(url) {
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = url.split("/").pop();
-            link.style.display = "none";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "{% url 'redirect_to_space' %}");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken')); // Include the CSRF token in the headers
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            window.location.href = "/space?time=" + encodeURIComponent(time);
         }
+    };
+
+    const data = { "time": time }; // Create an object with the time value
+    xhr.send(JSON.stringify(data));
+
+    console.log(time); // Print the selected time in the console
+}
+
+
+
+
+// Function to retrieve the CSRF token cookie
+function getCookie(name) {
+    const cookieValue = document.cookie.match('(^|;)\\s*' + name + '=([^;]+)');
+    return cookieValue ? cookieValue.pop() : '';
+}
+
+
     </script>
 </body>
 </html>
