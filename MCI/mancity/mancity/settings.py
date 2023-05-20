@@ -26,7 +26,7 @@ SECRET_KEY = 'INSERTSECRETKEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['b40e-92-7-230-223.ngrok-free.app','localhost']
+ALLOWED_HOSTS = ['b40e-92-7-230-223.ngrok-free.app','localhost','1ba6-92-7-230-223.ngrok-free.app']
 
 
 # Application definition
@@ -133,4 +133,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['https://5e70-92-7-230-223.ngrok-free.app','https://b40e-92-7-230-223.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://5e70-92-7-230-223.ngrok-free.app','https://b40e-92-7-230-223.ngrok-free.app','https://1ba6-92-7-230-223.ngrok-free.app']
